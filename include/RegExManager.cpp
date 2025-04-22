@@ -54,7 +54,7 @@ string RegExManager::RegExEval(char* p_tagSearch, char* p_textSearch)
 		//
 		std::ostringstream oss_regex;
 		//
-		oss_regex << "((<" << _p_tagSearch << ".*>)(.*" << _p_textSearch << ".*)(<\/" << _p_tagSearch << ">))";
+		oss_regex << "((<" << _p_tagSearch << ".*>)(.*" << _p_textSearch << ".*)(<\\/" << _p_tagSearch << ">))";
 		//
 		string strRegex    = oss_regex.str();
 		//

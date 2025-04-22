@@ -1,7 +1,13 @@
 ﻿///////////////////////////////////////////////////////////////////////////
-// ALGORITHM.LIBRARY.DLL
-// https://blogs.embarcadero.com/create-and-use-static-library-lib-and-dynamic-dlls-in-c-builder/
+// ALGORITHM.DLL
 ///////////////////////////////////////////////////////////////////////////
+/*
+
+	--[_]  compilar para x64
+*/
+
+///////////////////////////////////////////////////////////////////////////
+
 
 #include "include/Algorithm.h"
 #include "include/Dijkstra.h"
@@ -188,7 +194,6 @@
 	///////////////////////////////////////////////////////////////////////////
 	// ENTRY POINTS
 	///////////////////////////////////////////////////////////////////////////
-	/*
 	// DUJKSTRA
 	DLL_EXPORT const char* Dijkstra_GenerateRandomVertex_CPP(int p_vertexSize, int p_sourcePoint)
 	{
@@ -197,7 +202,6 @@
 		//
 		return uniquePtr->GetRandomPoints(p_vertexSize, p_sourcePoint).c_str();
 	};
-
 	// SORT BENCHMARK
 	DLL_EXPORT const char* SortBenchMark_GetSort_CPP(int p_sortAlgoritm, char* p_unsortedList)
 	{
@@ -207,7 +211,6 @@
 		);
 		return uniquePtr->GetSort(p_sortAlgoritm).c_str();
 	};
-
 	// REGULAR EXPRESSIONS
 	DLL_EXPORT const char*  RegExManager_RegExEval(char* p_tagSearch, char* p_textSearch)
 	{
@@ -304,7 +307,6 @@
 			{7, 1, 4, 2, 0, 6, 9, 3, 8},
 			{0, 8, 0, 7, 4, 0, 1, 2, 6}};
 	*/
-		/*
 		//
 		vector<string>   str_p_matrix_rows = algorithm->StringSplit(str_p_matrix_c_str,"|");
 		//
@@ -337,5 +339,5 @@
 		//
 		return str_matrix.c_str();
 	}
-	*/
+
 
