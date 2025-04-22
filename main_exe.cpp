@@ -1,8 +1,3 @@
-
-/*******************************************************************/
-//  CONFIGURACION
-/*******************************************************************/
-
 /*******************************************************************/
 //  DESCRIPCION
 /*******************************************************************/
@@ -11,7 +6,16 @@
   2) DEMOSTRACIÓN DE USO DE ARCHIVOS DE ENCABEZADO ".H".
   3) ESCRITO EN LENGUAJE C++.
   4) COMPILADOR MINGW / ENTORNO VISUAL STUDIO CODE.
-  5) GITHUB : https://github.com/aperezNWO/cpp_test
+  5) GITHUB : https://github.com/aperezNWO/cpp_gcc_algorithm
+*/
+/*******************************************************************/
+//  CONFIGURACION
+/*******************************************************************/
+/*
+   1) SELECT *.CPP FILE
+   2) TERMINAL > RUN TASK,
+   3) SELECT "(1) C/C++: g++.exe compilar archivo activo""
+   4) RUN FILE :  I.E: .\main_exe.exe
 */
 /*******************************************************************/
 

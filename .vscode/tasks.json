@@ -3,7 +3,7 @@
 	"tasks": [
 		{
 			"type": "cppbuild",
-			"label": "C/C++: g++.exe compilar archivo activo",
+			"label": "(1) C/C++: g++.exe compilar archivo activo",
 			"command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
 			"args": [
 				"-g",
@@ -25,7 +25,7 @@
 		},
 		{
 			"type": "cppbuild",
-			"label": "C/C++: g++.exe compilar archivo activo",
+			"label": "(2) C/C++: g++.exe compilar archivo activo",
 			"command": "C:\\msys64\\ucrt64\\bin\\gcc.exe",
 			"args": [
 				"-g",
@@ -44,6 +44,29 @@
 				"isDefault": true
 			},
 			"detail": "compilador: C:\\msys64\\ucrt64\\bin\\gcc.exe"
+		},
+		{
+			"type": "cppbuild",
+			"label": "(3) C/C++: g++.exe build active file",
+			"command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
+			"args": [
+				"-fdiagnostics-color=always",
+				"-g",
+				"${file}",
+				"-o",
+				"${fileDirname}\\${fileBasenameNoExtension}.exe"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "compiler: C:\\msys64\\ucrt64\\bin\\g++.exe"
 		}
 	]
 }
