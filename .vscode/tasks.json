@@ -47,14 +47,16 @@
 		},
 		{
 			"type": "cppbuild",
-			"label": "(3) C/C++: g++.exe build active file",
+			"label": "(3) (DLL) C/C++: g++.exe build active file",
 			"command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
 			"args": [
+				"-shared",
 				"-fdiagnostics-color=always",
 				"-g",
 				"${file}",
 				"-o",
-				"${fileDirname}\\${fileBasenameNoExtension}.exe"
+				"${fileDirname}\\${fileBasenameNoExtension}.dll",
+				"-I${fileDirname}\\include", 
 			],
 			"options": {
 				"cwd": "${fileDirname}"

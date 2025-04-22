@@ -21,8 +21,8 @@
 */
 /*******************************************************************/
 
-#include "iterativeList.h"
-#include "recursiveList.h"
+#include "include/iterativeList.h"
+#include "include/recursiveList.h"
 
 //
 int main()

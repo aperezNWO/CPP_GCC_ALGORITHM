@@ -6,22 +6,27 @@
 
 #include <iostream>
 #include <stdlib.h>
+#include <string>  
+#include <sstream>
 #include "node.h"
 
 using namespace std;
 
 class IterativeList
 {
-public:
+  private:
+    string  __trace;
+  
+  public:
     //
-    node *head,*tail;
+    node   *head,*tail;
     //
     IterativeList()
     {
         head = NULL;
         tail = NULL;
     }
-    //
+	//
     void add_node(int n)
     {
         node *tmp = new node;
@@ -39,21 +44,24 @@ public:
             tail = tail->next;
         }
     }
+	//
+	void setTrace(string aTrace)
+    {
+        __trace = aTrace;    
+    }
     //
-    static void Set()
+	const char* getTrace()
+	{
+		return __trace.c_str();
+	}
+	//
+	void Set(int limit)
     {
         //
-        system ("CLS");
-
-        //   
-        cout<<"-----------------------------------------"<< endl;
-        cout<<"-- ITERATIVE                             "<< endl;
-        cout<<"-----------------------------------------"<< endl;
-
-
-        //
         IterativeList a;
-        for (int i = 0; i <= 10; i++)
+		string        _trace;
+
+        for (int i = 0; i <= limit; i++)
                 a.add_node(i);
         //
         node *tmp = new node;
@@ -62,11 +70,22 @@ public:
         //
         while (tmp->next != NULL)
         {
-            cout<<tmp->data<<endl;
-            tmp  = tmp->next;
+            //
+            string  _strdata  = "";
+            tmp               = tmp->next;
+
+            //
+            stringstream ss;  
+            ss << tmp->data;  
+            ss >> _strdata;
+            
+            //
+            _trace += ("->" + _strdata);
         }
 
         //
-        system("pause");
+        setTrace("Iterative : " + _trace);
     };
+    
+
 };
