@@ -12,7 +12,9 @@
 //  CONFIGURACION
 /*******************************************************************/
 /*
-   1) SELECT *.CPP FILE
+  -- [_] toolchain linked via "tasks.json" -> "C:\\msys64\\ucrt64\\bin\\g++.exe".
+
+   1) SELECT *.CPP FILE (i.e main_exe.cpp)
    2) TERMINAL > RUN TASK,
    3) SELECT "(1) C/C++: g++.exe compilar archivo activo""
    4) RUN FILE :  I.E: .\main_exe.exe
