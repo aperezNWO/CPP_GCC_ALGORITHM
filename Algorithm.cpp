@@ -232,7 +232,6 @@
 		//
 		return uniquePtr->RegExEval(p_tagSearch, p_textSearch).c_str();
 	}
-
 	// SUDOKU - 64 bit version
 	DLL_EXPORT const char* Sudoku_Generate_CPP_64()
 	{
@@ -247,7 +246,6 @@
 		//
 		return str_matrix.c_str();
 	}
-
 	// SUDOKU
 	DLL_EXPORT const char*  Sudoku_Generate_CPP()
 	{
@@ -262,7 +260,6 @@
 		//
 		return str_matrix.c_str();
 	}
-
 	// SUDOKU
 	DLL_EXPORT const char*  Sudoku_Solve_CPP(char* p_matrix)
 	{
@@ -352,5 +349,14 @@
 		//
 		return str_matrix.c_str();
 	}
+	// APP_VERSION
+	DLL_EXPORT const char*  GetDLLVersion()
+	{
+		//
+		std::unique_ptr<Algorithm> uniquePtr = std::make_unique<Algorithm>();
+		//
+		return uniquePtr->configMap["DLL_VERSION"].c_str();
+	}
 
+//////////////////////////////////////////////////////////////////////////
 
