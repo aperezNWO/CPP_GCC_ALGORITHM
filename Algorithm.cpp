@@ -367,28 +367,3 @@
 		//
 		return uniquePtr->configMap["DLL_VERSION"].c_str();
 	}
-
-//////////////////////////////////////////////////////////////////////////
-// MAIN PROGRAM TEST
-//////////////////////////////////////////////////////////////////////////
-int main()
-{
-    GetDLLVersion();
-
-    int p_sortAlgoritm         = 2;
-    const char* p_unsortedList = "23|7|10|16|1|4|22|2|6|24|8|14|11|15|21|13|19|20|18|0|17|5|3|9|12";
-
-    std::cout << "Unsorted List: " << p_unsortedList << std::endl;
-
-	std::unique_ptr<SortBenchMark> uniquePtr = std::make_unique<SortBenchMark>(
-		p_unsortedList
-	);
-
-    std::cout << "Sorted List:   " << uniquePtr->GetSort(p_sortAlgoritm).c_str() << std::endl;
-
-    std::cin.get(); // Keep window open
-	
-    return 0;
-}
-
-//////////////////////////////////////////////////////////////////////////
