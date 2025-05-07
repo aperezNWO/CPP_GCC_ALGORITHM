@@ -28,7 +28,7 @@
 #include "include/RegExManager.h"
 #include "include/Sudoku.cpp"
 
-#define DLL_EXPORT extern "C" __declspec(dllexport) __stdcall
+    #define DLL_EXPORT extern "C" __declspec(dllexport) __stdcall
 
 	Algorithm::Algorithm()
 	{
@@ -207,8 +207,9 @@
 	///////////////////////////////////////////////////////////////////////////
 	// ENTRY POINTS
 	///////////////////////////////////////////////////////////////////////////
+
 	// DUJKSTRA
-	DLL_EXPORT const char* Dijkstra_GenerateRandomVertex_CPP(int p_vertexSize, int p_sourcePoint)
+	DLL_EXPORT const char*  Dijkstra_GenerateRandomVertex_CPP(int p_vertexSize, int p_sourcePoint)
 	{
 		//
 		std::unique_ptr<Dijkstra> uniquePtr = std::make_unique<Dijkstra>();
@@ -216,13 +217,23 @@
 		return uniquePtr->GetRandomPoints(p_vertexSize, p_sourcePoint).c_str();
 	};
 	// SORT BENCHMARK
-	DLL_EXPORT const char* SortBenchMark_GetSort_CPP(int p_sortAlgoritm, char* p_unsortedList)
+	DLL_EXPORT const char*  SortBenchMark_GetSort_CPP(int p_sortAlgoritm, const char* p_unsortedList)
 	{
-		//
+		/*
 		std::unique_ptr<SortBenchMark> uniquePtr = std::make_unique<SortBenchMark>(
 					p_unsortedList
 		);
 		return uniquePtr->GetSort(p_sortAlgoritm).c_str();
+		*/
+
+		//return "■<br/>1<br/>2<br/>19<br/>16<br/>6<br/>5<br/>4<br/>22<br/>18<br/>21<br/>14<br/>7<br/>0<br/>20<br/>3<br/>8<br/>13<br/>17<br/>10<br/>11<br/>23<br/>9<br/>24<br/>12<br/>15<br/>■<br/>1<br/>2<br/>12<br/>16<br/>6<br/>5<br/>4<br/>22<br/>18<br/>21<br/>14<br/>7<br/>0<br/>20<br/>3<br/>8<br/>13<br/>17<br/>10<br/>11<br/>23<br/>9<br/>24<br/>19<br/>15<br/>■<br/>1<br/>2<br/>9<br/>16<br/>6<br/>5<br/>4<br/>22<br/>18<br/>21<br/>14<br/>7<br/>0<br/>20<br/>3<br/>8<br/>13<br/>17<br/>10<br/>11<br/>23<br/>12<br/>24<br/>19<br/>15<br/>■<br/>1<br/>2<br/>9<br/>12<br/>6<br/>5<br/>4<br/>22<br/>18<br/>21<br/>14<br/>7<br/>0<br/>20<br/>3<br/>8<br/>13<br/>17<br/>10<br/>11<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>1<br/>2<br/>9<br/>11<br/>6<br/>5<br/>4<br/>22<br/>18<br/>21<br/>14<br/>7<br/>0<br/>20<br/>3<br/>8<br/>13<br/>17<br/>10<br/>12<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>1<br/>2<br/>9<br/>11<br/>6<br/>5<br/>4<br/>12<br/>18<br/>21<br/>14<br/>7<br/>0<br/>20<br/>3<br/>8<br/>13<br/>17<br/>10<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>1<br/>2<br/>9<br/>11<br/>6<br/>5<br/>4<br/>10<br/>18<br/>21<br/>14<br/>7<br/>0<br/>20<br/>3<br/>8<br/>13<br/>17<br/>12<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>1<br/>2<br/>9<br/>11<br/>6<br/>5<br/>4<br/>10<br/>12<br/>21<br/>14<br/>7<br/>0<br/>20<br/>3<br/>8<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>1<br/>2<br/>9<br/>11<br/>6<br/>5<br/>4<br/>10<br/>8<br/>21<br/>14<br/>7<br/>0<br/>20<br/>3<br/>12<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>1<br/>2<br/>9<br/>11<br/>6<br/>5<br/>4<br/>10<br/>8<br/>12<br/>14<br/>7<br/>0<br/>20<br/>3<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>1<br/>2<br/>9<br/>11<br/>6<br/>5<br/>4<br/>10<br/>8<br/>3<br/>14<br/>7<br/>0<br/>20<br/>12<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>1<br/>2<br/>9<br/>11<br/>6<br/>5<br/>4<br/>10<br/>8<br/>3<br/>12<br/>7<br/>0<br/>20<br/>14<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>1<br/>2<br/>9<br/>11<br/>6<br/>5<br/>4<br/>10<br/>8<br/>3<br/>0<br/>7<br/>12<br/>20<br/>14<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>0<br/>2<br/>9<br/>11<br/>6<br/>5<br/>4<br/>10<br/>8<br/>3<br/>1<br/>7<br/>12<br/>20<br/>14<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>0<br/>1<br/>9<br/>11<br/>6<br/>5<br/>4<br/>10<br/>8<br/>3<br/>2<br/>7<br/>12<br/>20<br/>14<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>0<br/>1<br/>7<br/>11<br/>6<br/>5<br/>4<br/>10<br/>8<br/>3<br/>2<br/>9<br/>12<br/>20<br/>14<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>0<br/>1<br/>7<br/>9<br/>6<br/>5<br/>4<br/>10<br/>8<br/>3<br/>2<br/>11<br/>12<br/>20<br/>14<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>0<br/>1<br/>7<br/>2<br/>6<br/>5<br/>4<br/>10<br/>8<br/>3<br/>9<br/>11<br/>12<br/>20<br/>14<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>0<br/>1<br/>7<br/>2<br/>6<br/>5<br/>4<br/>9<br/>8<br/>3<br/>10<br/>11<br/>12<br/>20<br/>14<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>0<br/>1<br/>7<br/>2<br/>6<br/>5<br/>4<br/>3<br/>8<br/>9<br/>10<br/>11<br/>12<br/>20<br/>14<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>0<br/>1<br/>3<br/>2<br/>6<br/>5<br/>4<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>20<br/>14<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>0<br/>1<br/>2<br/>3<br/>6<br/>5<br/>4<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>20<br/>14<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>0<br/>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>20<br/>14<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>0<br/>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>15<br/>14<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>20<br/>■<br/>0<br/>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>15<br/>14<br/>20<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>21<br/>■<br/>0<br/>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>15<br/>14<br/>19<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>20<br/>21<br/>■<br/>0<br/>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>15<br/>14<br/>19<br/>13<br/>17<br/>18<br/>20<br/>23<br/>16<br/>24<br/>22<br/>21<br/>■<br/>0<br/>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>15<br/>14<br/>19<br/>13<br/>17<br/>18<br/>16<br/>23<br/>20<br/>24<br/>22<br/>21<br/>■<br/>0<br/>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>15<br/>14<br/>19<br/>13<br/>17<br/>18<br/>16<br/>20<br/>23<br/>24<br/>22<br/>21<br/>■<br/>0<br/>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>19<br/>15<br/>17<br/>18<br/>16<br/>20<br/>23<br/>24<br/>22<br/>21<br/>■<br/>0<br/>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>19<br/>17<br/>18<br/>16<br/>20<br/>23<br/>24<br/>22<br/>21<br/>■<br/>0<br/>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>23<br/>24<br/>22<br/>21<br/>■<br/>0<br/>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21<br/>24<br/>22<br/>23<br/>■<br/>0<br/>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21<br/>23<br/>22<br/>24<br/>■<br/>0<br/>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21<br/>22<br/>23<br/>24<br/>"
+	
+		// Create instance manually for testing
+		SortBenchMark sorter(p_unsortedList);
+		string sortedStr       = sorter.GetSort(p_sortAlgoritm); // Store result
+		const char* sortedList = sortedStr.c_str();              // Use valid pointer
+		
+		return sortedList;
 	};
 	// REGULAR EXPRESSIONS
 	DLL_EXPORT const char*  RegExManager_RegExEval(char* p_tagSearch, char* p_textSearch)
@@ -233,7 +244,7 @@
 		return uniquePtr->RegExEval(p_tagSearch, p_textSearch).c_str();
 	}
 	// SUDOKU - 64 bit version
-	DLL_EXPORT const char* Sudoku_Generate_CPP_64()
+	DLL_EXPORT const char*  Sudoku_Generate_CPP_64()
 	{
 		//
 		const static int   N = 9;
@@ -359,4 +370,10 @@
 	}
 
 //////////////////////////////////////////////////////////////////////////
-
+// MAIN PROGRAM TEST
+//////////////////////////////////////////////////////////////////////////
+int main()
+{
+    return 0;
+}
+//////////////////////////////////////////////////////////////////////////

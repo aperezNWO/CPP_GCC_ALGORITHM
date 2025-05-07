@@ -3,7 +3,7 @@
 	"tasks": [
 		{
 			"type": "cppbuild",
-			"label": "(1) C/C++: g++.exe compilar archivo activo",
+			"label": "(1) (EXE) C/C++: g++.exe compilar archivo activo",
 			"command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
 			"args": [
 				"-g",
@@ -25,13 +25,26 @@
 		},
 		{
 			"type": "cppbuild",
-			"label": "(2) C/C++: g++.exe compilar archivo activo",
-			"command": "C:\\msys64\\ucrt64\\bin\\gcc.exe",
+			"label": "(2) (EXE) C/C++: g++.exe build active file",
+			"command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
 			"args": [
+				//"-shared",
+				//"-static",
+				//"-static-libgcc",
+				//"-static-libstdc++",
+				//"-fdiagnostics-color=always",
 				"-g",
 				"${file}",
+				"${fileDirname}\\include\\Dijkstra.cpp",
+				"${fileDirname}\\include\\RegExManager.cpp",
+				"${fileDirname}\\include\\SortBenchMark.cpp",
+				"${fileDirname}\\include\\Sudoku.cpp",
+				"${fileDirname}\\include\\TFileManager.cpp",
 				"-o",
-				"${fileDirname}\\${fileBasenameNoExtension}.exe"
+				"${fileDirname}\\${fileBasenameNoExtension}.exe",
+				"-I${fileDirname}\\include", 
+                "-Wl,--subsystem,windows", // Specify subsystem as Windows GUI
+                "-m64" // Target 64-bit architecture
 			],
 			"options": {
 				"cwd": "${fileDirname}"
@@ -43,8 +56,8 @@
 				"kind": "build",
 				"isDefault": true
 			},
-			"detail": "compilador: C:\\msys64\\ucrt64\\bin\\gcc.exe"
-		},
+			"detail": "compiler: C:\\msys64\\ucrt64\\bin\\g++.exe"
+		},	
 		{
 			"type": "cppbuild",
 			"label": "(3) (DLL) C/C++: g++.exe build active file",
