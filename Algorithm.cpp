@@ -3,7 +3,7 @@
 ///////////////////////////////////////////////////////////////////////////
 /*
 
-		-- [_] TOOLCHAIN : C:\msys64\ucrt64\bin.
+		-- [_] TOOLCHAIN : C:\msys64\mingw64\bin.
 */
 
 ///////////////////////////////////////////////////////////////////////////
@@ -18,6 +18,16 @@
 		a) Algorithm.dll
 		b) Algorithm.ini
 		c) cdCatalog.xml
+*/
+///////////////////////////////////////////////////////////////////////////
+// CONFIGURACION EXE
+///////////////////////////////////////////////////////////////////////////
+/*
+
+	1) SELECCIONAR ARCHIVO *.CPP 
+	2) TERMINAL > RUN BUILD TASK > (2) (EXE) C/C++: g++.exe build active file
+	3) SE GENERA ARCHIVO "ALGORITMO.DLL" STATIC DLL X64
+
 */
 ///////////////////////////////////////////////////////////////////////////
 
@@ -219,21 +229,10 @@
 	// SORT BENCHMARK
 	DLL_EXPORT const char*  SortBenchMark_GetSort_CPP(int p_sortAlgoritm, const char* p_unsortedList)
 	{
-		/*
 		std::unique_ptr<SortBenchMark> uniquePtr = std::make_unique<SortBenchMark>(
 					p_unsortedList
 		);
 		return uniquePtr->GetSort(p_sortAlgoritm).c_str();
-		*/
-
-		//return "■<br/>1<br/>2<br/>19<br/>16<br/>6<br/>5<br/>4<br/>22<br/>18<br/>21<br/>14<br/>7<br/>0<br/>20<br/>3<br/>8<br/>13<br/>17<br/>10<br/>11<br/>23<br/>9<br/>24<br/>12<br/>15<br/>■<br/>1<br/>2<br/>12<br/>16<br/>6<br/>5<br/>4<br/>22<br/>18<br/>21<br/>14<br/>7<br/>0<br/>20<br/>3<br/>8<br/>13<br/>17<br/>10<br/>11<br/>23<br/>9<br/>24<br/>19<br/>15<br/>■<br/>1<br/>2<br/>9<br/>16<br/>6<br/>5<br/>4<br/>22<br/>18<br/>21<br/>14<br/>7<br/>0<br/>20<br/>3<br/>8<br/>13<br/>17<br/>10<br/>11<br/>23<br/>12<br/>24<br/>19<br/>15<br/>■<br/>1<br/>2<br/>9<br/>12<br/>6<br/>5<br/>4<br/>22<br/>18<br/>21<br/>14<br/>7<br/>0<br/>20<br/>3<br/>8<br/>13<br/>17<br/>10<br/>11<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>1<br/>2<br/>9<br/>11<br/>6<br/>5<br/>4<br/>22<br/>18<br/>21<br/>14<br/>7<br/>0<br/>20<br/>3<br/>8<br/>13<br/>17<br/>10<br/>12<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>1<br/>2<br/>9<br/>11<br/>6<br/>5<br/>4<br/>12<br/>18<br/>21<br/>14<br/>7<br/>0<br/>20<br/>3<br/>8<br/>13<br/>17<br/>10<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>1<br/>2<br/>9<br/>11<br/>6<br/>5<br/>4<br/>10<br/>18<br/>21<br/>14<br/>7<br/>0<br/>20<br/>3<br/>8<br/>13<br/>17<br/>12<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>1<br/>2<br/>9<br/>11<br/>6<br/>5<br/>4<br/>10<br/>12<br/>21<br/>14<br/>7<br/>0<br/>20<br/>3<br/>8<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>1<br/>2<br/>9<br/>11<br/>6<br/>5<br/>4<br/>10<br/>8<br/>21<br/>14<br/>7<br/>0<br/>20<br/>3<br/>12<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>1<br/>2<br/>9<br/>11<br/>6<br/>5<br/>4<br/>10<br/>8<br/>12<br/>14<br/>7<br/>0<br/>20<br/>3<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>1<br/>2<br/>9<br/>11<br/>6<br/>5<br/>4<br/>10<br/>8<br/>3<br/>14<br/>7<br/>0<br/>20<br/>12<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>1<br/>2<br/>9<br/>11<br/>6<br/>5<br/>4<br/>10<br/>8<br/>3<br/>12<br/>7<br/>0<br/>20<br/>14<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>1<br/>2<br/>9<br/>11<br/>6<br/>5<br/>4<br/>10<br/>8<br/>3<br/>0<br/>7<br/>12<br/>20<br/>14<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>0<br/>2<br/>9<br/>11<br/>6<br/>5<br/>4<br/>10<br/>8<br/>3<br/>1<br/>7<br/>12<br/>20<br/>14<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>0<br/>1<br/>9<br/>11<br/>6<br/>5<br/>4<br/>10<br/>8<br/>3<br/>2<br/>7<br/>12<br/>20<br/>14<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>0<br/>1<br/>7<br/>11<br/>6<br/>5<br/>4<br/>10<br/>8<br/>3<br/>2<br/>9<br/>12<br/>20<br/>14<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>0<br/>1<br/>7<br/>9<br/>6<br/>5<br/>4<br/>10<br/>8<br/>3<br/>2<br/>11<br/>12<br/>20<br/>14<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>0<br/>1<br/>7<br/>2<br/>6<br/>5<br/>4<br/>10<br/>8<br/>3<br/>9<br/>11<br/>12<br/>20<br/>14<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>0<br/>1<br/>7<br/>2<br/>6<br/>5<br/>4<br/>9<br/>8<br/>3<br/>10<br/>11<br/>12<br/>20<br/>14<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>0<br/>1<br/>7<br/>2<br/>6<br/>5<br/>4<br/>3<br/>8<br/>9<br/>10<br/>11<br/>12<br/>20<br/>14<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>0<br/>1<br/>3<br/>2<br/>6<br/>5<br/>4<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>20<br/>14<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>0<br/>1<br/>2<br/>3<br/>6<br/>5<br/>4<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>20<br/>14<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>0<br/>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>20<br/>14<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>15<br/>■<br/>0<br/>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>15<br/>14<br/>21<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>20<br/>■<br/>0<br/>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>15<br/>14<br/>20<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>19<br/>21<br/>■<br/>0<br/>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>15<br/>14<br/>19<br/>13<br/>17<br/>18<br/>22<br/>23<br/>16<br/>24<br/>20<br/>21<br/>■<br/>0<br/>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>15<br/>14<br/>19<br/>13<br/>17<br/>18<br/>20<br/>23<br/>16<br/>24<br/>22<br/>21<br/>■<br/>0<br/>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>15<br/>14<br/>19<br/>13<br/>17<br/>18<br/>16<br/>23<br/>20<br/>24<br/>22<br/>21<br/>■<br/>0<br/>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>15<br/>14<br/>19<br/>13<br/>17<br/>18<br/>16<br/>20<br/>23<br/>24<br/>22<br/>21<br/>■<br/>0<br/>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>19<br/>15<br/>17<br/>18<br/>16<br/>20<br/>23<br/>24<br/>22<br/>21<br/>■<br/>0<br/>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>19<br/>17<br/>18<br/>16<br/>20<br/>23<br/>24<br/>22<br/>21<br/>■<br/>0<br/>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>23<br/>24<br/>22<br/>21<br/>■<br/>0<br/>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21<br/>24<br/>22<br/>23<br/>■<br/>0<br/>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21<br/>23<br/>22<br/>24<br/>■<br/>0<br/>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21<br/>22<br/>23<br/>24<br/>"
-	
-		// Create instance manually for testing
-		SortBenchMark sorter(p_unsortedList);
-		string sortedStr       = sorter.GetSort(p_sortAlgoritm); // Store result
-		const char* sortedList = sortedStr.c_str();              // Use valid pointer
-		
-		return sortedList;
 	};
 	// REGULAR EXPRESSIONS
 	DLL_EXPORT const char*  RegExManager_RegExEval(char* p_tagSearch, char* p_textSearch)
@@ -374,6 +373,22 @@
 //////////////////////////////////////////////////////////////////////////
 int main()
 {
+    GetDLLVersion();
+
+    int p_sortAlgoritm         = 2;
+    const char* p_unsortedList = "23|7|10|16|1|4|22|2|6|24|8|14|11|15|21|13|19|20|18|0|17|5|3|9|12";
+
+    std::cout << "Unsorted List: " << p_unsortedList << std::endl;
+
+	std::unique_ptr<SortBenchMark> uniquePtr = std::make_unique<SortBenchMark>(
+		p_unsortedList
+	);
+
+    std::cout << "Sorted List:   " << uniquePtr->GetSort(p_sortAlgoritm).c_str() << std::endl;
+
+    std::cin.get(); // Keep window open
+	
     return 0;
 }
+
 //////////////////////////////////////////////////////////////////////////

@@ -26,7 +26,7 @@
 		{
 			"type": "cppbuild",
 			"label": "(2) (EXE) C/C++: g++.exe build active file",
-			"command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
+			"command": "C:\\msys64\\mingw64\\bin\\g++.exe",
 			"args": [
 				//"-shared",
 				//"-static",
@@ -43,7 +43,7 @@
 				"-o",
 				"${fileDirname}\\${fileBasenameNoExtension}.exe",
 				"-I${fileDirname}\\include", 
-                "-Wl,--subsystem,windows", // Specify subsystem as Windows GUI
+                //"-Wl,--subsystem,windows", // Specify subsystem as Windows GUI
                 "-m64" // Target 64-bit architecture
 			],
 			"options": {
@@ -56,12 +56,12 @@
 				"kind": "build",
 				"isDefault": true
 			},
-			"detail": "compiler: C:\\msys64\\ucrt64\\bin\\g++.exe"
+			"detail": "compiler: C:\\msys64\\mingw64\\bin\\g++.exe"
 		},	
 		{
 			"type": "cppbuild",
 			"label": "(3) (DLL) C/C++: g++.exe build active file",
-			"command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
+			"command": "C:\\msys64\\mingw64\\bin\\g++.exe",
 			"args": [
 				"-shared",
 				"-static",
@@ -91,7 +91,7 @@
 				"kind": "build",
 				"isDefault": true
 			},
-			"detail": "compiler: C:\\msys64\\ucrt64\\bin\\g++.exe"
+			"detail": "compiler: C:\\msys64\\mingw64\\bin\\g++.exe"
 		}
 	]
 }
