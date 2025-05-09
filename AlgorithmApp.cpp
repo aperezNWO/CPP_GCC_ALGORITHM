@@ -4,7 +4,7 @@
 /*
 
 		-- [_] TOOLCHAIN : C:\msys64\mingw64\bin.
-
+		
 */
 
 ///////////////////////////////////////////////////////////////////////////
@@ -17,6 +17,14 @@
 	3) SE GENERA ARCHIVO "ALGORITMO.EXE" X6
 	4) EJECUTA  DESDE VISUAL STUDIO CODE : .\AlgorithmApp
 
+*/
+/*
+
+	"-g AlgorithmApp.cpp include\Dijkstra.cpp include\RegExManager.cpp include\SortBenchMark.cpp include\Sudoku.cpp include\TFileManager.cpp",
+	"-o AlgorithmApp.exe"
+	"-Iinclude", 
+    "-m64"
+                
 */
 ///////////////////////////////////////////////////////////////////////////
 
