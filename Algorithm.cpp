@@ -32,11 +32,11 @@
 ///////////////////////////////////////////////////////////////////////////
 
 
-#include "include/Algorithm.h"
-#include "include/Dijkstra.h"
-#include "include/SortBenchMark.h"
-#include "include/RegExManager.h"
-#include "include/Sudoku.cpp"
+#include "include\Algorithm.h"
+#include "include\Dijkstra.h"
+#include "include\SortBenchMark.h"
+#include "include\RegExManager.h"
+#include "include\Sudoku.cpp"
 
     #define DLL_EXPORT extern "C" __declspec(dllexport) __stdcall
 
