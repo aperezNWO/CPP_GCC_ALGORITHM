@@ -201,9 +201,9 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit18]
-FileName=include\Algorithm.cpp
+FileName=Algorithm.cpp
 CompileCpp=1
-Folder=include
+Folder=
 Compile=1
 Link=1
 Priority=1000
