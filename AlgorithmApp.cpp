@@ -18,13 +18,22 @@
 	4) EJECUTA  DESDE VISUAL STUDIO CODE : .\AlgorithmApp
 
 */
+
+///////////////////////////////////////////////////////////////////////////
+// EMBARCADERO DEV C++ 
+///////////////////////////////////////////////////////////////////////////
 /*
 
+    a) linea de comandos :
+    
 	"-g AlgorithmApp.cpp include\Dijkstra.cpp include\RegExManager.cpp include\SortBenchMark.cpp include\Sudoku.cpp include\TFileManager.cpp",
 	"-o AlgorithmApp.exe"
 	"-Iinclude", 
     "-m64"
-                
+    
+	b) commandos de git hub
+	
+	            
 */
 ///////////////////////////////////////////////////////////////////////////
 
