@@ -3,14 +3,15 @@
 ///////////////////////////////////////////////////////////////////////////
 /*
 
-		-- [_] TOOLCHAIN : C:\msys64\mingw64\bin.
+		-- [_] TOOLCHAIN :  "C:\msys64\ucrt64\bin\g++.exe"
 */
 
 ///////////////////////////////////////////////////////////////////////////
-// CONFIGURACION DLL
+// VISUAL STUDIO
 ///////////////////////////////////////////////////////////////////////////
 /*
 	1) SELECCIONAR ARCHIVO *.CPP DLL
+	
 	2) TERMINAL > RUN BUILD TASK > (3) (DLL) C/C++: g++.exe build active file
 	3) SE GENERA ARCHIVO "ALGORITMO.DLL" STATIC DLL X64
 	4) DISTRIBUIR LOS SIGUIENTES ARCHIVOS  EN CARPETA "/_DIST":
@@ -18,6 +19,14 @@
 		a) Algorithm.dll
 		b) Algorithm.ini
 		c) cdCatalog.xml
+
+///////////////////////////////////////////////////////////
+// COMMAND LINE
+///////////////////////////////////////////////////////////
+
+ 
+ "C:\msys64\ucrt64\bin\g++.exe" -shared -static -static-libgcc -static-libstdc++ -fdiagnostics-color=always -g Algorithm.cpp include\Dijkstra.cpp include\RegExManager.cpp include\SortBenchMark.cpp include\Sudoku.cpp include\TFileManager.cpp -o Algorithm.dll -Iinclude -Wl,--subsystem,windows -m64
+                
 */
 
 

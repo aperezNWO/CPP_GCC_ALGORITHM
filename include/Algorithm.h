@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// ALGORITHM.WINFORMS.DLL
+// ALGORITHM.H
 ///////////////////////////////////////////////////////////////////////////
 
 #ifndef Algorithm_H // include guard
@@ -18,13 +18,11 @@
 #include <cctype>
 #include <map>
 
-
 //
 using namespace std;
 
 #pragma hdrstop
 #pragma argsused
-
 #pragma once
 
 //

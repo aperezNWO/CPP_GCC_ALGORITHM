@@ -26,12 +26,16 @@
 
     a) linea de comandos :
     
-	"-g AlgorithmApp.cpp include\Dijkstra.cpp include\RegExManager.cpp include\SortBenchMark.cpp include\Sudoku.cpp include\TFileManager.cpp",
-	"-o AlgorithmApp.exe"
-	"-Iinclude", 
-    "-m64"
-    
-	b) commandos de git hub
+
+///////////////////////////////////////////////////////////
+// COMMAND LINE
+///////////////////////////////////////////////////////////
+
+ 
+ "C:\msys64\ucrt64\bin\g++.exe"  -g AlgorithmApp.cpp include\Dijkstra.cpp include\RegExManager.cpp include\SortBenchMark.cpp include\Sudoku.cpp include\TFileManager.cpp -o AlgorithmApp.exe -Iinclude  -m64
+
+
+
 	
 	            
 */
@@ -40,7 +44,7 @@
 #include "Algorithm.cpp"
 
 //////////////////////////////////////////////////////////////////////////
-// DLL TEST
+// CLASS SOURCE CODE  TEST
 //////////////////////////////////////////////////////////////////////////
 int main()
 {
