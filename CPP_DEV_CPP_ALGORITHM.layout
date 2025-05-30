@@ -89,7 +89,7 @@ CursorRow=36
 TopLine=30
 LeftChar=1
 [Editors]
-Order=19,3,4,17
+Order=
 Focused=4
 [Editor_18]
 CursorCol=3
