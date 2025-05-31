@@ -9,7 +9,7 @@
   5) GITHUB : https://github.com/aperezNWO/cpp_gcc_algorithm
 */
 /*******************************************************************/
-//  CONFIGURACION
+//  CONFIGURACION - visual studio code
 /*******************************************************************/
 /*
   -- [_] toolchain linked via "tasks.json" -> "C:\\msys64\\ucrt64\\bin\\g++.exe".
@@ -19,7 +19,15 @@
    3) SELECT "(1) C/C++: g++.exe compilar archivo activo""
    4) RUN FILE :  I.E: .\main_exe.exe
 */
+
 /*******************************************************************/
+// COMMAND LINE
+/*******************************************************************/
+/*
+
+	 "C:\msys64\ucrt64\bin\g++.exe"  -g TestApp.cpp  -o TestApp.exe 
+
+*/
 
 #include "include/iterativeList.h"
 #include "include/recursiveList.h"
@@ -39,6 +47,7 @@ int main()
          system ("CLS");
 
          //   
+         cout<<"";
          cout<<"-----------------------------------------"<< endl;
          cout<<"-- LINKED LISTS                          "<< endl;
          cout<<"-----------------------------------------"<< endl;
@@ -58,25 +67,34 @@ int main()
          {
              case 1:
                {
+               	  //
+         		  system ("CLS");
+		 		  //
                   IterativeList* iterativeList = new IterativeList();  
                   iterativeList->Set(limit);
-                  cout<<iterativeList->getTrace();
-                  std::getchar();
+                  cout<<iterativeList->getTrace()<<endl;
+			      //
+				  std::cout << "Press any key to continue..." << std::endl;
+			      _getwch(); // Wait for a single key press
                }
              break;
              case 2:
                {
+               	  //
+         		  system ("CLS");
+         		  //
                   RecursiveList* recursiveList = new RecursiveList();
                   recursiveList->Set(limit);
-                  cout<<recursiveList->getTrace();
-                  std::getchar();
+                  cout<<recursiveList->getTrace()<<endl;
+			      //
+				  std::cout << "Press any key to continue..." << std::endl;
+			      _getwch(); // Wait for a single key press
                }
              break;                
 
          };
 
-         //
-         system ("CLS");
+
     };
 
     //
