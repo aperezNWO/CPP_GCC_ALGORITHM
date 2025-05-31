@@ -20,16 +20,16 @@
 		b) Algorithm.ini
 		c) cdCatalog.xml
 
+*/
+
 ///////////////////////////////////////////////////////////
 // COMMAND LINE
 ///////////////////////////////////////////////////////////
+/* 
 
- 
  "C:\msys64\ucrt64\bin\g++.exe" -shared -static -static-libgcc -static-libstdc++ -fdiagnostics-color=always -g Algorithm.cpp include\Dijkstra.cpp include\RegExManager.cpp include\SortBenchMark.cpp include\Sudoku.cpp include\TFileManager.cpp -o Algorithm.dll -Iinclude -Wl,--subsystem,windows -m64
                 
 */
-
-
 
 #include "include\Algorithm.h"
 #include "include\Dijkstra.h"
@@ -228,13 +228,7 @@
 	// SORT BENCHMARK
 	DLL_EXPORT const char*  SortBenchMark_GetSort_CPP(int p_sortAlgoritm, const char* p_unsortedList)
 	{
-		/*
-		std::unique_ptr<SortBenchMark> uniquePtr = std::make_unique<SortBenchMark>(
-					p_unsortedList
-		);
-		return uniquePtr->GetSort(p_sortAlgoritm).c_str();
-		*/
-		
+		//		
 	    if (!p_unsortedList || !p_sortAlgoritm) {
 	        throw std::invalid_argument("Invalid input parameters");
 	    }
@@ -284,10 +278,7 @@
 	// SUDOKU
 	DLL_EXPORT const char*  Sudoku_Solve_CPP(char* p_matrix)
 	{
-		//
-		// [{2,0,8,5,1,3,4,6,7},{0,3,6,2,4,0,1,9,8},{0,0,0,8,6,0,2,5,3},{3,2,5,4,7,6,0,1,9},{0,6,9,1,8,2,3,7,5},{8,7,0,3,0,5,0,0,2},{0,4,7,9,2,8,0,3,1},{1,8,0,7,5,4,0,2,6},{9,5,2,0,0,1,7,0,4}]
-
-		//
+	    //
 		Algorithm*   algorithm     = new Algorithm();
 		string       str_p_matrix  = p_matrix;
 		FileManager* fileManager   = new FileManager();
@@ -327,17 +318,7 @@
 			{-1, -1, -1, -1, -1, -1, -1, -1, -1},
 			{-1, -1, -1, -1, -1, -1, -1, -1, -1},
 			{-1, -1, -1, -1, -1, -1, -1, -1, -1}};
-	/*
-			{{0, 4, 0, 1, 0, 2, 6, 5, 7},
-			{2, 7, 3, 6, 8, 5, 4, 1, 9},
-			{0, 6, 0, 9, 0, 4, 2, 8, 3},
-			{0, 9, 0, 3, 2, 8, 7, 0, 5},
-			{0, 5, 7, 4, 0, 9, 0, 6, 2},
-			{4, 2, 8, 5, 6, 7, 3, 9, 1},
-			{0, 3, 2, 0, 0, 1, 0, 7, 4},
-			{7, 1, 4, 2, 0, 6, 9, 3, 8},
-			{0, 8, 0, 7, 4, 0, 1, 2, 6}};
-	*/
+
 		//
 		vector<string>   str_p_matrix_rows = algorithm->StringSplit(str_p_matrix_c_str,"|");
 		//
