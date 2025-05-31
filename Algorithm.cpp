@@ -228,10 +228,22 @@
 	// SORT BENCHMARK
 	DLL_EXPORT const char*  SortBenchMark_GetSort_CPP(int p_sortAlgoritm, const char* p_unsortedList)
 	{
+		/*
 		std::unique_ptr<SortBenchMark> uniquePtr = std::make_unique<SortBenchMark>(
 					p_unsortedList
 		);
 		return uniquePtr->GetSort(p_sortAlgoritm).c_str();
+		*/
+		
+	    if (!p_unsortedList || !p_sortAlgoritm) {
+	        throw std::invalid_argument("Invalid input parameters");
+	    }
+	
+	    // Create SortBenchMark object on the stack
+	    SortBenchMark benchmark(p_unsortedList);
+	
+	    // Perform sorting and return the result as a std::string
+	    return benchmark.GetSort(p_sortAlgoritm).c_str();
 	};
 	// REGULAR EXPRESSIONS
 	DLL_EXPORT const char*  RegExManager_RegExEval(char* p_tagSearch, char* p_textSearch)
