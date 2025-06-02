@@ -30,7 +30,17 @@
  "C:\msys64\ucrt64\bin\g++.exe" -shared -static -static-libgcc -static-libstdc++ -fdiagnostics-color=always -g Algorithm.cpp include\Dijkstra.cpp include\RegExManager.cpp include\SortBenchMark.cpp include\Sudoku.cpp include\TFileManager.cpp -o Algorithm.dll -Iinclude -Wl,--subsystem,windows -m64
                 
 */
+///////////////////////////////////////////////////////////
+// MAKE
+///////////////////////////////////////////////////////////
+/* 
 
+mingw32-make --always-make --debug=v
+
+make.bat
+
+*/
+///////////////////////////////////////////////////////////
 #include "include\Algorithm.h"
 #include "include\Dijkstra.h"
 #include "include\SortBenchMark.h"
@@ -228,24 +238,50 @@
 	// SORT BENCHMARK
 	DLL_EXPORT const char*  SortBenchMark_GetSort_CPP(int p_sortAlgoritm, const char* p_unsortedList)
 	{
-		//		
 	    if (!p_unsortedList || !p_sortAlgoritm) {
 	        throw std::invalid_argument("Invalid input parameters");
 	    }
 	
 	    // Create SortBenchMark object on the stack
-	    SortBenchMark benchmark(p_unsortedList);
+	    int format = 1; // HTML
+	    SortBenchMark benchmark(p_unsortedList, format);
 	
-	    // Perform sorting and return the result as a std::string
-	    return benchmark.GetSort(p_sortAlgoritm).c_str();
+	    // Perform sorting and store the result in a static string
+	    static std::string jsonResponse;
+	    jsonResponse = benchmark.GetSort(p_sortAlgoritm);
+	
+	    // Return the pointer to the static string
+	    return jsonResponse.c_str();
 	};
+	// SORT BENCHMARK
+	DLL_EXPORT const char* SortBenchMark_GetSort_CPP_JSON(int p_sortAlgoritm, const char* p_unsortedList)
+	{
+	    if (!p_unsortedList || !p_sortAlgoritm) {
+	        throw std::invalid_argument("Invalid input parameters");
+	    }
+	
+	    // Create SortBenchMark object on the stack
+	    int format = 2; // JSON
+	    SortBenchMark benchmark(p_unsortedList, format);
+	
+	    // Perform sorting and store the result in a static string
+	    static std::string jsonResponse;
+	    jsonResponse = benchmark.GetSort(p_sortAlgoritm);
+	
+	    // Return the pointer to the static string
+	    return jsonResponse.c_str();
+	}
 	// REGULAR EXPRESSIONS
 	DLL_EXPORT const char*  RegExManager_RegExEval(char* p_tagSearch, char* p_textSearch)
 	{
 		//
 		std::unique_ptr<RegExManager> uniquePtr = std::make_unique<RegExManager>();
 		//
-		return uniquePtr->RegExEval(p_tagSearch, p_textSearch).c_str();
+		static std::string response; 
+		response  = uniquePtr->RegExEval(p_tagSearch, p_textSearch);
+		
+		//
+		return response.c_str();
 	}
 	// SUDOKU - 64 bit version
 	DLL_EXPORT const char*  Sudoku_Generate_CPP_64()
@@ -360,4 +396,4 @@
 		std::unique_ptr<Algorithm> uniquePtr = std::make_unique<Algorithm>();
 		//
 		return uniquePtr->configMap["DLL_VERSION"].c_str();
-|	}
+	}

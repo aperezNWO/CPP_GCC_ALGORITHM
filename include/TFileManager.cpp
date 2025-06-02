@@ -9,7 +9,7 @@
 			return 1; // Return an error code
 		}
 		//
-		cout << "File deleted successfully: " << filePath << std::endl;
+		//cout << "File deleted successfully: " << filePath << std::endl;
 		//
 		return 0;
 	}

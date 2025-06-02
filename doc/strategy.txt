@@ -2,11 +2,25 @@
 // STRATEGY
 ///////////////////////////////////////////////
 
+-- [_] .bat file
+
+-- [_] C++ PENSUM
+
+	-- [_] https://learncpp.com.
+
+	-- [_] angular list.
+
+-- [_] outputFormat enum.
+
+-- [_] Merge TestApp.cpp && AlgorithmApp.cpp.
+
 -- [_] sort benchmark
 
 	-- [_] output as json.
-	
 
+	-- [_] save file as json.
+		
+///////////////////////////////////////////////
 
 
 

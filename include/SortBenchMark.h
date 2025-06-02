@@ -18,7 +18,7 @@ class SortBenchMark	 :
 	public Algorithm
 {
 	public  :
-	   SortBenchMark(const char* p_randomValues);
+	   SortBenchMark(const char* p_randomValues, int p_format);
 	   ~SortBenchMark();
 	   void           SaveStep(int arr[]);
 	   string	      GetSort(int p_sortAlgoritm);
@@ -27,9 +27,10 @@ class SortBenchMark	 :
 	   void           quickSort(int arr[],int low,int high);
 	   void           BubbleSort();
 	public  :
+	   const char*      randomValues;
+	   int              format;
+	   int              arraySize;
 	   vector<int>      arreglo;
 	   vector<string>   sortSteps;
-	   const char*      randomValues;
-	   int              arraySize;
 	   FileManager      _fileManager;
 };

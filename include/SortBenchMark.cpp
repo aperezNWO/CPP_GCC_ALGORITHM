@@ -1,9 +1,10 @@
 ﻿#include "SortBenchMark.h"
 
 	//
-	SortBenchMark::SortBenchMark(const char* p_randomValues)
+	SortBenchMark::SortBenchMark(const char* p_randomValues, int p_format)
 	{
 		//
+		this->format         = p_format;
 		this->randomValues   = p_randomValues;
 		this->arraySize      = std::stoi(this->configMap["ARRAY_SIZE"]);
 
@@ -18,8 +19,8 @@
 		}
 
 		//
-		this->_fileManager.DeleteFile("Array.txt");
-		this->_fileManager.SaveVectorToFile(this->arreglo,"Array.txt");
+		this->_fileManager.DeleteFile("ArrayUnsorted.txt");
+		this->_fileManager.SaveVectorToFile(this->arreglo,"ArrayUnsorted.txt");
 
 	};
 	//
@@ -40,7 +41,7 @@
 		  //
 		  stringstream  ss;
 		  //
-		  string separator = (index == 0) ? "" : "<br/>";
+		  string separator = (index == 0) ? "" : ((this->format == 1)? "<br/>" : ",");
 		  ss << separator << arr[index];
 		  //
 		  string _tempValues  = ss.str();
@@ -65,25 +66,43 @@
 		};
 
 		//
-		string sortedList = "";
+		string sortedList = (this->format==1)? "" : "{";
+		int stepNumber    = 0;
 		// Using iterators
 		for (auto sortStep = this->sortSteps.begin(); sortStep != this->sortSteps.end(); ++sortStep) {
 				  //
+				  stepNumber++;
+				  //
 				  stringstream  ss;
 				  //
-				  string separator = "~";
-				  ss << separator << "<br/>" << *sortStep << "<br/>";
+				  std::string separator = (this->format == 1) 
+								    ? "~" 
+								    : ( (stepNumber == 1)?  "" : ",") + ("\"step " + std::to_string(stepNumber) + " of " + std::to_string( this->sortSteps.size() )  + "\":");
+    
+				  ss << separator << ((this->format == 1)? "<br/>":"[") << *sortStep << ((this->format == 1)? "<br/>":"]") ;
 				  //
 				  string _tempValues  = ss.str();
 				  //
 				  sortedList          += _tempValues;
 
-		}
-
+		} 
+		sortedList += (this->format==1)? "" : "}";
+				
 		//
-		this->_fileManager.DeleteFile("SortedArray.txt");
-		this->_fileManager.SaveVectorToFile(this->sortSteps,"SortedArray.txt");
-
+		switch (this->format) {
+			case 1: // HTML
+			{
+				this->_fileManager.DeleteFile("ArraySorted.txt");
+				this->_fileManager.SaveLineToFile(sortedList,"ArraySorted.txt");	
+			}
+			break;		
+			case 2: // JSON
+			{
+				this->_fileManager.DeleteFile("ArraySorted.json");
+				this->_fileManager.SaveLineToFile(sortedList,"ArraySorted.json");
+			}
+		};
+		
 		//
 		return sortedList;
 	};

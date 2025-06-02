@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
 CompilerSettings=0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;4;0;0;0
-UnitCount=20
+UnitCount=21
 
 [VersionInfo]
 Major=1
@@ -60,37 +60,17 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=$(CC) -c AlgorithmApp.cpp -o AlgorithmApp.o $(CFLAGS)
 
-[Unit3]
-FileName=TestApp.cpp
-Folder=
-Compile=0
-Link=0
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-CompileCpp=1
-
 [Unit4]
-FileName=include\Dijkstra.cpp
-CompileCpp=0
+FileName=include\Dijkstra.h
+CompileCpp=1
 Folder=include
 Compile=1
 Link=1
 Priority=1000
 OverrideBuildCmd=0
-BuildCmd=$(CC) -c Dijkstra.cpp -o Dijkstra.o $(CFLAGS)
+BuildCmd=
 
 [Unit6]
-FileName=include\iterativeList.h
-CompileCpp=1
-Folder=include
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit7]
 FileName=include\node.h
 CompileCpp=1
 Folder=include
@@ -100,7 +80,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit8]
+[Unit7]
 FileName=include\recursiveList.h
 CompileCpp=1
 Folder=include
@@ -110,7 +90,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit9]
+[Unit8]
 FileName=include\RegExManager.cpp
 CompileCpp=0
 Folder=include
@@ -120,7 +100,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=$(CC) -c RegExManager.cpp -o RegExManager.o $(CFLAGS)
 
-[Unit10]
+[Unit9]
 FileName=include\RegExManager.h
 CompileCpp=1
 Folder=include
@@ -130,7 +110,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit11]
+[Unit10]
 FileName=include\SortBenchMark.cpp
 CompileCpp=0
 Folder=include
@@ -140,7 +120,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=$(CC) -c SortBenchMark.cpp -o SortBenchMark.o $(CFLAGS)
 
-[Unit12]
+[Unit11]
 FileName=include\SortBenchMark.h
 CompileCpp=1
 Folder=include
@@ -150,7 +130,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit13]
+[Unit12]
 FileName=include\Sudoku.cpp
 CompileCpp=0
 Folder=include
@@ -160,7 +140,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=$(CC) -c Sudoku.cpp -o Sudoku.o $(CFLAGS)
 
-[Unit14]
+[Unit13]
 FileName=include\TFileManager.cpp
 CompileCpp=0
 Folder=include
@@ -170,7 +150,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=$(CC) -c TFileManager.cpp -o TFileManager.o $(CFLAGS)
 
-[Unit15]
+[Unit14]
 FileName=include\TFileManager.h
 CompileCpp=1
 Folder=include
@@ -180,7 +160,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit16]
+[Unit15]
 FileName=include\TicTacToeManager.h
 CompileCpp=1
 Folder=include
@@ -190,7 +170,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit17]
+[Unit16]
 FileName=include\Algorithm.h
 CompileCpp=1
 Folder=include
@@ -200,7 +180,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit18]
+[Unit17]
 FileName=Algorithm.cpp
 CompileCpp=1
 Folder=
@@ -210,8 +190,18 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
+[Unit18]
+FileName=Algorithm_Test_DLL.cpp
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
 [Unit5]
-FileName=include\Dijkstra.h
+FileName=include\iterativeList.h
 CompileCpp=1
 Folder=include
 Compile=1
@@ -230,21 +220,40 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit19]
-FileName=TestDLL.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit20]
 FileName=doc\strategy.txt
+CompileCpp=1
 Folder=doc
 Compile=0
 Link=0
 Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
+
+[Unit20]
+FileName=Makefile
+Folder=
+Compile=0
+Link=0
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit21]
+FileName=AlgorithmApp.bat
+Folder=
+Compile=0
+Link=0
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit3]
+FileName=include\Dijkstra.cpp
+CompileCpp=0
+Folder=include
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=$(CC) -c Dijkstra.cpp -o Dijkstra.o $(CFLAGS)
 
