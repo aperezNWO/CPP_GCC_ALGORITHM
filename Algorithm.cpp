@@ -233,7 +233,11 @@ make.bat
 		//
 		std::unique_ptr<Dijkstra> uniquePtr = std::make_unique<Dijkstra>();
 		//
-		return uniquePtr->GetRandomPoints(p_vertexSize, p_sourcePoint).c_str();
+		static std::string response; 
+		//
+		response = uniquePtr->GetRandomPoints(p_vertexSize, p_sourcePoint);
+		//
+		return response.c_str();
 	};
 	// SORT BENCHMARK
 	DLL_EXPORT const char*  SortBenchMark_GetSort_CPP(int p_sortAlgoritm, const char* p_unsortedList)
