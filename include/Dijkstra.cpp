@@ -390,4 +390,3 @@ using namespace std;
 		//
 		return s_statusMessage;
 	}
-
