@@ -85,8 +85,7 @@ int GetDLLVersionTest()
 int SortBenchMarkTest()
 {
 	//
-	//int       format                 = 1; // HTML
-	int         format                 = 2; // JSON
+	FormatType  format                 = FormatType::JSON; // JSON
     int         p_sortAlgorithm        = 2; // QUICK SORT
     const char* p_unsortedList         = "23|7|10|16|1|4|22|2|6|24|8|14|11|15|21|13|19|20|18|0|17|5|3|9|12";
 
@@ -102,10 +101,10 @@ int SortBenchMarkTest()
 		
 	//
 	switch (format) {
-		case 1 : // HTML
+		case FormatType::HTML : // HTML
 			  	std::cout << "Sorted   List in file 'ArraySorted.txt'.  " << std::endl;
 		break;
-		case 2 : // JSON
+		case FormatType::JSON : // JSON
 				std::cout << "Sorted   List in file 'ArraySorted.json'. " << std::endl;
 		break;
 	}
@@ -168,6 +167,7 @@ int main()
 			 break;    
 			 case 4: // SORT BENCHMARK
 			 	SortBenchMarkTest(); 
+			 break;
 			 default :
 			 	if (option != 0)
 			 		cout<<"invalid option"<<endl;
@@ -175,13 +175,13 @@ int main()
          };
          
 	    //
-	    std::cout << "Press any key to continue..." << std::endl;
-        _getwch(); // Wait for a single key press
+	    if (option != 0)
+	    {
+		    std::cout << "Press any key to continue..." << std::endl;
+	        _getwch(); // Wait for a single key press	    	
+		}
     };
 
-	//
-	system ("CLS");
-    
 	//
     return 0;
 }

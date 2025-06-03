@@ -1,7 +1,7 @@
 ﻿#include "SortBenchMark.h"
 
 	//
-	SortBenchMark::SortBenchMark(const char* p_randomValues, int p_format)
+	SortBenchMark::SortBenchMark(const char* p_randomValues, FormatType p_format)
 	{
 		//
 		this->format         = p_format;
@@ -41,7 +41,7 @@
 		  //
 		  stringstream  ss;
 		  //
-		  string separator = (index == 0) ? "" : ((this->format == 1)? "<br/>" : ",");
+		  string separator = (index == 0) ? "" : ((this->format == FormatType::HTML)? "<br/>" : ",");
 		  ss << separator << arr[index];
 		  //
 		  string _tempValues  = ss.str();
@@ -66,7 +66,7 @@
 		};
 
 		//
-		string sortedList = (this->format==1)? "" : "{";
+		string sortedList = (this->format==FormatType::HTML)? "" : "{";
 		int stepNumber    = 0;
 		// Using iterators
 		for (auto sortStep = this->sortSteps.begin(); sortStep != this->sortSteps.end(); ++sortStep) {
@@ -75,28 +75,28 @@
 				  //
 				  stringstream  ss;
 				  //
-				  std::string separator = (this->format == 1) 
+				  std::string separator = (this->format == FormatType::HTML) 
 								    ? "~" 
 								    : ( (stepNumber == 1)?  "" : ",") + ("\"step " + std::to_string(stepNumber) + " of " + std::to_string( this->sortSteps.size() )  + "\":");
     
-				  ss << separator << ((this->format == 1)? "<br/>":"[") << *sortStep << ((this->format == 1)? "<br/>":"]") ;
+				  ss << separator << ((this->format == FormatType::HTML)? "<br/>":"[") << *sortStep << ((this->format == FormatType::HTML)? "<br/>":"]") ;
 				  //
 				  string _tempValues  = ss.str();
 				  //
 				  sortedList          += _tempValues;
 
 		} 
-		sortedList += (this->format==1)? "" : "}";
+		sortedList += (this->format==FormatType::HTML)? "" : "}";
 				
 		//
 		switch (this->format) {
-			case 1: // HTML
+			case FormatType::HTML: // HTML
 			{
 				this->_fileManager.DeleteFile("ArraySorted.txt");
 				this->_fileManager.SaveLineToFile(sortedList,"ArraySorted.txt");	
 			}
 			break;		
-			case 2: // JSON
+			case FormatType::JSON: // JSON
 			{
 				this->_fileManager.DeleteFile("ArraySorted.json");
 				this->_fileManager.SaveLineToFile(sortedList,"ArraySorted.json");
@@ -211,7 +211,7 @@
 					  //
 					  stringstream  ss;
 					  //
-					  string separator = (j == 0)? "" : "<br/>";
+					  string separator = (j == 0)? "" : ((this->format==FormatType::HTML)?"<br/>":",");
 					  ss << separator << arreglo[j];
 					  //
 					  string _tempValues  = ss.str();

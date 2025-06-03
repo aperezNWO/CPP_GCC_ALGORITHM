@@ -247,7 +247,7 @@ make.bat
 	    }
 	
 	    // Create SortBenchMark object on the stack
-	    int format = 1; // HTML
+	    FormatType format = FormatType::HTML; // HTML
 	    SortBenchMark benchmark(p_unsortedList, format);
 	
 	    // Perform sorting and store the result in a static string
@@ -265,7 +265,7 @@ make.bat
 	    }
 	
 	    // Create SortBenchMark object on the stack
-	    int format = 2; // JSON
+	    FormatType format = FormatType::JSON; // JSON
 	    SortBenchMark benchmark(p_unsortedList, format);
 	
 	    // Perform sorting and store the result in a static string

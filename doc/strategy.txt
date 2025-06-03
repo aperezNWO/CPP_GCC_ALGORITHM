@@ -2,23 +2,26 @@
 // STRATEGY
 ///////////////////////////////////////////////
 
--- [_] .bat file
+-- [x] .bat file
 
 -- [_] C++ PENSUM
 
 	-- [_] https://learncpp.com.
 
 	-- [_] angular list.
+	
+	-- [_] Concurrency and Memory Management
 
--- [_] outputFormat enum.
+-- [x] outputFormat enum.
 
--- [_] Merge TestApp.cpp && AlgorithmApp.cpp.
+-- [x] Merge TestApp.cpp && AlgorithmApp.cpp.
 
--- [_] sort benchmark
+-- [x] sort benchmark
 
-	-- [_] output as json.
+	-- [x] output as json.
 
-	-- [_] save file as json.
+	-- [x] save file as json.
+
 		
 ///////////////////////////////////////////////
 
