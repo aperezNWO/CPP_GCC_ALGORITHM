@@ -20,13 +20,15 @@
 #include "Dijkstra.h"
 #include "Algorithm.h"
 
+
+
 using namespace std;
 
 #pragma hdrstop
 #pragma argsused
 
 	//
-	Dijkstra::Dijkstra()
+	Dijkstra::Dijkstra() : graph(), dist(), path()
 	{
 			//
 	}
@@ -128,52 +130,68 @@ using namespace std;
 	// adjacency matrix representation
 	void Dijkstra::SetDijkstra(int src, int V)
 	{
-		vector<bool> sptSet; // sptSet[i] will be true if vertex i is
-
-		// Initialize path
-		// Initialize all distances as INFINITE and stpSet[] as false
-		for (int i = 0; i < V; i++)
+		
+		try
 		{
-			dist.push_back(INT_MAX);
-			sptSet.push_back(false);
-			path.push_back(string(""));
-		}
+			vector<bool> sptSet; // sptSet[i] will be true if vertex i is
+	
+			// Initialize path
+			// Initialize all distances as INFINITE and stpSet[] as false
+			for (int i = 0; i < V; i++)
+			{
+				dist.push_back(INT_MAX);
+				sptSet.push_back(false);
+				path.push_back(string(""));
+			}
+	
+			// Distance of source vertex from itself is always 0
+			dist[src] = 0;
+	
+			// Find shortest path for all vertices
+			for (int count = 0; count < V - 1; count++) {
+				// Pick the minimum distance vertex from the set of
+				// vertices not yet processed. u is always equal to
+				// src in the first iteration.
+				int u = minDistance(dist, sptSet, V);
+	
+				// Mark the picked vertex as processed
+				sptSet[u] = true;
+	
 
-		// Distance of source vertex from itself is always 0
-		dist[src] = 0;
-
-		// Find shortest path for all vertices
-		for (int count = 0; count < V - 1; count++) {
-			// Pick the minimum distance vertex from the set of
-			// vertices not yet processed. u is always equal to
-			// src in the first iteration.
-			int u = minDistance(dist, sptSet, V);
-
-			// Mark the picked vertex as processed
-			sptSet[u] = true;
-
-			// Update dist value of the adjacent vertices of the
-			// picked vertex.
-			for (int v = 0; v < V; v++)
-
-				// Update dist[v] only if is not in sptSet,
-				// there is an edge from u to v, and total
-				// weight of path from src to  v through u is
-				// smaller than current value of dist[v]
-				if (!sptSet[v] && graph[u][v]
-					&& dist[u] != INT_MAX
-					&& dist[u] + graph[u][v] < dist[v])
+				// Update dist value of the adjacent vertices of the
+				// picked vertex.
+				for (int v = 0; v < V; v++)
 				{
-					dist[v] = dist[u] + graph[u][v];
+					if (u >= graph.size() || v >= graph[u].size()) {
+				    	throw std::out_of_range("Index out of bounds in SetDijkstra");	
+                    }
 
-					//path[v] = path[u] + string.Format("[{0},{1}]≡", u,v);
-					stringstream ss;
-					string       pathSeparator  = "≡";
-					//
-					ss << "[" << u << ";" << v << "]" << pathSeparator;
-					path[v] = path[u] + ss.str().c_str();
+					// Update dist[v] only if is not in sptSet,
+					// there is an edge from u to v, and total
+					// weight of path from src to  v through u is
+					// smaller than current value of dist[v]
+					if (!sptSet[v] && graph[u][v]
+						&& dist[u] != INT_MAX
+						&& dist[u] + graph[u][v] < dist[v])
+					{
+						dist[v] = dist[u] + graph[u][v];
+	
+						//path[v] = path[u] + string.Format("[{0},{1}]≡", u,v);
+						stringstream ss;
+						string       pathSeparator  = "≡";
+						//
+						ss << "[" << u << ";" << v << "]" << pathSeparator;
+						path[v] = path[u] + ss.str().c_str();
+					}					
 				}
+			}
 		}
+		catch (const std::exception& e) {
+	        std::cerr << "Error in SetDijkstra at line: " << __LINE__
+	                  << ". Message: " << e.what() << std::endl;
+	        throw;
+    	}  
+
 	}
 	//
 	float Dijkstra::Pitagorean(float coord_x, float coord_y)
@@ -195,6 +213,7 @@ using namespace std;
 	float Dijkstra::GetHipotemuza(const char*vertexString, int index_x, int index_y)
 	{
 
+		
 		//--------------------------------------------------------------
 		//   string split
 		//--------------------------------------------------------------
@@ -207,6 +226,9 @@ using namespace std;
 		std::vector<string> coord_source_array = StringSplit(coord_source.c_str(),",",false);
 		std::vector<string> coord_dest_array   = StringSplit(coord_dest.c_str(),",",false);
 
+		if (index_x >= outputArr.size() || index_y >= outputArr.size()) {
+		    throw std::out_of_range("Index out of bounds in GetHipotemuza");
+		}
 		//
 		float coord_source_x    = std::stof(coord_source_array[0]);
 		float coord_source_y    = std::stof(coord_source_array[1]);
@@ -224,169 +246,209 @@ using namespace std;
 	//
 	string Dijkstra::GenerateRandomMatrix(const char* vertexString, int p_vertexSize)
 	{
-		// CREAR MATRIZ
-		//--------------------------------------------------------------
-		// Resize the matrix to the desired number of rows
-		this->graph.resize(p_vertexSize);
-		// Resize each row to the desired number of columns
-		for (int i = 0; i < p_vertexSize; i++) {
-			this->graph[i].resize(p_vertexSize);
-		}
-
-		//--------------------------------------------------------------
-		// LA PARTE DIAGONAL DE LA MATRIZ SIEMPRE SERA 0
-		// lA DISTANCIA ENTRE UN PUNTO Y EL MISMO SIEMPRE ES CERO
-		//--------------------------------------------------------------
-		for (int index_x = 0; index_x < p_vertexSize; index_x++)
+		try
 		{
-			for (int index_y = 0; index_y < p_vertexSize; index_y++) {
-				this->graph[index_x][index_y] = 0;
+			//--------------------------------------------------------------
+			// CREAR MATRIZ
+			//--------------------------------------------------------------
+			// Resize the matrix to the desired number of rows
+			this->graph.resize(p_vertexSize);
+			// Resize each row to the desired number of columns
+			for (int i = 0; i < p_vertexSize; i++) {
+				this->graph[i].resize(p_vertexSize);
 			}
-		}
-
-		//--------------------------------------------------------------
-		// LLENAR EL RESTO DE LA MATRIZ DE FORMA ALEATORIA
-		//--------------------------------------------------------------
-		//
-		for (int index_x = 0; index_x < p_vertexSize; index_x++)
-		{
-			//
-			for (int index_y = (index_x + 1); index_y < p_vertexSize; index_y++)
+	
+			//--------------------------------------------------------------
+			// LA PARTE DIAGONAL DE LA MATRIZ SIEMPRE SERA 0
+			// lA DISTANCIA ENTRE UN PUNTO Y EL MISMO SIEMPRE ES CERO
+			//--------------------------------------------------------------
+			this->graph.resize(p_vertexSize, std::vector<int>(p_vertexSize, 0));
+			
+			for (int index_x = 0; index_x < p_vertexSize; index_x++)
 			{
-				// Seed the generator with a random value om a hardware device
-				std::mt19937        mt_3;
-				std::random_device  rd_3;
-				mt_3                 = std::mt19937(rd_3());
-				std::uniform_int_distribution<int> distribution(0, 1);
-				int randomValue      = distribution(mt_3);
-				int hipotemuza       = 0;
-
-				//--------------------------------------------------------------
-				// EN VALORES POSITIVOS LLENAR LA MATRIZ CON DISTANCIAS
-				//--------------------------------------------------------------
-
-				if (randomValue == 1)
-				{
-					//
-					hipotemuza = GetHipotemuza(vertexString, index_x, index_y);
-				}
-				//
-				this->graph[index_x][index_y] = hipotemuza;
-				this->graph[index_y][index_x] = hipotemuza;
-			}
-		}
-
-		//----------------------------------------------------
-		// GARANTIZAR CONECTIVIDAD DE AL MENOS UN PUNTO
-		//----------------------------------------------------
-		for (int index_x = 0; index_x < p_vertexSize; index_x++)
-		{
-			//
-			int zeroCount = 0;
-
-			//
-			for (int index_y = 0; index_y < p_vertexSize; index_y++)
-			{
-				// DESCARTA DIAGONAL Y VERIFICAR EXISTENCIA DE VALOR "CERO"
-				if ((index_x != index_y) && (graph[index_x][index_y] == 0))
-				{
-					//
-					zeroCount++;
-
-					// GARANTIZAR CONECTIVIDAD DE AL MENOS UN PUNTO
-					if (zeroCount == (p_vertexSize - 1))
-					{
-						//
-						int hipotemuza          = static_cast<int>(std::round(GetHipotemuza(vertexString, index_x, index_y)));
-						this->graph[index_x][index_y] = hipotemuza;
-						this->graph[index_y][index_x] = hipotemuza;
+				for (int index_y = 0; index_y < p_vertexSize; index_y++) {
+					
+				     if (index_x >= p_vertexSize || index_y >= p_vertexSize) {
+            				throw std::out_of_range("Index out of bounds in GenerateRandomMatrix");
+       				 }
+					
+					if (index_x < graph.size() && index_y < graph[index_x].size()) {
+					    this->graph[index_x][index_y] = 0;
+					} else {
+					    throw std::out_of_range("Index out of bounds");
 					}
 				}
 			}
-		}
-		//--------------------------------------------------------------------
-		// REPRESENTAR MATRIZ EN CADENA
-		//--------------------------------------------------------------------
-		//
-		string statusMessage = "";
-		//
-		for (int index_x = 0; index_x < p_vertexSize; index_x++) {
-
+	
+			//--------------------------------------------------------------
+			// LLENAR EL RESTO DE LA MATRIZ DE FORMA ALEATORIA
+			//--------------------------------------------------------------
 			//
-			string separator_1 = (index_x < p_vertexSize - 1) ? "|" : "";
-			//
-			string stringArray       = "";
-			//
-			for (int index_y = 0; index_y < p_vertexSize; index_y++)
+			for (int index_x = 0; index_x < p_vertexSize; index_x++)
 			{
 				//
-				stringstream  ss_y;
-				//
-				string separator_2   = (index_y < p_vertexSize - 1)? "," : "";
-				ss_y << graph[index_x][index_y]<< separator_2;
-				string vertexItem_y  = ss_y.str();
-				//
-				stringArray          += vertexItem_y;
+				for (int index_y = (index_x + 1); index_y < p_vertexSize; index_y++)
+				{
+					
+					if (index_x >= p_vertexSize || index_y >= p_vertexSize) {
+            			throw std::out_of_range("Index out of bounds in GenerateRandomMatrix");
+      				}
+					// Seed the generator with a random value om a hardware device
+					std::mt19937        mt_3;
+					std::random_device  rd_3;
+					mt_3                 = std::mt19937(rd_3());
+					std::uniform_int_distribution<int> distribution(0, 1);
+					int randomValue      = distribution(mt_3);
+					int hipotemuza       = 0;
+	
+					//--------------------------------------------------------------
+					// EN VALORES POSITIVOS LLENAR LA MATRIZ CON DISTANCIAS
+					//--------------------------------------------------------------
+	
+					if (randomValue == 1)
+					{
+						//
+						hipotemuza = GetHipotemuza(vertexString, index_x, index_y);
+					}
+					//
+					this->graph.resize(p_vertexSize, std::vector<int>(p_vertexSize, 0));
+					//
+					this->graph[index_x][index_y] = hipotemuza;
+					this->graph[index_y][index_x] = hipotemuza;
+				}
 			}
+	
+			//----------------------------------------------------
+			// GARANTIZAR CONECTIVIDAD DE AL MENOS UN PUNTO
+			//----------------------------------------------------
+			for (int index_x = 0; index_x < p_vertexSize; index_x++)
+			{
+				//
+				int zeroCount = 0;
+	
+				//
+				for (int index_y = 0; index_y < p_vertexSize; index_y++)
+				{
+					
+					if (index_x >= p_vertexSize || index_y >= p_vertexSize) {
+            			throw std::out_of_range("Index out of bounds in GenerateRandomMatrix");
+      				}
+					// DESCARTA DIAGONAL Y VERIFICAR EXISTENCIA DE VALOR "CERO"
+					if ((index_x != index_y) && (graph[index_x][index_y] == 0))
+					{
+						//
+						zeroCount++;
+	
+						// GARANTIZAR CONECTIVIDAD DE AL MENOS UN PUNTO
+						if (zeroCount == (p_vertexSize - 1))
+						{
+							//
+							int hipotemuza          = static_cast<int>(std::round(GetHipotemuza(vertexString, index_x, index_y)));
+							this->graph.resize(p_vertexSize, std::vector<int>(p_vertexSize, 0));
+							this->graph[index_x][index_y] = hipotemuza;
+							this->graph[index_y][index_x] = hipotemuza;
+						}
+					}
+				}
+			}
+			//--------------------------------------------------------------------
+			// REPRESENTAR MATRIZ EN CADENA
+			//--------------------------------------------------------------------
 			//
-			stringstream  ss_x;
-			ss_x          << "{" << stringArray << "}";
+			string statusMessage = "";
 			//
-			string stringArrayValues = ss_x.str();
+			for (int index_x = 0; index_x < p_vertexSize; index_x++) {
+	
+				//
+				string separator_1 = (index_x < p_vertexSize - 1) ? "|" : "";
+				//
+				string stringArray       = "";
+				//
+				for (int index_y = 0; index_y < p_vertexSize; index_y++)
+				{
+					//
+					stringstream  ss_y;
+					//
+					string separator_2   = (index_y < p_vertexSize - 1)? "," : "";
+					ss_y << graph[index_x][index_y]<< separator_2;
+					string vertexItem_y  = ss_y.str();
+					//
+					stringArray          += vertexItem_y;
+				}
+				//
+				stringstream  ss_x;
+				ss_x          << "{" << stringArray << "}";
+				//
+				string stringArrayValues = ss_x.str();
+				//
+				statusMessage += stringArrayValues + separator_1;
+			}
+	
 			//
-			statusMessage += stringArrayValues + separator_1;
+			return statusMessage;			
+	    } 
+		catch (const std::exception& e) {
+	        std::cerr << "Error in GetHipotemuza at line: " << __LINE__
+	                  << ". Message: " << e.what() << std::endl;
+	        throw;
 		}
 
-		//
-		return statusMessage;
 	}
 	//
 	string Dijkstra::GetRandomPoints(int p_vertexSize, int p_sourcePoint)
 	{
-		//
-		int  p_sampleSize        = std::stoi(this->configMap["ARRAY_SIZE"]) - 1;
-		p_sampleSize             = p_sampleSize - 2;    // remover extremos de coordenadas
-		vector<int>  vertex_X;
-		vector<int>  vertex_Y;
-		//
-		for (short i = 0; i < p_sampleSize; i++)
+		try
 		{
 			//
-			vertex_X.push_back(i + 1); // remover extremos de coordenadas
-			vertex_Y.push_back(i + 1); // remover extremos de coordenadas
+			int  p_sampleSize        = std::stoi(this->configMap["ARRAY_SIZE"]) - 1;
+			p_sampleSize             = p_sampleSize - 2;    // remover extremos de coordenadas
+			vector<int>  vertex_X;
+			vector<int>  vertex_Y;
+			//
+			for (short i = 0; i < p_sampleSize; i++)
+			{
+				//
+				vertex_X.push_back(i + 1); // remover extremos de coordenadas
+				vertex_Y.push_back(i + 1); // remover extremos de coordenadas
+			}
+	
+			unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+			std::default_random_engine generator(seed);
+			//
+			std::shuffle ( vertex_Y.begin(), vertex_Y.end() , generator);
+			std::shuffle ( vertex_X.begin(), vertex_X.end() , generator);
+	
+			vertex_X   = FisherYates(p_sampleSize, vertex_X);
+			vertex_Y   = FisherYates(p_sampleSize, vertex_Y);
+	
+			//
+			string _vertexArrayString = "";
+			//
+			for (int index = 0; index < p_vertexSize; index++) {
+				//
+				stringstream  ss;
+				//
+				string separator   = (index < p_vertexSize - 1)? "|" : "";
+				ss << "[" << vertex_X[index] << "," << vertex_Y[index] << "]" << separator;
+				string vertexItem  = ss.str();
+				//
+				_vertexArrayString += vertexItem;
+			}
+			//
+			string _vertexMatrix = GenerateRandomMatrix(_vertexArrayString.c_str(), p_vertexSize);
+			//
+			string vertexList    = GetDijkstra(StringSplit(_vertexArrayString.c_str(),"|",false), p_vertexSize, p_sampleSize, p_sourcePoint);
+			//
+			string        separator_1("~");
+			stringstream  ss_statusMessage;
+			ss_statusMessage << _vertexArrayString << separator_1 << _vertexMatrix << separator_1 << vertexList;
+			string s_statusMessage      = ss_statusMessage.str();
+			//
+			return s_statusMessage;		
 		}
-
-		unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-		std::default_random_engine generator(seed);
-		//
-		std::shuffle ( vertex_Y.begin(), vertex_Y.end() , generator);
-		std::shuffle ( vertex_X.begin(), vertex_X.end() , generator);
-
-		vertex_X   = FisherYates(p_sampleSize, vertex_X);
-		vertex_Y   = FisherYates(p_sampleSize, vertex_Y);
-
-		//
-		string _vertexArrayString = "";
-		//
-		for (int index = 0; index < p_vertexSize; index++) {
-			//
-			stringstream  ss;
-			//
-			string separator   = (index < p_vertexSize - 1)? "|" : "";
-			ss << "[" << vertex_X[index] << "," << vertex_Y[index] << "]" << separator;
-			string vertexItem  = ss.str();
-			//
-			_vertexArrayString += vertexItem;
+		catch (const std::exception& e) {
+	        std::cerr << "Error in GetHipotemuza at line: " << __LINE__
+	                  << ". Message: " << e.what() << std::endl;
+	        throw;
 		}
-		//
-		string _vertexMatrix = GenerateRandomMatrix(_vertexArrayString.c_str(), p_vertexSize);
-		//
-		string vertexList    = GetDijkstra(StringSplit(_vertexArrayString.c_str(),"|",false), p_vertexSize, p_sampleSize, p_sourcePoint);
-		//
-		string        separator_1("~");
-		stringstream  ss_statusMessage;
-		ss_statusMessage << _vertexArrayString << separator_1 << _vertexMatrix << separator_1 << vertexList;
-		string s_statusMessage      = ss_statusMessage.str();
-		//
-		return s_statusMessage;
 	}

@@ -226,19 +226,20 @@ make.bat
 	///////////////////////////////////////////////////////////////////////////
 	// ENTRY POINTS
 	///////////////////////////////////////////////////////////////////////////
-
-	// DUJKSTRA
-	DLL_EXPORT const char*  Dijkstra_GenerateRandomVertex_CPP(int p_vertexSize, int p_sourcePoint)
+	// DIJKSTRA
+	DLL_EXPORT const char* Dijkstra_GenerateRandomVertex_CPP(int p_vertexSize, int p_sourcePoint)
 	{
-		//
-		std::unique_ptr<Dijkstra> uniquePtr = std::make_unique<Dijkstra>();
-		//
-		static std::string response; 
-		//
+	    // Create a unique_ptr for Dijkstra
+	    std::unique_ptr<Dijkstra> uniquePtr = std::make_unique<Dijkstra>();
+	
+	    // Generate the response
+	    static std::string response; 
+		
 		response = uniquePtr->GetRandomPoints(p_vertexSize, p_sourcePoint);
-		//
-		return response.c_str();
-	};
+	
+	    // Return the pointer to the dynamically allocated memory
+	    return response.c_str();
+	}
 	// SORT BENCHMARK
 	DLL_EXPORT const char*  SortBenchMark_GetSort_CPP(int p_sortAlgoritm, const char* p_unsortedList)
 	{

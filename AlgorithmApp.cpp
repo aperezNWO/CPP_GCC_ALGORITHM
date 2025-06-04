@@ -114,6 +114,28 @@ int SortBenchMarkTest()
   	return 0;
 }
 
+//
+int DijkstraTest()
+{	
+	//
+    int p_vertexSize  = 9;
+    int p_sourcePoint = 0;
+    
+	// Create a unique_ptr for Dijkstra
+	std::unique_ptr<Dijkstra> uniquePtr = std::make_unique<Dijkstra>();
+	
+	// Generate the response
+	static std::string response; 
+	
+	response = uniquePtr->GetRandomPoints(p_vertexSize, p_sourcePoint);
+	
+	// Return the pointer to the dynamically allocated memory
+	cout <<"DIJKSTRA RESPONSE : " << response.c_str() << endl;
+	
+	//
+	return 0;
+}
+
 ///////////////////////////////////////////////////////////////////////////
 // MAIN PROGRAM
 ///////////////////////////////////////////////////////////////////////////
@@ -144,6 +166,7 @@ int main()
          cout<<"2. Recursive.                            "<< endl;
          cout<<"3. GET DLL Version.                      "<< endl;
          cout<<"4. Sort Benchmark.                       "<< endl;
+         cout<<"5. Dijkstra.                             "<< endl;
          cout<<"-----------------------------------------"<< endl;
          cout<<"0. Exit.                                 "<< endl;
          cout<<"-----------------------------------------"<< endl;
@@ -167,6 +190,9 @@ int main()
 			 break;    
 			 case 4: // SORT BENCHMARK
 			 	SortBenchMarkTest(); 
+			 break;
+			 case 5: //  DIJKSATRA
+			 	DijkstraTest();
 			 break;
 			 default :
 			 	if (option != 0)

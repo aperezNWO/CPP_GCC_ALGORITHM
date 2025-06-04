@@ -17,6 +17,7 @@
 #include <regex>
 #include <cctype>
 #include <map>
+#include <cstring>
 
 //
 using namespace std;
