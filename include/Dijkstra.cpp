@@ -418,9 +418,6 @@ using namespace std;
 			std::shuffle ( vertex_Y.begin(), vertex_Y.end() , generator);
 			std::shuffle ( vertex_X.begin(), vertex_X.end() , generator);
 	
-			//vertex_X   = FisherYates(p_sampleSize, vertex_X);
-			//vertex_Y   = FisherYates(p_sampleSize, vertex_Y);
-	
 			//
 			string _vertexArrayString = "";
 			//

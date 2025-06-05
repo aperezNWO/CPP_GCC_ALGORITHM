@@ -43,7 +43,6 @@ class Algorithm
 			static string             HtmlEncode(const std::string& input);
 			static string             StringTrim(const std::string& str);
 			static vector<string>     StringSplit(const char* p_inputString, std::string p_delimiter);
-			vector<int>               FisherYates(int count, vector<int> deck);
 			int                       ReadConfigFile();
             static void               ReplaceAll(std::string &str, const std::string &from, const std::string &to);
 	   public :

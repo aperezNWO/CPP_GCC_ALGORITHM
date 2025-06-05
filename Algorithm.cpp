@@ -130,46 +130,6 @@ make.bat
 		return outputArr;
 	};
 	//
-	vector<int> Algorithm::FisherYates(int count, vector<int> deck)
-	{
-	   //
-	   for (short i = 0; i <= count - 2; i++)
-	   {
-		   // Create a random number generator engine
-		   unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-		   std::default_random_engine generator(seed);
-		   std::uniform_int_distribution<int> dist(0, count - i);
-		   int j         = dist(generator);
-
-		   //
-		   if (j > 0)
-		   {
-			   int curVal  = deck[i];
-			   deck[i]     = deck[i + j];
-			   deck[i + j] = curVal;
-		   }
-	   }
-	   //
-	   for (short i = count - 1; i >= 1; i--)
-	   {
-		   // Seed the generator with a random value om a hardware device
-		   unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-		   std::default_random_engine generator(seed);
-		   std::uniform_int_distribution<int> dist(0, i + 1);
-		   int j              = dist(generator);
-
-		   //
-		   if (j != i)
-		   {
-			   int curVal = deck[i];
-			   deck[i]    = deck[j];
-			   deck[j]    = curVal;
-		   }
-	   }
-	   //
-	   return deck;
-	}
-	//
 	int Algorithm::ReadConfigFile()
 	{
 		 // Open the configuration file

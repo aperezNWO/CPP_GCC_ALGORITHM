@@ -40,11 +40,37 @@
 #include "include/recursiveList.h"
 
 ///////////////////////////////////////////////////////////////////////////
-// FUNCTIONS
+// CLASSES
 ///////////////////////////////////////////////////////////////////////////
 
+class AlgorithmApp
+{
+   	 public :
+	 		AlgorithmApp();
+	 		~AlgorithmApp();
+	 public :
+	 	int IterativeTest(int limit);
+		int RecursiveTest(int limit);
+		int GetDLLVersionTest();
+		int SortBenchMarkTest();
+		int DijkstraTest();
+	 	int Run();
+};
+
+///////////////////////////////////////////////////////////////////////////
+// FUNCTIONS
+///////////////////////////////////////////////////////////////////////////
+AlgorithmApp::AlgorithmApp()
+{
+	//
+}
 //
-int IterativeTest(int limit)
+AlgorithmApp::~AlgorithmApp()
+{
+	//
+}
+//
+int AlgorithmApp::IterativeTest(int limit)
 {
 	//
 	IterativeList* iterativeList = new IterativeList();  
@@ -56,7 +82,7 @@ int IterativeTest(int limit)
 }
 
 //  
-int RecursiveTest(int limit)
+int AlgorithmApp::RecursiveTest(int limit)
 {
 	//
 	RecursiveList* recursiveList = new RecursiveList();
@@ -68,7 +94,7 @@ int RecursiveTest(int limit)
 }
 
 //
-int GetDLLVersionTest()
+int AlgorithmApp::GetDLLVersionTest()
 {
 	//
 	std::unique_ptr<Algorithm> uniquePtr = std::make_unique<Algorithm>();
@@ -82,7 +108,7 @@ int GetDLLVersionTest()
 }
 
 //
-int SortBenchMarkTest()
+int AlgorithmApp::SortBenchMarkTest()
 {
 	//
 	FormatType  format                 = FormatType::JSON; // JSON
@@ -115,7 +141,7 @@ int SortBenchMarkTest()
 }
 
 //
-int DijkstraTest()
+int AlgorithmApp::DijkstraTest()
 {	
 	//
     int p_vertexSize  = 9;
@@ -140,7 +166,7 @@ int DijkstraTest()
 // MAIN PROGRAM
 ///////////////////////////////////////////////////////////////////////////
 
-int main()
+int AlgorithmApp::Run()
 {
     //
     const int opt_salida = 0;
@@ -210,6 +236,13 @@ int main()
 
 	//
     return 0;
+}
+
+int main()
+{
+    AlgorithmApp *algorithmApp = new AlgorithmApp();
+    
+    algorithmApp->Run();
 }
 
 //////////////////////////////////////////////////////////////////////////
