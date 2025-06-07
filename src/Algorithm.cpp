@@ -28,7 +28,7 @@
 /* 
 
  "C:\msys64\ucrt64\bin\g++.exe" -shared -static -static-libgcc -static-libstdc++ -fdiagnostics-color=always -g Algorithm.cpp include\Dijkstra.cpp include\RegExManager.cpp include\SortBenchMark.cpp include\Sudoku.cpp include\TFileManager.cpp -o Algorithm.dll -Iinclude -Wl,--subsystem,windows -DALGORITHM_EXPORTS -m64
-                
+ 
 */
 ///////////////////////////////////////////////////////////
 // MAKE
@@ -192,6 +192,7 @@ make.bat
 	///////////////////////////////////////////////////////////////////////////
 	// ENTRY POINTS
 	///////////////////////////////////////////////////////////////////////////
+
 	// DIJKSTRA
 	DLL_EXPORT const char* Dijkstra_GenerateRandomVertex_CPP(int p_vertexSize, int p_sourcePoint)
 	{
@@ -366,7 +367,6 @@ make.bat
 		//
 		std::unique_ptr<Algorithm> uniquePtr = std::make_unique<Algorithm>();
 		//
-		//return uniquePtr->configMap["DLL_VERSION"].c_str();
-		//
 		return uniquePtr->_GetDLLVersion();
 	}
+

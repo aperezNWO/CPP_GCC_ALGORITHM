@@ -52,7 +52,7 @@ class ALGORITHM_API Algorithm
 	   public :
 			//
 			Algorithm();
-			 ~Algorithm();
+			~Algorithm();
 			//
 			static string                      HtmlEncode(const std::string& input);
 			static string                      StringTrim(const std::string& str);

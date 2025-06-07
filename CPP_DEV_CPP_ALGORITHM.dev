@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
 CompilerSettings=0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;1;0;0;0;4;0;0;0
-UnitCount=33
+UnitCount=34
 
 [VersionInfo]
 Major=1
@@ -61,7 +61,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit4]
-FileName=src\AlgorithmApp.bat
+FileName=src\AlgorithmAppTestSrc.bat
 CompileCpp=1
 Folder=src
 Compile=0
@@ -230,7 +230,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit3]
-FileName=src\Algorithm_Test_DLL.cpp
+FileName=src\AlgorithmAppTestDLL.cpp
 CompileCpp=1
 Folder=src
 Compile=1
@@ -240,7 +240,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit5]
-FileName=src\AlgorithmApp.cpp
+FileName=src\AlgorithmAppTestSrc.cpp
 CompileCpp=1
 Folder=src
 Compile=1
@@ -365,11 +365,20 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit33]
-FileName=dest\AlgorithmTestRef.cpp
+FileName=dest\AlgorithmAppTestRef.cpp
 CompileCpp=1
 Folder=dest
 Compile=1
 Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit34]
+FileName=src\AlgorithmAppTestDLL.bat
+Folder=src
+Compile=0
+Link=0
 Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
