@@ -243,7 +243,7 @@ int AlgorithmAppTestSrc::SudokuTest()
 
 	//
 	std::unique_ptr<SudokuGenerator> uniquePtr = std::make_unique<SudokuGenerator>(N, K);
-	static string           str_matrix         = uniquePtr->Run();
+	string           str_matrix                = uniquePtr->Run();
 
 	cout << "Sudoku to Solve : " << str_matrix << endl;
 	

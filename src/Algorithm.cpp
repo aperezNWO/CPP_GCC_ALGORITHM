@@ -265,7 +265,7 @@ make.bat
 
 		//
 		std::unique_ptr<SudokuGenerator> uniquePtr = std::make_unique<SudokuGenerator>(N, K);
-		static string           str_matrix         = uniquePtr->Run();
+		string           str_matrix                = uniquePtr->Run();
 
 		//
 		return str_matrix.c_str();
@@ -343,7 +343,7 @@ make.bat
 
 		//
 		std::unique_ptr<SudokuSolver> uniquePtr = std::make_unique<SudokuSolver>();
-		static string           str_matrix      = uniquePtr->Solve(grid);
+		string           str_matrix             = uniquePtr->Solve(grid);
 
 		//
 		fileManager->SaveLineToFile("\nSudoku Solved \n","SudokuSolved.txt");
