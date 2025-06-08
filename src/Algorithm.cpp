@@ -299,7 +299,7 @@ make.bat
 
 		//
 		const char* str_p_matrix_c_str     = str_p_matrix.c_str();
-		fileManager->SaveLineToFile("\nSudoku To Solve\n","SudokuGenerated.txt");
+		//fileManager->SaveLineToFile("\nSudoku To Solve\n","SudokuGenerated.txt");
 
 		//
 		const static int   N          = 9;
@@ -323,7 +323,7 @@ make.bat
 		//
 		for (string row : str_p_matrix_rows) {
 			//
-			fileManager->SaveLineToFile(row,"SudokuGenerated.txt");
+			//fileManager->SaveLineToFile(row,"SudokuGenerated.txt");
 			//
 			int j = 0;
 			//				
@@ -346,7 +346,7 @@ make.bat
 		string           str_matrix                  = uniquePtrSolve->Solve(grid);
 
 		//
-		fileManager->SaveLineToFile("\nSudoku Solved \n","SudokuSolved.txt");
+		//fileManager->SaveLineToFile("\nSudoku Solved \n","SudokuSolved.txt");
 		//
 		return str_matrix.c_str();
 	}

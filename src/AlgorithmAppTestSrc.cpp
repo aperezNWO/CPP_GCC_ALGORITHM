@@ -273,7 +273,7 @@ int AlgorithmAppTestSrc::SudokuTest()
 
 	//
 	const char* str_p_matrix_c_str     = str_p_matrix.c_str();
-	fileManager->SaveLineToFile("\nSudoku To Solve\n","SudokuGenerated.txt");
+	//fileManager->SaveLineToFile("\nSudoku To Solve\n","SudokuGenerated.txt");
 
 	//
 	const static int   _N           = 9;
@@ -297,7 +297,7 @@ int AlgorithmAppTestSrc::SudokuTest()
 	//
 	for (string row : str_p_matrix_rows) {
 		//
-		fileManager->SaveLineToFile(row,"SudokuGenerated.txt");
+		//fileManager->SaveLineToFile(row,"Sudoku.txt");
 		//
 		int j = 0;
 		//				
@@ -320,10 +320,11 @@ int AlgorithmAppTestSrc::SudokuTest()
 	string           str_matrix_solved            = uniquePtrSolver ->Solve(grid);
 
 	//
-	fileManager->SaveLineToFile("\nSudoku Solved \n","SudokuSolved.txt");
+	//fileManager->SaveLineToFile("\nSudoku Solved \n","Sudoku.txt");
 	//
 	//cout << "Sudoku Solved " << str_matrix_solved.c_str() << endl;
 	
+	cout << endl << "(Ver Archivo 'Sudoku.txt') " << endl;
 	//
 	return 0;
 }
