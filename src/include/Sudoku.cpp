@@ -196,7 +196,7 @@ public:
 
 		//
 		FileManager* fileManager = new FileManager();
-		fileManager->SaveLineToFile("\nSudoku Generated\n","Sudoku.txt");
+		fileManager->SaveLineToFile("\nSudoku To Solve \n","SudokuGenerated.txt");
 
 		//
 		for (int i = 0; i < N; i++)
@@ -218,7 +218,7 @@ public:
 			//
 			cout << endl;
 			//
-			fileManager->SaveLineToFile(row,"Sudoku.txt");
+			fileManager->SaveLineToFile(row,"SudokuGenerated.txt");
 		}
 		//
 		string_matrix = "[" + string_matrix  + "]";
@@ -325,7 +325,7 @@ class SudokuSolver
 			string string_matrix     = "";
 			//
 			FileManager* fileManager = new FileManager();
-			fileManager->SaveLineToFile("\nSudoku Solved\n","Sudoku.txt");
+			fileManager->SaveLineToFile("\nSudoku Solved\n","SudokuSolved.txt");
 			//
 			for (int i = 0; i < N; ++i) {
 				//
@@ -346,7 +346,7 @@ class SudokuSolver
 				//
 				cout << endl;
 				//
-				fileManager->SaveLineToFile(row,"Sudoku.txt");
+				fileManager->SaveLineToFile(row,"SudokuSolved.txt");
 			}
 			//
 			string_matrix = "[" + string_matrix  + "]";

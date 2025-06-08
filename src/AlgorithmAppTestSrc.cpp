@@ -29,7 +29,7 @@
 
  "C:\msys64\ucrt64\bin\g++.exe"  -g AlgorithmAppTestSrc.cpp  include\Dijkstra.cpp include\RegExManager.cpp include\SortBenchMark.cpp include\Sudoku.cpp include\TFileManager.cpp -o AlgorithmAppTestSrc.exe -Iinclude -DALGORITHM_EXPORTS -m64
 	
-  AlgoritmAppTestSrc.bat
+  AlgorithmAppTestSrc.bat
  	            
 */
 
@@ -56,7 +56,11 @@ class AlgorithmAppTestSrc
 		int GetDLLVersionTest();
 		int SortBenchMarkTest();
 		int DijkstraTest();
+		int RegExTest();
+		int SudokuTest();
 	 	int Run();
+	 public :
+	 	FileManager      _fileManager;
 };
 
 ///////////////////////////////////////////////////////////////////////////
@@ -75,6 +79,11 @@ AlgorithmAppTestSrc::~AlgorithmAppTestSrc()
 int AlgorithmAppTestSrc::IterativeTest(int limit)
 {
 	//
+	cout << "---------------"<< endl;
+	cout << "ITERATIVE TEST" << endl;
+	cout << "---------------"<< endl;
+	
+	//
 	IterativeList* iterativeList = new IterativeList();  
 	iterativeList->Set(limit);
 	cout<<iterativeList->getTrace()<<endl;
@@ -87,6 +96,11 @@ int AlgorithmAppTestSrc::IterativeTest(int limit)
 int AlgorithmAppTestSrc::RecursiveTest(int limit)
 {
 	//
+	cout << "---------------" << endl;
+	cout << "RECURSIVE TEST " << endl;
+	cout << "---------------" << endl;
+	
+	//
 	RecursiveList* recursiveList = new RecursiveList();
 	recursiveList->Set(limit);
 	cout<<recursiveList->getTrace()<<endl;
@@ -98,6 +112,11 @@ int AlgorithmAppTestSrc::RecursiveTest(int limit)
 //
 int AlgorithmAppTestSrc::GetDLLVersionTest()
 {
+	//
+	cout << "------------------"  << endl;
+	cout << "DLL VERSION TEST  "  << endl;
+	cout << "------------------"  << endl;
+	
 	//
 	std::unique_ptr<Algorithm> uniquePtr = std::make_unique<Algorithm>();
 	//
@@ -112,6 +131,11 @@ int AlgorithmAppTestSrc::GetDLLVersionTest()
 //
 int AlgorithmAppTestSrc::SortBenchMarkTest()
 {
+	//
+	cout << "--------------------"  << endl;
+	cout << "SORT BENCHMARK TEST "  << endl;
+	cout << "--------------------"  << endl;
+	
 	//
 	FormatType  format                 = FormatType::JSON; // JSON
     int         p_sortAlgorithm        = 2; // QUICK SORT
@@ -144,7 +168,12 @@ int AlgorithmAppTestSrc::SortBenchMarkTest()
 
 //
 int AlgorithmAppTestSrc::DijkstraTest()
-{	
+{
+	//
+	cout << "--------------------"  << endl;
+	cout << "DIJKSTRA TEST       "  << endl;
+	cout << "--------------------"  << endl;	
+	
 	//
     int p_vertexSize  = 9;
     int p_sourcePoint = 0;
@@ -158,7 +187,65 @@ int AlgorithmAppTestSrc::DijkstraTest()
 	response = uniquePtr->GetRandomPoints(p_vertexSize, p_sourcePoint);
 	
 	// Return the pointer to the dynamically allocated memory
-	cout <<"DIJKSTRA RESPONSE : " << response.c_str() << endl;
+	cout <<"RESPONSE : " << response.c_str() << endl;
+	
+	//
+	return 0;
+}
+//
+int AlgorithmAppTestSrc::RegExTest()
+{
+		//
+		cout << "--------------------"  << endl;
+		cout << "REG EX TEST         "  << endl;
+		cout << "--------------------"  << endl;
+		
+		//
+		char p_tagSearch[8];
+		std::strcpy(p_tagSearch, "company");
+		
+		char p_textSearch[4];
+		std::strcpy(p_textSearch,"BMG");
+		//
+		std::unique_ptr<RegExManager> uniquePtr = std::make_unique<RegExManager>();
+		//
+		static std::string response; 
+		response  = uniquePtr->RegExEval(p_tagSearch, p_textSearch);
+		
+		if (response != "")
+		{
+			//
+			std::unique_ptr<Algorithm> uniquePtr = std::make_unique<Algorithm>();
+			//
+			vector<string> vectorResponse = uniquePtr->StringSplit(response.c_str(),"|");
+			//
+			cout << "Se encontraron [" << vectorResponse[0] << "] coincidencias." << endl;
+			//
+			this->_fileManager.SaveLineToFile(response,"cdCatalog.html");
+			cout << "Se creo el  archivo 'cdCatalog.html' " << endl;
+		}
+    
+	//
+	return 0;
+}
+//
+//
+int AlgorithmAppTestSrc::SudokuTest()
+{
+	//
+	cout << "--------------------"  << endl;
+	cout << "SUDOKU TEST         "  << endl;
+	cout << "--------------------"  << endl;
+	
+	//
+	const static int   N = 9;
+	int                K = 20;
+
+	//
+	std::unique_ptr<SudokuGenerator> uniquePtr = std::make_unique<SudokuGenerator>(N, K);
+	static string           str_matrix         = uniquePtr->Run();
+
+	cout << "Sudoku to Solve : " << str_matrix << endl;
 	
 	//
 	return 0;
@@ -195,6 +282,8 @@ int AlgorithmAppTestSrc::Run()
          cout<<"3. GET DLL Version.                      "<< endl;
          cout<<"4. Sort Benchmark.                       "<< endl;
          cout<<"5. Dijkstra.                             "<< endl;
+         cout<<"6. Regular Expression.                   "<< endl;
+         cout<<"7. Sudoku.                               "<< endl;
          cout<<"-----------------------------------------"<< endl;
          cout<<"0. Exit.                                 "<< endl;
          cout<<"-----------------------------------------"<< endl;
@@ -219,19 +308,25 @@ int AlgorithmAppTestSrc::Run()
 			 case 4: // SORT BENCHMARK
 			 	SortBenchMarkTest(); 
 			 break;
-			 case 5: //  DIJKSATRA
+			 case 5: //  DIJKSTRA
 			 	DijkstraTest();
+			 break;
+			 case 6: // REGEX
+			 	RegExTest();
+			 break;
+			 case 7: // SUDOKU
+			    SudokuTest();
 			 break;
 			 default :
 			 	if (option != 0)
-			 		cout<<"invalid option"<<endl;
+			 		std::cout << std::endl << "invalid option" <<std::endl;
 			 break;    
          };
          
 	    //
 	    if (option != 0)
 	    {
-		    std::cout << "Press any key to continue..." << std::endl;
+		    std::cout << std::endl <<  "Press any key to continue..." << std::endl;
 	        _getwch(); // Wait for a single key press	    	
 		}
     };

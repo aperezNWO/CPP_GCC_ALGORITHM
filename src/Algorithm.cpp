@@ -41,6 +41,7 @@ make.bat
 
 */
 ///////////////////////////////////////////////////////////
+
 #include "include\Algorithm.h"
 #include "include\Dijkstra.h"
 #include "include\SortBenchMark.h"
@@ -255,20 +256,6 @@ make.bat
 		//
 		return response.c_str();
 	}
-	// SUDOKU - 64 bit version
-	DLL_EXPORT const char*  Sudoku_Generate_CPP_64()
-	{
-		//
-		const static int   N = 9;
-		int                K = 20;
-
-		//
-		std::unique_ptr<SudokuGenerator> uniquePtr = std::make_unique<SudokuGenerator>(N, K);
-		static string           str_matrix         = uniquePtr->Run();
-
-		//
-		return str_matrix.c_str();
-	}
 	// SUDOKU
 	DLL_EXPORT const char*  Sudoku_Generate_CPP()
 	{
@@ -312,7 +299,7 @@ make.bat
 
 		//
 		const char* str_p_matrix_c_str     = str_p_matrix.c_str();
-		fileManager->SaveLineToFile("\nSudoku To Solve\n","Sudoku.txt");
+		fileManager->SaveLineToFile("\nSudoku To Solve\n","SudokuGenerated.txt");
 
 		//
 		const static int   N          = 9;
@@ -336,7 +323,7 @@ make.bat
 		//
 		for (string row : str_p_matrix_rows) {
 			//
-			fileManager->SaveLineToFile(row,"Sudoku.txt");
+			fileManager->SaveLineToFile(row,"SudokuGenerated.txt");
 			//
 			int j = 0;
 			//				
@@ -358,6 +345,8 @@ make.bat
 		std::unique_ptr<SudokuSolver> uniquePtr = std::make_unique<SudokuSolver>();
 		static string           str_matrix      = uniquePtr->Solve(grid);
 
+		//
+		fileManager->SaveLineToFile("\nSudoku Solved \n","SudokuSolved.txt");
 		//
 		return str_matrix.c_str();
 	}
