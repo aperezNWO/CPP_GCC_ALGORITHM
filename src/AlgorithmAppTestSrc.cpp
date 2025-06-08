@@ -245,7 +245,84 @@ int AlgorithmAppTestSrc::SudokuTest()
 	std::unique_ptr<SudokuGenerator> uniquePtr = std::make_unique<SudokuGenerator>(N, K);
 	string           str_matrix                = uniquePtr->Run();
 
-	cout << "Sudoku to Solve : " << str_matrix << endl;
+	//cout << endl << "Sudoku to Solve : " << str_matrix << endl;
+	cout << endl << "------------------" << endl;
+	//
+	Algorithm*   algorithm     = new Algorithm();
+	string       str_p_matrix  = str_matrix;
+	FileManager* fileManager   = new FileManager();
+
+	//
+	std::map<std::string, std::string> replaceMap;
+
+	// Inserting values into the map
+	replaceMap["["]      = "";
+	replaceMap["]"]      = "";
+	replaceMap["},"]     = "|";
+	replaceMap["{"]      = "";
+	//replaceMap["}"]      = "";  // ERROR EN ESTE REEMPLAZO
+	// SE DEBE REEMPLAZAR ESPECIFICMENTE MAS ABAJO
+
+	// Iterating through the map
+	for (const auto& pair : replaceMap) {
+		//
+		algorithm->ReplaceAll(str_p_matrix, pair.first, pair.second);
+	}
+	//
+	algorithm->ReplaceAll(str_p_matrix, "}", "");
+
+	//
+	const char* str_p_matrix_c_str     = str_p_matrix.c_str();
+	fileManager->SaveLineToFile("\nSudoku To Solve\n","SudokuGenerated.txt");
+
+	//
+	const static int   _N           = 9;
+	int                grid[_N][_N] =
+		{
+			{-1, -1, -1, -1, -1, -1, -1, -1, -1},
+			{-1, -1, -1, -1, -1, -1, -1, -1, -1},
+			{-1, -1, -1, -1, -1, -1, -1, -1, -1},
+			{-1, -1, -1, -1, -1, -1, -1, -1, -1},
+			{-1, -1, -1, -1, -1, -1, -1, -1, -1},
+			{-1, -1, -1, -1, -1, -1, -1, -1, -1},
+			{-1, -1, -1, -1, -1, -1, -1, -1, -1},
+			{-1, -1, -1, -1, -1, -1, -1, -1, -1},
+			{-1, -1, -1, -1, -1, -1, -1, -1, -1} 
+		};
+
+	//
+	vector<string>   str_p_matrix_rows = algorithm->StringSplit(str_p_matrix_c_str,"|");
+	//
+	int i = 0;
+	//
+	for (string row : str_p_matrix_rows) {
+		//
+		fileManager->SaveLineToFile(row,"SudokuGenerated.txt");
+		//
+		int j = 0;
+		//				
+		vector<string>   str_p_matrix_cols = algorithm->StringSplit(row.c_str(),",");
+		//
+		for (string col : str_p_matrix_cols) {
+			//
+			int num = stoi(col);
+			//
+			grid[i][j] = num;
+			//
+			j++;	
+		}
+		//
+		i++;
+	}
+
+	//
+	std::unique_ptr<SudokuSolver> uniquePtrSolver = std::make_unique<SudokuSolver>();
+	string           str_matrix_solved            = uniquePtrSolver ->Solve(grid);
+
+	//
+	fileManager->SaveLineToFile("\nSudoku Solved \n","SudokuSolved.txt");
+	//
+	//cout << "Sudoku Solved " << str_matrix_solved.c_str() << endl;
 	
 	//
 	return 0;

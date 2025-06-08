@@ -192,6 +192,10 @@ public:
 	string printSudoku()
 	{
 		//
+		cout << endl << "Sudoku to Solve : "  << endl;
+		//
+		cout << endl;
+		//
 		string string_matrix     = "";
 
 		//
@@ -322,6 +326,8 @@ class SudokuSolver
 		// Function to print the solved Sudoku grid
 		string printGrid(int grid[N][N]) {
 			//
+			cout << endl;
+			//
 			string string_matrix     = "";
 			//
 			FileManager* fileManager = new FileManager();
@@ -384,7 +390,7 @@ class SudokuSolver
 				{0, 8, 0, 7, 4, 0, 1, 2, 6}};
 			//
 			if (solveSudoku(grid)) {
-				cout << "Sudoku solved:\n";
+				cout << "Sudoku solved:\n" << endl;
 				printGrid(grid);
 			} else {
 				cout << "No solution exists.\n";
@@ -403,7 +409,7 @@ class SudokuSolver
 			string str_matrix = "";
 			//
 			if (solveSudoku(grid)) {
-				cout << "Sudoku solved:\n";
+				cout << endl <<  "Sudoku solved :" << endl;
 				str_matrix = printGrid(grid);
 			} else {
 				cout << "No solution exists.\n";
