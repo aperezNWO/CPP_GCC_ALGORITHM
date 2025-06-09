@@ -7,6 +7,8 @@
  
  "C:\msys64\ucrt64\bin\g++.exe"  -g AlgorithmAppTestDLL.cpp  -o AlgorithmAppTestDLL.exe  -m64
 
+  RunTestDLL.BAT
+  
 */
 
 #include <stdio.h>

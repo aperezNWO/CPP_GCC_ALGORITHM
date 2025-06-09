@@ -29,7 +29,7 @@
 
  "C:\msys64\ucrt64\bin\g++.exe"  -g AlgorithmAppTestSrc.cpp  include\Dijkstra.cpp include\RegExManager.cpp include\SortBenchMark.cpp include\Sudoku.cpp include\TFileManager.cpp -o AlgorithmAppTestSrc.exe -Iinclude -DALGORITHM_EXPORTS -m64
 	
-  AlgorithmAppTestSrc.bat
+  RunTestExe.bat
  	            
 */
 
@@ -343,16 +343,21 @@ int AlgorithmAppTestSrc::Run()
     //
     while (option != opt_salida)
     {
+    	 //
+    	 Algorithm *algorithm      = new Algorithm();
+    	 static string stdVersion  = algorithm->GetSTDVersion();
+    	 
          //
          system ("CLS");
 
          //   
          cout<<"";
-         cout<<"-----------------------------------------"<< endl;
-         cout<<"-- ALGORITHM UNIT TESTING                "<< endl;
-         cout<<"-----------------------------------------"<< endl;
-         cout<<"-- MAIN MENU                             "<< endl;
-         cout<<"-----------------------------------------"<< endl;
+         cout<<"-----------------------------------------"        << endl;
+         cout<<"-- ALGORITHM SRC TESTING                 "        << endl;
+         cout<<"-- C++ Standard Version: [" << stdVersion << "]"  << endl;
+         cout<<"-----------------------------------------"        << endl;
+         cout<<"-- MAIN MENU                             "        << endl;
+         cout<<"-----------------------------------------"        << endl;
          
          cout<<"-----------------------------------------"<< endl;
          cout<<"1. Iterative.                            "<< endl;         

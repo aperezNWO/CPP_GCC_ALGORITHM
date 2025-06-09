@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
 CompilerSettings=0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;1;0;0;0;4;0;0;0
-UnitCount=25
+UnitCount=27
 
 [VersionInfo]
 Major=1
@@ -61,7 +61,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit4]
-FileName=src\AlgorithmAppTestSrc.bat
+FileName=src\RunTestExe.bat
 CompileCpp=1
 Folder=src
 Compile=0
@@ -71,16 +71,6 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit9]
-FileName=src\include\Algorithm.h
-CompileCpp=1
-Folder=src/include
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit10]
 FileName=src\include\Dijkstra.cpp
 CompileCpp=1
 Folder=src/include
@@ -90,7 +80,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit11]
+[Unit10]
 FileName=src\include\Dijkstra.h
 CompileCpp=1
 Folder=src/include
@@ -100,7 +90,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit12]
+[Unit11]
 FileName=src\include\iterativeList.h
 CompileCpp=1
 Folder=src/include
@@ -110,7 +100,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit13]
+[Unit12]
 FileName=src\include\node.h
 CompileCpp=1
 Folder=src/include
@@ -120,8 +110,8 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit15]
-FileName=src\include\RegExManager.cpp
+[Unit13]
+FileName=src\include\recursiveList.h
 CompileCpp=1
 Folder=src/include
 Compile=1
@@ -130,7 +120,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit16]
+[Unit15]
 FileName=src\include\RegExManager.h
 CompileCpp=1
 Folder=src/include
@@ -140,7 +130,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit17]
+[Unit16]
 FileName=src\include\SortBenchMark.cpp
 CompileCpp=1
 Folder=src/include
@@ -150,8 +140,18 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit18]
+[Unit17]
 FileName=src\include\SortBenchMark.h
+CompileCpp=1
+Folder=src/include
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit18]
+FileName=src\include\Sudoku.cpp
 CompileCpp=1
 Folder=src/include
 Compile=1
@@ -171,7 +171,7 @@ BuildCmd=
 CompileCpp=1
 
 [Unit19]
-FileName=src\include\Sudoku.cpp
+FileName=src\include\TFileManager.cpp
 CompileCpp=1
 Folder=src/include
 Compile=1
@@ -181,8 +181,8 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit21]
-FileName=src\include\TFileManager.h
-Folder=src/include
+FileName=dest\include\Algorithm.h
+Folder=dest/include
 Compile=1
 Link=1
 Priority=1000
@@ -220,19 +220,19 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit22]
-FileName=dest\include\Algorithm.h
+FileName=doc\strategy.txt
 CompileCpp=1
-Folder=dest/include
-Compile=1
-Link=1
+Folder=doc
+Compile=0
+Link=0
 Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
 [Unit25]
-FileName=src\AlgorithmAppTestDLL.bat
+FileName=dest\AlgorithmTestRefApp.ini
 CompileCpp=1
-Folder=src
+Folder=dest
 Compile=0
 Link=0
 Priority=1000
@@ -240,19 +240,19 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit26]
-FileName=dest\AlgorithmAppTestRef.cpp
+FileName=dest\Makefile
 Folder=dest
-Compile=1
-Link=1
+Compile=0
+Link=0
 Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 CompileCpp=1
 
 [Unit27]
-FileName=src\AlgorithmAppTestDLL.bat
+FileName=dest\Run.bat
 CompileCpp=1
-Folder=src
+Folder=dest
 Compile=0
 Link=0
 Priority=1000
@@ -260,9 +260,9 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit28]
-FileName=src\include\TFileManager.o
+FileName=dest\Run.bat
 CompileCpp=1
-Folder=src/include
+Folder=dest
 Compile=0
 Link=0
 Priority=1000
@@ -318,17 +318,8 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit8]
-FileName=src\Makefile.win
-Folder=src
-Compile=0
-Link=0
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
 [Unit14]
-FileName=src\include\recursiveList.h
+FileName=src\include\RegExManager.cpp
 CompileCpp=1
 Folder=src/include
 Compile=1
@@ -338,7 +329,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit20]
-FileName=src\include\TFileManager.cpp
+FileName=src\include\TFileManager.h
 CompileCpp=1
 Folder=src/include
 Compile=1
@@ -348,16 +339,6 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit23]
-FileName=doc\strategy.txt
-CompileCpp=1
-Folder=doc
-Compile=0
-Link=0
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit24]
 FileName=dest\AlgorithmAppTestRef.cpp
 CompileCpp=1
 Folder=dest
@@ -367,11 +348,31 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
+[Unit24]
+FileName=src\RunTestDLL.bat
+CompileCpp=1
+Folder=src
+Compile=0
+Link=0
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
 [Unit6]
 FileName=src\make.bat
 Folder=src
 Compile=0
 Link=0
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit8]
+FileName=src\include\Algorithm.h
+CompileCpp=1
+Folder=src/include
+Compile=1
+Link=1
 Priority=1000
 OverrideBuildCmd=0
 BuildCmd=

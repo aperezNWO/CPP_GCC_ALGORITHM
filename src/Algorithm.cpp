@@ -39,6 +39,15 @@ mingw32-make --always-make --debug=v
 
 make.bat
 
+dumpbin /exports Algorithm.dll
+
+
+gcc version 15.1.0 (Rev1, Built by MSYS2 project)
+
+GCC 10.x and later : Default is C++17 .
+
+
+
 */
 ///////////////////////////////////////////////////////////
 
@@ -188,6 +197,12 @@ make.bat
 	{
 		//
 		return this->configMap["DLL_VERSION"].c_str();
+	}
+	//
+	string Algorithm::GetSTDVersion()
+	{
+		//
+		return ((std::to_string(__cplusplus) == "201703")? "C++17" : std::to_string(__cplusplus) );
 	}
 
 	///////////////////////////////////////////////////////////////////////////

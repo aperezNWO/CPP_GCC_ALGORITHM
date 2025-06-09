@@ -38,15 +38,13 @@ using namespace std;
 #pragma argsused
 #pragma once
 
-
-
-//
 // Define the enum
 enum class FormatType {
     HTML = 1,  // Represents HTML format
     JSON = 2   // Represents JSON format
 };
 
+//
 class ALGORITHM_API Algorithm
 {
 	   public :
@@ -60,6 +58,7 @@ class ALGORITHM_API Algorithm
 			int                                ReadConfigFile(const char* fileName);
             static void                        ReplaceAll(std::string &str, const std::string &from, const std::string &to);
             const char*                        _GetDLLVersion();
+            static string                      GetSTDVersion();
 	   public :
 		  //
 		  map<string, string> configMap;
