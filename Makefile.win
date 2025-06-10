@@ -1,0 +1,52 @@
+# Project: CPP_DEV_CPP_ALGORITHM
+# Makefile created by Embarcadero Dev-C++ 6.3
+
+CPP      = g++.exe -D__DEBUG__
+CC       = gcc.exe -D__DEBUG__
+WINDRES  = windres.exe
+OBJ      = src/Algorithm.o src/AlgorithmAppTestDLL.o src/AlgorithmAppTestSrc.o src/include/Dijkstra.o src/include/RegExManager.o src/include/SortBenchMark.o src/include/Sudoku.o src/include/TFileManager.o dest/AlgorithmAppTestRef.o
+LINKOBJ  = src/Algorithm.o src/AlgorithmAppTestDLL.o src/AlgorithmAppTestSrc.o src/include/Dijkstra.o src/include/RegExManager.o src/include/SortBenchMark.o src/include/Sudoku.o src/include/TFileManager.o dest/AlgorithmAppTestRef.o
+LIBS     = -L"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib" -L"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/lib" -static-libgcc -pg -g3
+INCS     = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include"
+CXXINCS  = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++"
+BIN      = CPP_DEV_CPP_ALGORITHM.exe
+CXXFLAGS = $(CXXINCS) -pg -g3 -m64
+CFLAGS   = $(INCS) -pg -g3
+DEL      = C:\Program Files (x86)\Embarcadero\Dev-Cpp\devcpp.exe INTERNAL_DEL
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${DEL} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+src/Algorithm.o: src/Algorithm.cpp
+	$(CPP) -c src/Algorithm.cpp -o src/Algorithm.o $(CXXFLAGS)
+
+src/AlgorithmAppTestDLL.o: src/AlgorithmAppTestDLL.cpp
+	$(CPP) -c src/AlgorithmAppTestDLL.cpp -o src/AlgorithmAppTestDLL.o $(CXXFLAGS)
+
+src/AlgorithmAppTestSrc.o: src/AlgorithmAppTestSrc.cpp
+	$(CPP) -c src/AlgorithmAppTestSrc.cpp -o src/AlgorithmAppTestSrc.o $(CXXFLAGS)
+
+src/include/Dijkstra.o: src/include/Dijkstra.cpp
+	$(CPP) -c src/include/Dijkstra.cpp -o src/include/Dijkstra.o $(CXXFLAGS)
+
+src/include/RegExManager.o: src/include/RegExManager.cpp
+	$(CPP) -c src/include/RegExManager.cpp -o src/include/RegExManager.o $(CXXFLAGS)
+
+src/include/SortBenchMark.o: src/include/SortBenchMark.cpp
+	$(CPP) -c src/include/SortBenchMark.cpp -o src/include/SortBenchMark.o $(CXXFLAGS)
+
+src/include/Sudoku.o: src/include/Sudoku.cpp
+	$(CPP) -c src/include/Sudoku.cpp -o src/include/Sudoku.o $(CXXFLAGS)
+
+src/include/TFileManager.o: src/include/TFileManager.cpp
+	$(CPP) -c src/include/TFileManager.cpp -o src/include/TFileManager.o $(CXXFLAGS)
+
+dest/AlgorithmAppTestRef.o: dest/AlgorithmAppTestRef.cpp
+	$(CPP) -c dest/AlgorithmAppTestRef.cpp -o dest/AlgorithmAppTestRef.o $(CXXFLAGS)

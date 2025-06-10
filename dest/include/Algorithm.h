@@ -58,7 +58,7 @@ class ALGORITHM_API Algorithm
 			int                                ReadConfigFile(const char* fileName);
             static void                        ReplaceAll(std::string &str, const std::string &from, const std::string &to);
             const char*                        _GetDLLVersion();
-            static string                      GetSTDVersion();
+            const char*                        GetCPPSTDVersion();
 	   public :
 		  //
 		  map<string, string> configMap;

@@ -61,7 +61,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit4]
-FileName=src\RunTestExe.bat
+FileName=src\RunTestSrc.bat
 CompileCpp=1
 Folder=src
 Compile=0

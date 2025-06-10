@@ -57,8 +57,6 @@ GCC 10.x and later : Default is C++17 .
 #include "include\RegExManager.h"
 #include "include\Sudoku.cpp"
 
-
-
 	Algorithm::Algorithm()
 	{
 		 //
@@ -199,10 +197,10 @@ GCC 10.x and later : Default is C++17 .
 		return this->configMap["DLL_VERSION"].c_str();
 	}
 	//
-	string Algorithm::GetSTDVersion()
+	const char* Algorithm::GetCPPSTDVersion()
 	{
 		//
-		return ((std::to_string(__cplusplus) == "201703")? "C++17" : std::to_string(__cplusplus) );
+		return ((std::to_string(__cplusplus) == "201703")? ("C++17") : std::to_string(__cplusplus).c_str() );
 	}
 
 	///////////////////////////////////////////////////////////////////////////
@@ -374,3 +372,12 @@ GCC 10.x and later : Default is C++17 .
 		return uniquePtr->_GetDLLVersion();
 	}
 
+	// C++ VERSION
+	DLL_EXPORT const char* GetCPPSTDVersion()
+	{
+		Algorithm *algorithm;
+		
+		return algorithm->GetCPPSTDVersion();	
+	}
+
+	///////////////////////////////////////////////////////////////////////////

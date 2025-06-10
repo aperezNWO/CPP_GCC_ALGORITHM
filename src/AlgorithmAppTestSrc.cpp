@@ -344,8 +344,8 @@ int AlgorithmAppTestSrc::Run()
     while (option != opt_salida)
     {
     	 //
-    	 Algorithm *algorithm      = new Algorithm();
-    	 static string stdVersion  = algorithm->GetSTDVersion();
+    	 Algorithm *algorithm;
+    	 const char* stdVersion  = algorithm->GetCPPSTDVersion();
     	 
          //
          system ("CLS");
@@ -420,7 +420,7 @@ int AlgorithmAppTestSrc::Run()
 
 int main()
 {
-    AlgorithmAppTestSrc *algorithmApp = new AlgorithmAppTestSrc();
+    AlgorithmAppTestSrc *algorithmApp;
     
     algorithmApp->Run();
 }

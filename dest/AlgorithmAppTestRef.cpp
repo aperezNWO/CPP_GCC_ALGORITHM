@@ -24,6 +24,11 @@ class AlgorithmAppTestRef	 :
 	public :
 		AlgorithmAppTestRef();
 		~AlgorithmAppTestRef();
+	public :
+		int GetDLLVersionTest();
+		int GetCPPSTDVersionTest();
+	public :
+		Run();
 };
 
 //
@@ -38,21 +43,104 @@ AlgorithmAppTestRef::~AlgorithmAppTestRef()
 {
 	//
 };
+
+//
+int AlgorithmAppTestRef::GetDLLVersionTest()
+{
+	//
+    static std::string dllVersion; 
+	dllVersion = this->_GetDLLVersion();
+
+	//
+	cout << dllVersion << endl;
+	//
+	return 0;
+}
+
+//		
+int AlgorithmAppTestRef::GetCPPSTDVersionTest()
+{ 
+	//
+	static std::string cppSTDVersion;
+	cppSTDVersion = this->GetCPPSTDVersion(); 
+	cout << cppSTDVersion << endl;  
+	//
+	return 0;
+};
+
+//
+int AlgorithmAppTestRef::Run()
+{
+	//
+    const int opt_salida = 0;
+          int option     = -1;
+
+	//
+    while (option != opt_salida)
+    {
+    	 //
+    	 Algorithm *algorithm;
+    	 const char* stdVersion  = algorithm->GetCPPSTDVersion();
+    	 
+         //
+         system ("CLS");
+
+         //   
+         cout<<"";
+         cout<<"-----------------------------------------"        << endl;
+         cout<<"-- ALGORITHM DLL REF TESTING             "        << endl;
+         cout<<"-- C++ Standard Version: [" << stdVersion << "]"  << endl;
+         cout<<"-----------------------------------------"        << endl;
+         cout<<"-- MAIN MENU                             "        << endl;
+         cout<<"-----------------------------------------"        << endl;
+         
+         cout<<"-----------------------------------------"<< endl;
+         cout<<"1. DLL Version.                          "<< endl;         
+         cout<<"2. Get C++ STD Version.                  "<< endl;
+         cout<<"-----------------------------------------"<< endl;
+         cout<<"0. Exit.                                 "<< endl;
+         cout<<"-----------------------------------------"<< endl;
+         cout<<"Enter Option : ";
+         cin>>option;
+         
+          //
+		 system ("CLS");
+		 
+         //
+         switch (option)
+         {
+             case 1: // GetDLLVersion
+				this->GetDLLVersionTest();
+             break;
+             case 2: // GetCPPSTDVersion
+				this->GetCPPSTDVersionTest();
+             break;       
+			 default :
+			 	if (option != 0)
+			 		std::cout << std::endl << "invalid option" <<std::endl;
+			 break;    
+         };
+         
+	    //
+	    if (option != 0)
+	    {
+		    std::cout << std::endl <<  "Press any key to continue..." << std::endl;
+	        _getwch(); // Wait for a single key press	    	
+		}
+	};
 	
+	// 	
+	return 0;
+}
+
 //	
 int main()
 {
-    // Create a unique_ptr 
-    std::unique_ptr<AlgorithmAppTestRef> uniquePtr = std::make_unique<AlgorithmAppTestRef>();
-
-    // Generate the response
-    static std::string response; 
-	
-	//
-	response = uniquePtr->_GetDLLVersion();
-
-	//
-	cout << response;
+   	//
+    AlgorithmAppTestRef *algorithmAppTestRef = new 	AlgorithmAppTestRef();
+    
+    //
+	algorithmAppTestRef->Run();
 	
 	//
 	return 0;
