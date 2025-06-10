@@ -6,18 +6,6 @@
 #define Algorithm_H
 #endif
 
-#define DLL_EXPORT extern "C" __declspec(dllexport) __stdcall
-
-#ifdef _WIN32
-    #ifdef ALGORITHM_EXPORTS
-        #define ALGORITHM_API __declspec(dllexport)
-    #else
-        #define ALGORITHM_API __declspec(dllimport)
-    #endif
-#else
-    #define ALGORITHM_API // Non-Windows platforms don't need this
-#endif
-
 #include <algorithm>
 #include <string>
 #include <vector>
@@ -30,6 +18,18 @@
 #include <cctype>
 #include <map>
 #include <cstring>
+
+#define DLL_EXPORT extern "C" __declspec(dllexport) __stdcall
+
+#ifdef _WIN32
+    #ifdef ALGORITHM_EXPORTS
+        #define ALGORITHM_API __declspec(dllexport)
+    #else
+        #define ALGORITHM_API __declspec(dllimport)
+    #endif
+#else
+    #define ALGORITHM_API // Non-Windows platforms don't need this
+#endif
 
 //
 using namespace std;
@@ -49,7 +49,7 @@ class ALGORITHM_API Algorithm
 {
 	   public :
 			//
-			Algorithm();
+			Algorithm(bool readConfigFile);
 			~Algorithm();
 			//
 			static string                      HtmlEncode(const std::string& input);
@@ -58,7 +58,7 @@ class ALGORITHM_API Algorithm
 			int                                ReadConfigFile(const char* fileName);
             static void                        ReplaceAll(std::string &str, const std::string &from, const std::string &to);
             const char*                        _GetDLLVersion();
-            const char*                        GetCPPSTDVersion();
+            const char*                        GetCPPSTDVersion(long int cppVersion);
 	   public :
 		  //
 		  map<string, string> configMap;

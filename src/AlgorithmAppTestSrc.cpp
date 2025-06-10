@@ -27,7 +27,7 @@
 ///////////////////////////////////////////////////////////////////////////
 /*
 
- "C:\msys64\ucrt64\bin\g++.exe"  -g AlgorithmAppTestSrc.cpp  include\Dijkstra.cpp include\RegExManager.cpp include\SortBenchMark.cpp include\Sudoku.cpp include\TFileManager.cpp -o AlgorithmAppTestSrc.exe -Iinclude -DALGORITHM_EXPORTS -m64
+ "C:\msys64\ucrt64\bin\g++.exe" -std=c++20 -g AlgorithmAppTestSrc.cpp  include\Dijkstra.cpp include\RegExManager.cpp include\SortBenchMark.cpp include\Sudoku.cpp include\TFileManager.cpp -o AlgorithmAppTestSrc.exe -Iinclude -DALGORITHM_EXPORTS -m64
 	
   RunTestExe.bat
  	            
@@ -45,7 +45,8 @@
 // CLASSES
 ///////////////////////////////////////////////////////////////////////////
 
-class AlgorithmAppTestSrc
+class AlgorithmAppTestSrc :
+	   public Algorithm
 {
    	 public :
 	 		AlgorithmAppTestSrc();
@@ -66,9 +67,10 @@ class AlgorithmAppTestSrc
 ///////////////////////////////////////////////////////////////////////////
 // FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////
-AlgorithmAppTestSrc::AlgorithmAppTestSrc()
+AlgorithmAppTestSrc::AlgorithmAppTestSrc() : Algorithm(false)
 {
 	//
+	this->ReadConfigFile("AlgorithmAppTestSrc.ini");
 }
 //
 AlgorithmAppTestSrc::~AlgorithmAppTestSrc()
@@ -118,9 +120,11 @@ int AlgorithmAppTestSrc::GetDLLVersionTest()
 	cout << "------------------"  << endl;
 	
 	//
-	std::unique_ptr<Algorithm> uniquePtr = std::make_unique<Algorithm>();
+	//std::unique_ptr<Algorithm> uniquePtr = std::make_unique<Algorithm>();
 	//
-	const char* dllVersion = uniquePtr->configMap["DLL_VERSION"].c_str();
+	//const char* dllVersion = uniquePtr->configMap["DLL_VERSION"].c_str();
+	// 
+	const char* dllVersion = this->_GetDLLVersion();
 	//	
     cout << "DLL Version : " << dllVersion  <<  std::endl;
     
@@ -215,7 +219,7 @@ int AlgorithmAppTestSrc::RegExTest()
 		if (response != "")
 		{
 			//
-			std::unique_ptr<Algorithm> uniquePtr = std::make_unique<Algorithm>();
+			std::unique_ptr<Algorithm> uniquePtr = std::make_unique<Algorithm>(false);
 			//
 			vector<string> vectorResponse = uniquePtr->StringSplit(response.c_str(),"|");
 			//
@@ -248,7 +252,7 @@ int AlgorithmAppTestSrc::SudokuTest()
 	//cout << endl << "Sudoku to Solve : " << str_matrix << endl;
 	cout << endl << "------------------" << endl;
 	//
-	Algorithm*   algorithm     = new Algorithm();
+	Algorithm*   algorithm     = new Algorithm(false);
 	string       str_p_matrix  = str_matrix;
 	FileManager* fileManager   = new FileManager();
 
@@ -344,8 +348,10 @@ int AlgorithmAppTestSrc::Run()
     while (option != opt_salida)
     {
     	 //
-    	 Algorithm *algorithm;
-    	 const char* stdVersion  = algorithm->GetCPPSTDVersion();
+    	 //Algorithm *algorithm    = new Algorithm(__cplusplus);
+    	 //const char* stdVersion  = algorithm->GetCPPSTDVersion();
+    	 
+    	 const char* stdVersion    = this->GetCPPSTDVersion();
     	 
          //
          system ("CLS");
@@ -420,9 +426,9 @@ int AlgorithmAppTestSrc::Run()
 
 int main()
 {
-    AlgorithmAppTestSrc *algorithmApp;
+    AlgorithmAppTestSrc *algorithmApp = new AlgorithmAppTestSrc();
     
     algorithmApp->Run();
-}
+};
 
 //////////////////////////////////////////////////////////////////////////

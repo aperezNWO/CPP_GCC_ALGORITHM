@@ -1,7 +1,7 @@
 ﻿#include "SortBenchMark.h"
 
 	//
-	SortBenchMark::SortBenchMark(const char* p_randomValues, FormatType p_format)
+	SortBenchMark::SortBenchMark(const char* p_randomValues, FormatType p_format) : Algorithm(true)
 	{
 		//
 		this->format         = p_format;

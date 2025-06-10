@@ -57,10 +57,16 @@ GCC 10.x and later : Default is C++17 .
 #include "include\RegExManager.h"
 #include "include\Sudoku.cpp"
 
-	Algorithm::Algorithm()
+
+
+	Algorithm::Algorithm(bool readConfigFile)
 	{
 		 //
-		 ReadConfigFile("Algorithm.ini");
+		 if (readConfigFile)
+		 {
+		 	this->ReadConfigFile("Algorithm.ini");
+		 }
+
 	}
 	//
 	Algorithm::~Algorithm()
@@ -197,10 +203,17 @@ GCC 10.x and later : Default is C++17 .
 		return this->configMap["DLL_VERSION"].c_str();
 	}
 	//
-	const char* Algorithm::GetCPPSTDVersion()
+	const char* Algorithm::GetCPPSTDVersion(long int cppVersion)	
 	{
-		//
-		return ((std::to_string(__cplusplus) == "201703")? ("C++17") : std::to_string(__cplusplus).c_str() );
+		switch (cppVersion) {
+		        case 199711L: return "C++98/C++03";
+		        case 201103L: return "C++11";
+		        case 201402L: return "C++14";
+		        case 201703L: return "C++17";
+		        case 202002L: return "C++20";
+		        case 202302L: return "C++23";
+		        default: return "Unknown C++ Standard";
+		}
 	}
 
 	///////////////////////////////////////////////////////////////////////////
@@ -287,7 +300,7 @@ GCC 10.x and later : Default is C++17 .
 	DLL_EXPORT const char*  Sudoku_Solve_CPP(char* p_matrix)
 	{
 	    //
-		Algorithm*   algorithm     = new Algorithm();
+		Algorithm*   algorithm     = new Algorithm(false);
 		string       str_p_matrix  = p_matrix;
 		FileManager* fileManager   = new FileManager();
 
@@ -367,7 +380,7 @@ GCC 10.x and later : Default is C++17 .
 	DLL_EXPORT const char* GetDLLVersion()
 	{
 		//
-		std::unique_ptr<Algorithm> uniquePtr = std::make_unique<Algorithm>();
+		std::unique_ptr<Algorithm> uniquePtr = std::make_unique<Algorithm>(true);
 		//
 		return uniquePtr->_GetDLLVersion();
 	}
@@ -375,9 +388,9 @@ GCC 10.x and later : Default is C++17 .
 	// C++ VERSION
 	DLL_EXPORT const char* GetCPPSTDVersion()
 	{
-		Algorithm *algorithm;
+		Algorithm *algorithm = new Algorithm(false);
 		
-		return algorithm->GetCPPSTDVersion();	
+		return algorithm->GetCPPSTDVersion(__cplusplus);	
 	}
 
 	///////////////////////////////////////////////////////////////////////////

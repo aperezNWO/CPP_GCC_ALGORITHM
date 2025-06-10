@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <windows.h>
 
-typedef const char* (*GetTensorFlowAPPVersionFunc)();  // Define function pointer type
+typedef const char* (*GetDLLVersionFunc)();  // Define function pointer type
 
 int main()
 {
@@ -31,15 +31,15 @@ int main()
     //////////////////////////////////////////////////////
     
     
-    GetTensorFlowAPPVersionFunc GetTensorFlowAPPVersion = (GetTensorFlowAPPVersionFunc)GetProcAddress(hDLL, "GetDLLVersion");
-    if (!GetTensorFlowAPPVersion) {
+    GetDLLVersionFunc GetDLLVersion = (GetDLLVersionFunc)GetProcAddress(hDLL, "GetDLLVersion");
+    if (!GetDLLVersion) {
         printf("Could not locate the function 'GetDLLVersion'.\n");
         FreeLibrary(hDLL);
         return 1;
     }
 
     // Call the function
-    const char* appVersion = GetTensorFlowAPPVersion();
+    const char* appVersion = GetDLLVersion();
     printf("'GetDLLVersion' : %s\n", appVersion);
     
     //////////////////////////////////////////////////////////

@@ -1,8 +1,8 @@
 # Compiler
-CXX = g++
+CXX = g++ 
 
 # Compiler flags
-CXXFLAGS = -I"include" -g -DALGORITHM_EXPORTS -m64
+CXXFLAGS = -std=c++20 -I"include" -g -DALGORITHM_EXPORTS -m64
 
 # Linker flags
 LDFLAGS = -L"lib" -lAlgorithm

@@ -28,7 +28,7 @@ using namespace std;
 #pragma argsused
 
 	//
-	Dijkstra::Dijkstra() : graph(), dist(), path()
+	Dijkstra::Dijkstra() : Algorithm(true), graph(), dist(), path()
 	{
 			//
 	}

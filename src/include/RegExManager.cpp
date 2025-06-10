@@ -5,7 +5,7 @@
 #include "RegExManager.h"
 
 //
-RegExManager::RegExManager()
+RegExManager::RegExManager() : Algorithm(true)
 {
 	this->GetXml();
 }

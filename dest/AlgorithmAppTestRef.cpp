@@ -5,7 +5,7 @@
 
 /*
 
- "C:\msys64\ucrt64\bin\g++.exe" -I"include" -L"lib" -g AlgorithmAppTestRef.cpp  -o AlgorithmAppTestRef.exe -lAlgorithm -DALGORITHM_EXPORTS  -m64
+ "C:\msys64\ucrt64\bin\g++.exe" -std=c++20 -I"include" -L"lib" -g AlgorithmAppTestRef.cpp  -o AlgorithmAppTestRef.exe -lAlgorithm -DALGORITHM_EXPORTS  -m64
 
  mingw32-make --always-make --debug=v
  
@@ -32,7 +32,7 @@ class AlgorithmAppTestRef	 :
 };
 
 //
-AlgorithmAppTestRef::AlgorithmAppTestRef()
+AlgorithmAppTestRef::AlgorithmAppTestRef() : Algorithm(false)
 {
 	//
 	this->ReadConfigFile("AlgorithmTestRefApp.ini");
@@ -77,7 +77,7 @@ int AlgorithmAppTestRef::GetCPPSTDVersionTest()
 	
 	//
 	static std::string cppSTDVersion;
-	cppSTDVersion = this->GetCPPSTDVersion(); 
+	cppSTDVersion = this->GetCPPSTDVersion(__cplusplus); 
 	cout << cppSTDVersion << endl;  
 	//
 	return 0;
@@ -95,7 +95,7 @@ int AlgorithmAppTestRef::Run()
     {
     	 //
     	 Algorithm *algorithm;
-    	 const char* stdVersion  = algorithm->GetCPPSTDVersion();
+    	 const char* stdVersion  = algorithm->GetCPPSTDVersion(__cplusplus);
     	 
          //
          system ("CLS");
