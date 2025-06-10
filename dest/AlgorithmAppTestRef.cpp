@@ -48,7 +48,16 @@ AlgorithmAppTestRef::~AlgorithmAppTestRef()
 int AlgorithmAppTestRef::GetDLLVersionTest()
 {
 	//
-    static std::string dllVersion; 
+	cout << "-----------------------------"  << endl;
+	cout << "DLL VERSION TEST             "  << endl;
+	cout << "(Reading through inheritance)"  << endl;
+	cout << "-----------------------------"  << endl;
+	
+	//
+	cout << "(Reading 'AlgorithmTestRefApp.ini' file)" << endl;
+    
+    //
+	static std::string dllVersion; 
 	dllVersion = this->_GetDLLVersion();
 
 	//
@@ -60,6 +69,12 @@ int AlgorithmAppTestRef::GetDLLVersionTest()
 //		
 int AlgorithmAppTestRef::GetCPPSTDVersionTest()
 { 
+	//
+	cout << "-----------------------------"  << endl;
+	cout << "CPP STD VERSION TEST         "  << endl;
+	cout << "(Reading through inheritance)"  << endl;
+	cout << "-----------------------------"  << endl;
+	
 	//
 	static std::string cppSTDVersion;
 	cppSTDVersion = this->GetCPPSTDVersion(); 
