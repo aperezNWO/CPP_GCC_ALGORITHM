@@ -30,8 +30,9 @@
   // Algorithm.dll
  "C:\msys64\ucrt64\bin\g++.exe" -shared -static -static-libgcc -static-libstdc++ -fdiagnostics-color=always -g Algorithm.cpp include\Dijkstra.cpp include\RegExManager.cpp include\SortBenchMark.cpp include\Sudoku.cpp include\TFileManager.cpp -o Algorithm.dll -Iinclude -Wl,--subsystem,windows -DALGORITHM_EXPORTS -m64
  
- // Algoritym.o
+ // Algoritym.o 
  "C:\msys64\ucrt64\bin\g++.exe" -c Algorithm.cpp -o Algorithm.o -Iinclude -Wall -Wextra -fdiagnostics-color=always -g -m64 -DALGORITHM_EXPORTS
+ ar rcs libAlgorithm.a Algorithm.o
 
 */
 ///////////////////////////////////////////////////////////
