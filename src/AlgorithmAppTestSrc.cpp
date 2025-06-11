@@ -351,7 +351,7 @@ int AlgorithmAppTestSrc::Run()
     	 //Algorithm *algorithm    = new Algorithm(__cplusplus);
     	 //const char* stdVersion  = algorithm->GetCPPSTDVersion();
     	 
-    	 const char* stdVersion    = this->GetCPPSTDVersion();
+    	 const char* stdVersion    = this->GetCPPSTDVersion(__cplusplus);
     	 
          //
          system ("CLS");
