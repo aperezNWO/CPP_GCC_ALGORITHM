@@ -32,8 +32,26 @@
  
  // Algoritym.o 
  "C:\msys64\ucrt64\bin\g++.exe" -c Algorithm.cpp -o Algorithm.o -Iinclude -Wall -Wextra -fdiagnostics-color=always -g -m64 -DALGORITHM_EXPORTS
- ar rcs libAlgorithm.a Algorithm.o
 
+// TFileManager.o
+"C:\msys64\ucrt64\bin\g++.exe" -c include\TFileManager.cpp -o TFileManager.o -Iinclude -Wall -Wextra -fdiagnostics-color=always -g -m64 -DALGORITHM_EXPORTS
+
+// RegexManager.o
+"C:\msys64\ucrt64\bin\g++.exe" -c include\RegExManager.cpp -o RegExManager.o -Iinclude -Wall -Wextra -fdiagnostics-color=always -g -m64 -DALGORITHM_EXPORTS
+
+// Sudoku.o
+"C:\msys64\ucrt64\bin\g++.exe" -c include\Sudoku.cpp -o Sudoku.o -Iinclude -Wall -Wextra -fdiagnostics-color=always -g -m64 -DALGORITHM_EXPORTS
+ 
+// Dijkstra.o 
+"C:\msys64\ucrt64\bin\g++.exe" -c include\Dijkstra.cpp -o Dijkstra.o -Iinclude -Wall -Wextra -fdiagnostics-color=always -g -m64 -DALGORITHM_EXPORTS
+
+// SortBenchMark.o
+"C:\msys64\ucrt64\bin\g++.exe" -c include\SortBenchMark.cpp -o SortBenchMark.o -Iinclude -Wall -Wextra -fdiagnostics-color=always -g -m64 -DALGORITHM_EXPORTS
+
+ // PUT TOGETHER IN A LIBALGORITHM.A FILE
+ ar rcs libAlgorithm.a Algorithm.o TFileManager.o RegExManager.o Sudoku.o Dijkstra.o SortBenchMark.o
+ 
+ 
 */
 ///////////////////////////////////////////////////////////
 // MAKE
