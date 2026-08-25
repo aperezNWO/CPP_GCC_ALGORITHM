@@ -48,5 +48,22 @@
 		-- [_] PUBLISH VISUAL STUDIO COMMUNIT PROJECT LOCAL IIS 
 		
 		-- [_] MAKE SURE __dist folder automatically copied C++ dll files.
+		
+		-- [_] TEST .net core LOCAL IIS FUNCTIONS RELATED WITH C++ ALGORITHMS LISTED IN SWAGGER.HTML FILES
+		
+			-- [_] http://localhost:83/swagger/index.html
+		
+			-- [_] http://localhost:83/api/Algorithm/GetAppVersion
 			
+		-- [_] deploy c++ dll files on "monster.asp" hosting (upload zip file)
+		
+			-- [_] https://admin.monsterasp.net/login
+			
+		-- [_] test algorithm c++ related functions from swagger list
+							
+			-- [_] https://tensorflownetcore64.tryasp.net/swagger/index.html
+			
+			-- [_] https://tensorflownetcore64.tryasp.net/api/Algorithm/GetAppVersion
+			
+				
 ///////////////////////////////////////////////
