@@ -1,0 +1,52 @@
+///////////////////////////////////////////////
+// SCM
+///////////////////////////////////////////////
+
+-- [_] INSTALL COMPILER / TOOLCHAIN
+
+	-- [_] https://www.msys2.org/#installation
+	
+	-- [_] (from MSYS2 UCRT64 SHELL) pacman -S mingw-w64-ucrt-x86_64-gcc
+	
+			-- [_] gcc --version
+	
+	-- [_] (from MSYS2 UCRT64 SHELL) pacman -S mingw-w64-ucrt-x86_64-make
+	
+			-- [_] which mingw32-make
+		
+			-- [_] mingw32-make --version
+	
+	-- [_] CHECK path
+	
+-- [_] TEST PROJECTS
+
+	-- [_] RUN SRC FILES 
+	
+		-- [_] src / runtestsrc.bat ==> output on __dist\AlgorithmAppTestSrc.exe
+		
+		-- [_] output text : "-- ALGORITHM SRC TESTING".
+		
+	-- [_] CREATE DLL FILE
+	
+		-- [_] MAKE.BAT ==> output on __dist\Algorithm.dll
+	
+	-- [_] TEST DLL FILE
+	
+	
+		-- [_] src / runtestDLL.bat ==>  __dist\AlgorithmAppTestDLL.exe
+
+		-- [_] output text : "'GetDLLVersion' : 1.0.3".
+		
+-- [_] DEPLOY PROJECT
+
+		-- [_] copy __dist folder content on .NET core source code project "ASP_NET_CORE_CPP_ENTRY\"
+		
+		-- [_] ASP_NET_CORE_CPP_ENTRY\_dist
+		
+		-- [_] ASP_NET_CORE_CPP_ENTRY\bin\Debug\net8.0
+		
+		-- [_] PUBLISH VISUAL STUDIO COMMUNIT PROJECT LOCAL IIS 
+		
+		-- [_] MAKE SURE __dist folder automatically copied C++ dll files.
+			
+///////////////////////////////////////////////

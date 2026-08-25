@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
 CompilerSettings=0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;1;0;0;0;4;0;0;0
-UnitCount=27
+UnitCount=28
 
 [VersionInfo]
 Major=1
@@ -260,11 +260,11 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit28]
-FileName=dest\Run.bat
+FileName=doc\scm.txt
 CompileCpp=1
-Folder=dest
-Compile=0
-Link=0
+Folder=doc
+Compile=1
+Link=1
 Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
