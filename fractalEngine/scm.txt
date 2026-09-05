@@ -42,5 +42,7 @@ docker push apereznwogmail/fractal-cpp-server:latest
 
 -- [_] docker.io/apereznwogmail/fractal-cpp-server:latest
 
+-- [_] https://fractal-cpp-server-latest.onrender.com/zero
+
 //////////////////////////////////////////////////////
 
