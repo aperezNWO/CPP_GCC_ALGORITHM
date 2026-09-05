@@ -24,12 +24,12 @@ HostApplication=
 UseCustomMakefile=0
 CustomMakefile=
 CommandLine=
-Folders=dest,dest/include,doc,src,src/include
+Folders=dest,dest/include,doc,fractalEngine,src,src/include
 IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
 CompilerSettings=0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;1;0;0;0;4;0;0;0
-UnitCount=28
+UnitCount=32
 
 [VersionInfo]
 Major=1
@@ -270,9 +270,9 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit30]
-FileName=dest\include\Algorithm.h
+FileName=fractalEngine\FractalDemo.cpp
 CompileCpp=1
-Folder=dest/include
+Folder=fractalEngine
 Compile=1
 Link=1
 Priority=1000
@@ -280,20 +280,20 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit31]
-FileName=doc\strategy.txt
+FileName=fractalEngine\FractalEngine.cpp
 CompileCpp=1
-Folder=doc
-Compile=0
-Link=0
+Folder=fractalEngine
+Compile=1
+Link=1
 Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
 [Unit32]
-FileName=dest\AlgorithmAppTestRef.cpp
-Folder=dest
-Compile=1
-Link=1
+FileName=fractalEngine\scm.txt
+Folder=fractalEngine
+Compile=0
+Link=0
 Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
@@ -373,6 +373,15 @@ CompileCpp=1
 Folder=src/include
 Compile=1
 Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit29]
+FileName=fractalEngine\Dockerfile
+Folder=fractalEngine
+Compile=0
+Link=0
 Priority=1000
 OverrideBuildCmd=0
 BuildCmd=

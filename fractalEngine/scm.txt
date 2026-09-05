@@ -1,0 +1,46 @@
+
+curl -sL https://raw.githubusercontent.com/yhirose/cpp-httplib/master/httplib.h -o httplib.h
+
+g++ -std=c++17 -O3 FractalDemo.cpp -o fractal_server.exe -mconsole -lws2_32
+
+g++ -std=c++17 -O3 FractalDemo.cpp -o fractal_server.exe -mconsole -lws2_32 
+
+fractal_server.exe
+
+fractalEngine>curl -i http://localhost:8080/zero
+HTTP/1.1 204 No Content
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization
+Access-Control-Allow-Credentials: true
+Keep-Alive: timeout=5, max=100
+Content-Length: 0
+
+curl -i "http://localhost:8080/api/fractals/generate?kind=1&maxIterations=100"
+
+curl -i "http://localhost:8080/api/fractals/generate?kind=2"
+
+curl -i "http://localhost:8080/api/fractals/generate?kind=3"
+
+http://localhost:8080/api/fractals/generate?kind=1&maxIterations=500
+
+# 0  build
+docker build -t fractal-cpp-server .
+
+# 1. Tag your local image with your Docker Hub username and repository name
+docker tag fractal-cpp-server apereznwogmail/fractal-cpp-server:latest
+
+# 2. Log in to your Docker Hub account
+docker login
+
+# 3. Push the image to the remote registry
+docker push apereznwogmail/fractal-cpp-server:latest
+
+//////////////////////////////////////////////////////
+// render  / chronjob
+//////////////////////////////////////////////////////
+
+-- [_] docker.io/apereznwogmail/fractal-cpp-server:latest
+
+//////////////////////////////////////////////////////
+
