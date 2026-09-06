@@ -1,0 +1,74 @@
+CMD
+
+	curl -sL https://raw.githubusercontent.com/yhirose/cpp-httplib/master/httplib.h -o httplib.h
+
+MSYS2
+	pacman -S mingw-w64-ucrt-x86_64-protobuf mingw-w64-ucrt-x86_64-grpc
+
+CMD
+    ## create a "fractal.proto" file, then
+	protoc --cpp_out=. --grpc_out=. --plugin=protoc-gen-grpc=C:\msys64\ucrt64\bin\grpc_cpp_plugin.exe fractal.proto
+
+//////////////////////////////////////////////////////
+// compile
+//////////////////////////////////////////////////////
+
+g++ -std=c++17 -O3 FractalDemoRPC.cpp fractal.pb.cc fractal.grpc.pb.cc ^
+-lgrpc++ -lgrpc -lprotobuf -lgpr ^
+-labsl_cord -labsl_cord_internal -labsl_raw_hash_set -labsl_hash ^
+-labsl_log_internal_check_op -labsl_log_internal_message -labsl_raw_logging_internal -labsl_log_internal_nullguard ^
+-labsl_synchronization -labsl_time -labsl_strings -lpthread -lws2_32 -ladvapi32 -luserenv ^
+-o fractal_grpc_server.exe
+
+fractal_grpc_server.exe
+
+//////////////////////////////////////////////////////
+// LOCAL TEST
+//////////////////////////////////////////////////////
+
+grpcurl -plaintext -import-path . -proto fractal.proto localhost:50051 list
+
+	## fractal.FractalService
+
+grpcurl -plaintext -import-path . -proto fractal.proto localhost:50051 fractal.FractalService/Ping
+
+grpcurl -plaintext -max-msg-sz 67108864 -import-path . -proto fractal.proto -d "{\"kind\": 1, \"max_iterations\": 50}" localhost:50051 fractal.FractalService/GenerateFractal
+
+
+//////////////////////////////////////////////////////
+// DOCKER
+//////////////////////////////////////////////////////
+
+# 0  build
+docker build -t fractal-cpp-grpc-server .
+
+# 1. Tag your local image with your Docker Hub username and repository name
+docker tag fractal-cpp-grpc-server apereznwogmail/fractal-cpp-grpc-server:latest
+
+# 2. Log in to your Docker Hub account
+docker login
+
+# 3. Push the image to the remote registry
+docker push apereznwogmail/fractal-cpp-grpc-server:latest
+
+//////////////////////////////////////////////////////
+// render  / chronjob
+//////////////////////////////////////////////////////
+
+-- [_] docker.io/apereznwogmail/fractal-cpp-grpc-server:latest
+
+-- [_] https://fractal-cpp-grpc-server-latest.onrender.com/zero
+
+//////////////////////////////////////////////////////
+// REMOTE TEST
+//////////////////////////////////////////////////////
+
+grpcurl -plaintext -max-msg-sz 67108864 -import-path . -proto fractal.proto -d "{\"kind\": 1, \"max_iterations\": 50}" fractal-cpp-grpc-server-latest.onrender.com:50051 fractal.FractalService/GenerateFractal
+
+grpcurl -plaintext -max-msg-sz 67108864 -import-path . -proto fractal.proto -d "{\"kind\": 1, \"max_iterations\": 50}" fractal-cpp-grpc-server-latest.onrender.com:50051 fractal.FractalService/GenerateFractal
+
+//////////////////////////////////////////////////////
+// GOOGLE CLOUD DEPLOY
+//////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////

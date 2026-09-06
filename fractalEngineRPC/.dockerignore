@@ -1,0 +1,12 @@
+# .dockerignore
+Dockerfile
+.dockerignore
+.git
+.gitignore
+*.exe
+*.o
+*.obj
+fractal.pb.cc
+fractal.pb.h
+fractal.grpc.pb.cc
+fractal.grpc.pb.h

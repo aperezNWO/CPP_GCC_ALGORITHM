@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package fractal;
+
+message PingRequest {}
+message PingResponse {}
+
+message FractalRequest {
+  int32 kind = 1;
+  double x_min = 2;
+  double x_max = 3;
+  double y_min = 4;
+  double y_max = 5;
+  int32 max_iterations = 6;
+}
+
+message FractalPointMessage {
+  double x = 1;
+  double y = 2;
+  int32 iteration = 3;
+}
+
+message FractalResponse {
+  repeated FractalPointMessage points = 1;
+}
+
+service FractalService {
+  rpc Ping(PingRequest) returns (PingResponse);
+  rpc GenerateFractal(FractalRequest) returns (FractalResponse);
+}
