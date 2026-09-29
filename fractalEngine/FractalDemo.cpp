@@ -4,6 +4,30 @@
 #include <vector>
 #include <string>
 
+//
+const char* GetCPPSTDVersion(long int cppVersion)	
+{
+	switch (cppVersion) {
+	        case 199711L: return "C++98/C++03";
+	        case 201103L: return "C++11";
+	        case 201402L: return "C++14";
+	        case 201703L: return "C++17";
+	        case 202002L: return "C++20";
+	        case 202302L: return "C++23";
+	        default: return "Unknown C++ Standard";
+	}
+}
+
+// Get HTTP Server Version (cpp-httplib)
+const char* GetCPPHttpVersion()
+{
+    #ifdef CPPHTTPLIB_VERSION
+        return CPPHTTPLIB_VERSION;
+    #else
+        return "Unknown cpp-httplib Version";
+    #endif
+}
+	
 int main(int argc, char* argv[]) {
     FractalEngine engine;
     httplib::Server svr;
@@ -32,6 +56,27 @@ int main(int argc, char* argv[]) {
     // Ping / Zero Endpoint
     svr.Get("/zero", [](const httplib::Request&, httplib::Response& res) {
         res.status = 204;
+    });
+
+    // Server Diagnostics
+    svr.Get("/health", [](const httplib::Request&, httplib::Response& res) {
+    		std::string jsonResponse  = "Server Working!";
+            res.set_content(jsonResponse, "application/json");
+            res.status = 200;
+    });
+    
+    // Get Standard C++ Version
+    svr.Get("/getSTDVersion", [](const httplib::Request&, httplib::Response& res) {
+    		std::string jsonResponse  = GetCPPSTDVersion(__cplusplus); 
+            res.set_content(jsonResponse, "application/json");
+            res.status = 200;
+    });
+    
+    // Get Http Server Version
+    svr.Get("/getServerVersion", [](const httplib::Request&, httplib::Response& res) {
+    		std::string jsonResponse  = GetCPPHttpVersion();
+            res.set_content(jsonResponse, "application/json");
+            res.status = 200;
     });
 
     // Fractal Generation Endpoint

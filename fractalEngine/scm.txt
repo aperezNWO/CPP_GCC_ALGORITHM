@@ -1,13 +1,22 @@
 
-curl -sL https://raw.githubusercontent.com/yhirose/cpp-httplib/master/httplib.h -o httplib.h
+	curl -sL https://raw.githubusercontent.com/yhirose/cpp-httplib/master/httplib.h -o httplib.h
+
+MSYS2
+	pacman -S mingw-w64-ucrt-x86_64-protobuf mingw-w64-ucrt-x86_64-grpc
+
+CMD
+    ## create a "fractal.proto" file, then
+	protoc --cpp_out=. --grpc_out=. --plugin=protoc-gen-grpc=C:\msys64\ucrt64\bin\grpc_cpp_plugin.exe fractal.proto
+
 
 g++ -std=c++17 -O3 FractalDemo.cpp -o fractal_server.exe -mconsole -lws2_32
 
-g++ -std=c++17 -O3 FractalDemo.cpp -o fractal_server.exe -mconsole -lws2_32 
-
 fractal_server.exe
 
-fractalEngine>curl -i http://localhost:8080/zero
+cd fractalEngine (other window)
+
+curl -i http://localhost:8080/zero
+
 HTTP/1.1 204 No Content
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
@@ -22,7 +31,13 @@ curl -i "http://localhost:8080/api/fractals/generate?kind=2"
 
 curl -i "http://localhost:8080/api/fractals/generate?kind=3"
 
-http://localhost:8080/api/fractals/generate?kind=1&maxIterations=500
+curl -i "http://localhost:8080/api/fractals/generate?kind=1&maxIterations=500"
+
+curl -i "http://localhost:8080/getSTDVersion"
+
+curl -i "http://localhost:8080/health"
+
+curl -i "http://localhost:8080/getServerVersion"
 
 # 0  build
 docker build -t fractal-cpp-server .
@@ -45,4 +60,8 @@ docker push apereznwogmail/fractal-cpp-server:latest
 -- [_] https://fractal-cpp-server-latest.onrender.com/zero
 
 //////////////////////////////////////////////////////
+
+g++ -std=c++17 FractalDemoRPC.cpp fractal.pb.cc fractal.grpc.pb.cc \
+  -lgrpc++ -lprotobuf -lpthread -o fractal_grpc_server
+
 
