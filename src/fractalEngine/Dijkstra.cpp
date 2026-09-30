@@ -17,8 +17,8 @@
 #include <iomanip>
 #include <memory>
 #include <chrono>
+#include <map>
 #include "Dijkstra.h"
-
 
 
 using namespace std;
@@ -30,11 +30,54 @@ using namespace std;
 	Dijkstra::Dijkstra() :  graph(), dist(), path()
 	{
 			//
+			this->ReadConfigFile("Algorithm.ini");
 	}
 	//
 	Dijkstra::~Dijkstra()
 	{
 		 //
+	}
+	//
+	int Dijkstra::ReadConfigFile(const char* fileName)
+	{
+		 // Open the configuration file
+		std::ifstream configFile(fileName);
+
+		// Check if the file is opened successfully
+		if (!configFile.is_open()) {
+			std::cerr << "Error opening the configuration file." << std::endl;
+			return 1;
+		}
+
+		// Read the file line by line
+		std::string line;
+		while (std::getline(configFile, line)) {
+			// Skip empty lines or lines starting with '#' (comments)
+			if (line.empty() || line[0] == '#') {
+				continue;
+			}
+
+			// Split the line into key and value
+			std::istringstream iss(line);
+			std::string key, value;
+			if (std::getline(iss, key, '=') && std::getline(iss, value))
+			{
+				// Trim leading and trailing whitespaces from key and value
+				key.erase(0, key.find_first_not_of(" \t"));
+				key.erase(key.find_last_not_of(" \t") + 1);
+				value.erase(0, value.find_first_not_of(" \t"));
+				value.erase(value.find_last_not_of(" \t") + 1);
+
+				// Insert key-value pair into the map
+				this->configMap[key] = value;
+			}
+		}
+
+		// Close the configuration file
+		configFile.close();
+
+		//
+		return 0;
 	}
 	//
 	vector<string> Dijkstra::StringSplit(const char* p_inputString, std::string p_delimiter, bool adjust)

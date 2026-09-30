@@ -1,9 +1,18 @@
 
 curl -sL https://raw.githubusercontent.com/yhirose/cpp-httplib/master/httplib.h -o httplib.h
 
+// windows
 g++ -std=c++17 -O3 FractalDemo.cpp -o fractal_server.exe -mconsole -lws2_32
 
+// linux
+g++ -std=c++17 -O3 FractalDemo.cpp  -o fractal_server.exe -lpthread
+g++ -std=c++17 -O3 FractalDemo.cpp -I. Dijkstra.cpp -o fractal_server.exe  -lpthread
+
+// windows
 fractal_server.exe
+
+// linux
+./fractal_server.exe
 
 cd fractalEngine (other window)
 
@@ -30,8 +39,6 @@ curl -i "http://localhost:8080/getSTDVersion"
 curl -i "http://localhost:8080/getServerVersion"
 
 curl -i "http://localhost:8080/health"
-
-curl -i "http://localhost:8080/GenerateRandomVertex_CPP"
 
 curl -i "http://localhost:8080/GenerateRandomVertex_CPP?p_vertexSize=9&p_sourcePoint=0"
 

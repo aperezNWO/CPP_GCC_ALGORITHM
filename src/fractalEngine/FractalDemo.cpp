@@ -7,11 +7,22 @@
 */
 #include "httplib.h"
 #include "FractalEngine.cpp"
-//#include "include\Dijkstra.h"
+#include "Dijkstra.h"
 #include <iostream>
 #include <vector>
 #include <string>
 
+//
+void ReplaceAll(std::string &str, const std::string &from, const std::string &to) 
+	{
+		//
+		size_t startPos = 0;
+		//
+		while ((startPos = str.find(from, startPos)) != std::string::npos) {
+			str.replace(startPos, from.length(), to);
+			startPos += to.length(); // Move to the next position after replacement
+		}
+	}
 //
 const char* GetCPPSTDVersion(long int cppVersion)	
 {
@@ -87,10 +98,10 @@ int main(int argc, char* argv[]) {
             res.status = 200;
     });
 
-	/*
+	//
   	svr.Get("/GenerateRandomVertex_CPP", [](const httplib::Request& req, httplib::Response& res) {
 	    // Default values if query parameters are omitted
-	    int p_vertexSize = 9;
+	    int p_vertexSize  = 9;
 	    int p_sourcePoint = 0;
 	
 	    // Check and parse p_vertexSize from query string
@@ -121,12 +132,11 @@ int main(int argc, char* argv[]) {
 	    std::string separator = "\xE2\x96\xA0";
 	    
 	    // Replace all occurrences of "~" with "■"
-	    Algorithm::ReplaceAll(response, "~", separator);
+	    ReplaceAll(response, "~", separator);
 	
 	    res.set_content(response, "text/plain; charset=utf-8");
 	    res.status = 200;
 	});
-	*/
 	
 
     // Fractal Generation Endpoint
