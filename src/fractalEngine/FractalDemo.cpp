@@ -1,9 +1,5 @@
 /*
-
-	g++ -std=c++17 -O3 FractalDemo.cpp -o fractal_server.exe -mconsole -lws2_32
-    
-	check file : fractalEngine\scm.txt
-    
+    g++ -std=c++17 -O3 FractalDemo.cpp -I. Dijkstra.cpp -o fractal_server.exe  -lpthread
 */
 #include "httplib.h"
 #include "FractalEngine.cpp"
@@ -12,17 +8,6 @@
 #include <vector>
 #include <string>
 
-//
-void ReplaceAll(std::string &str, const std::string &from, const std::string &to) 
-	{
-		//
-		size_t startPos = 0;
-		//
-		while ((startPos = str.find(from, startPos)) != std::string::npos) {
-			str.replace(startPos, from.length(), to);
-			startPos += to.length(); // Move to the next position after replacement
-		}
-	}
 //
 const char* GetCPPSTDVersion(long int cppVersion)	
 {
@@ -47,6 +32,19 @@ const char* GetCPPHttpVersion()
     #endif
 }
 	
+void ReplaceAll(std::string &str, const std::string &from, const std::string &to) 
+{
+    //
+    size_t startPos = 0;
+    //
+    while ((startPos = str.find(from, startPos)) != std::string::npos) {
+        str.replace(startPos, from.length(), to);
+        startPos += to.length(); // Move to the next position after replacement
+    }
+}
+
+////////////////////////////////////////////////////////////
+
 int main(int argc, char* argv[]) {
     FractalEngine engine;
     httplib::Server svr;
@@ -97,47 +95,6 @@ int main(int argc, char* argv[]) {
             res.set_content(jsonResponse, "application/json");
             res.status = 200;
     });
-
-	//
-  	svr.Get("/GenerateRandomVertex_CPP", [](const httplib::Request& req, httplib::Response& res) {
-	    // Default values if query parameters are omitted
-	    int p_vertexSize  = 9;
-	    int p_sourcePoint = 0;
-	
-	    // Check and parse p_vertexSize from query string
-	    if (req.has_param("p_vertexSize")) {
-	        try {
-	            p_vertexSize = std::stoi(req.get_param_value("p_vertexSize"));
-	        } catch (...) {
-	            // Fallback or handle invalid integer format if desired
-	        }
-	    }
-	
-	    // Check and parse p_sourcePoint from query string
-	    if (req.has_param("p_sourcePoint")) {
-	        try {
-	            p_sourcePoint = std::stoi(req.get_param_value("p_sourcePoint"));
-	        } catch (...) {
-	            // Fallback or handle invalid integer format if desired
-	        }
-	    }
-	
-	    std::unique_ptr<Dijkstra> uniquePtr = std::make_unique<Dijkstra>();
-	    
-	    // Note: avoid 'static std::string response' here if multiple concurrent requests 
-	    // might overwrite it; a local variable is safer for multi-threaded request handling.
-	    std::string response = uniquePtr->GetRandomPoints(p_vertexSize, p_sourcePoint);
-	    
-	    // Define the UTF-8 byte sequence for ■
-	    std::string separator = "\xE2\x96\xA0";
-	    
-	    // Replace all occurrences of "~" with "■"
-	    ReplaceAll(response, "~", separator);
-	
-	    res.set_content(response, "text/plain; charset=utf-8");
-	    res.status = 200;
-	});
-	
 
     // Fractal Generation Endpoint
     svr.Get("/api/fractals/generate", [&](const httplib::Request& req, httplib::Response& res) {
@@ -199,6 +156,45 @@ int main(int argc, char* argv[]) {
             res.set_content("{\"error\":{\"type\":\"ServerError\",\"message\":\"An unexpected internal server error occurred.\"}}", "application/json");
         }
     });
+
+    svr.Get("/GenerateRandomVertex_CPP", [](const httplib::Request& req, httplib::Response& res) {
+	    // Default values if query parameters are omitted
+	    int p_vertexSize = 9;
+	    int p_sourcePoint = 0;
+	
+	    // Check and parse p_vertexSize from query string
+	    if (req.has_param("p_vertexSize")) {
+	        try {
+	            p_vertexSize = std::stoi(req.get_param_value("p_vertexSize"));
+	        } catch (...) {
+	            // Fallback or handle invalid integer format if desired
+	        }
+	    }
+	
+	    // Check and parse p_sourcePoint from query string
+	    if (req.has_param("p_sourcePoint")) {
+	        try {
+	            p_sourcePoint = std::stoi(req.get_param_value("p_sourcePoint"));
+	        } catch (...) {
+	            // Fallback or handle invalid integer format if desired
+	        }
+	    }
+	
+	    std::unique_ptr<Dijkstra> uniquePtr = std::make_unique<Dijkstra>();
+	    
+	    // Note: avoid 'static std::string response' here if multiple concurrent requests 
+	    // might overwrite it; a local variable is safer for multi-threaded request handling.
+	    std::string response = uniquePtr->GetRandomPoints(p_vertexSize, p_sourcePoint);
+	    
+	    // Define the UTF-8 byte sequence for ■
+	    std::string separator = "\xE2\x96\xA0";
+	    
+	    // Replace all occurrences of "~" with "■"
+	    ReplaceAll(response, "~", separator);
+	
+	    res.set_content(response, "text/plain; charset=utf-8");
+	    res.status = 200;
+	});
 
     int port = 8080;
     if (getenv("PORT")) {

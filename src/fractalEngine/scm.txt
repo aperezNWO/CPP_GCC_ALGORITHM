@@ -1,3 +1,11 @@
+###########################################
+                SCM 
+###########################################
+
+
+###########################################
+# setup
+###########################################
 
 curl -sL https://raw.githubusercontent.com/yhirose/cpp-httplib/master/httplib.h -o httplib.h
 
@@ -15,6 +23,10 @@ fractal_server.exe
 ./fractal_server.exe
 
 cd fractalEngine (other window)
+
+###########################################
+# LOCAL TEST
+###########################################
 
 curl -i http://localhost:8080/zero
 
@@ -42,14 +54,30 @@ curl -i "http://localhost:8080/health"
 
 curl -i "http://localhost:8080/GenerateRandomVertex_CPP?p_vertexSize=9&p_sourcePoint=0"
 
+###########################################
+# DOCKER
+###########################################
+
+cat Dockerfile
+
+## Log in to your Docker Hub account
+  ## DOCKER DESKTOP
+  docker login
+
+  ## CODESPACES
+    ## Get PAT from https://app.docker.com/accounts/apereznwogmail/settings/personal-access-tokens
+      ## privileges : read/write/delete
+      ## must return 'Login Succeeded'
+      echo "YOUR_PAT_HERE" | docker login --username apereznwogmail --password-stdin
+
+
 # 0  build
 docker build -t fractal-cpp-server .
+docker build --no-cache -t fractal-cpp-server .
 
 # 1. Tag your local image with your Docker Hub username and repository name
 docker tag fractal-cpp-server apereznwogmail/fractal-cpp-server:latest
 
-# 2. Log in to your Docker Hub account
-docker login
 
 # 3. Push the image to the remote registry
 docker push apereznwogmail/fractal-cpp-server:latest
@@ -58,13 +86,15 @@ docker push apereznwogmail/fractal-cpp-server:latest
 // render  / chronjob
 //////////////////////////////////////////////////////
 
+## RENDER PUBLIC IMAGE
 -- [_] docker.io/apereznwogmail/fractal-cpp-server:latest
 
--- [_] https://fractal-cpp-server-latest.onrender.com/zero
+## REMOTE TESTING 
+
+-- [_] curl -i "https://fractal-cpp-server-latest-hh6n.onrender.com/GenerateRandomVertex_CPP?p_vertexSize=9&p_sourcePoint=0"
 
 //////////////////////////////////////////////////////
 
-g++ -std=c++17 FractalDemoRPC.cpp fractal.pb.cc fractal.grpc.pb.cc \
-  -lgrpc++ -lprotobuf -lpthread -o fractal_grpc_server
+
 
 
