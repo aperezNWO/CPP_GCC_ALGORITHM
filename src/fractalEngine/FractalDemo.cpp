@@ -1,5 +1,10 @@
 /*
-    g++ -std=c++17 -O3 FractalDemo.cpp -I. Dijkstra.cpp -o fractal_server.exe  -lpthread
+    // WINDOWS
+    g++ -std=c++17 -O3 FractalDemo.cpp -o fractal_server.exe -mconsole -lws2_32
+    
+    // LINUX
+    g++ -std=c++17 -O3 FractalDemo.cpp -I. Dijkstra.cpp -o fractal_server -lpthread
+    
 */
 #include "httplib.h"
 #include "FractalEngine.cpp"
