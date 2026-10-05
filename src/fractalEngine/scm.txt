@@ -17,7 +17,7 @@
 	fractal_server.exe
 	
 	// LINUX
-	.\fractal_server
+	./fractal_server
 	
 	cd fractalEngine (other window)
 	
@@ -45,6 +45,34 @@
 	
 	curl -i "http://localhost:8080/health"
 
+	curl -i "http://localhost:8080/GenerateRandomVertex_CPP?p_vertexSize=9&p_sourcePoint=0"
+
+-------------------------------------------------------
+# TO SAVE DISK SPACE
+-------------------------------------------------------
+
+# This removes all stopped containers, unused networks, and dangling images
+docker system prune -a --volumes -f
+
+# This clears out hidden build caches (crucial for freeing up space)
+docker builder prune -a -f
+
+# ONLY IF VERSION IS STABLE
+# rm -rf .venv/
+
+#
+pip cache purge
+
+# Find and delete every __pycache__ directory recursively from your project
+find . -type d -name "__pycache__" -exec rm -r {} +
+
+#
+sudo apt-get clean
+
+m check disk space
+df -h . && du -h --max-depth=1 | sort -hr
+-------------------------------------------------------
+
 // DOCKER
 
 # 0  build
@@ -54,7 +82,15 @@ docker build -t fractal-cpp-server .
 docker tag fractal-cpp-server apereznwogmail/fractal-cpp-server:latest
 
 # 2. Log in to your Docker Hub account
-docker login
+## must return 'Login Succeeded'
+		## Log into docker for publish
+		## Get PAT from https://app.docker.com/accounts/apereznwogmail/settings/personal-access-tokens
+		## Privileges : read/write/delete
+		
+	    echo "YOUR_PAT_HERE" | docker login --username apereznwogmail --password-stdin
+
+		## Docker Desktop
+		docker login
 
 # 3. Push the image to the remote registry
 docker push apereznwogmail/fractal-cpp-server:latest
