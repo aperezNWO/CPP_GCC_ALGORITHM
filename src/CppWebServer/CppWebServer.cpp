@@ -12,6 +12,22 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <unordered_map>
+
+struct EndpointInfo {
+    std::string endpointName;
+    std::string endpointDescription;
+};
+
+// Key is a string identifier (e.g., "HEALTH_ENDPOINT")
+std::unordered_map<std::string, EndpointInfo> endpointDictionary = {
+    {"HEALTH_ENDPOINT", {"/health", "Print all endpoints"}},
+    {"PING_ENDPOINT", {"/zero", "Render workaround"}},
+    {"STD_VERSION_ENDPOINT", {"/getSTDVersion", "Get Standard C++ Version"}},
+    {"SERVER_VERSION_ENDPOINT", {"/getServerVersion", "Get Http Server Version"}},
+    {"FRACTAL_ENDPOINT", {"/api/fractals/generate", "Fractal Generation Endpoint"}},
+    {"DIJKSTRA_ENDPOINT", {"/GenerateRandomVertex_CPP", "Generate Random Vertex via Dijkstra"}}
+};
 
 //
 const char* GetCPPSTDVersion(long int cppVersion)	
@@ -76,33 +92,51 @@ int main(int argc, char* argv[]) {
     });
 
     // Ping / Zero Endpoint
-    svr.Get("/zero", [](const httplib::Request&, httplib::Response& res) {
+    svr.Get(endpointDictionary["PING_ENDPOINT"].endpointName.c_str(), [](const httplib::Request&, httplib::Response& res) {
         res.status = 204;
     });
 
-    // Server Diagnostics
-    svr.Get("/health", [](const httplib::Request&, httplib::Response& res) {
-    		std::string jsonResponse  = "Server Working!";
-            res.set_content(jsonResponse, "application/json");
-            res.status = 200;
+    // Server Diagnostics (Health Endpoint listing all routes)
+    // Server Diagnostics (Health Endpoint listing all routes)
+    svr.Get(endpointDictionary["HEALTH_ENDPOINT"].endpointName.c_str(), [&](const httplib::Request&, httplib::Response& res) {
+        std::string jsonResponse = "{\n  \"server\": \"Server Working!\",\n  \"endpoints\": [\n";
+        
+        size_t count = 0;
+        for (const auto& pair : endpointDictionary) {
+            const std::string& key = pair.first;
+            const EndpointInfo& info = pair.second;
+            
+            std::string comma = (++count < endpointDictionary.size()) ? "," : "";
+
+            jsonResponse += "    {\n";
+            jsonResponse += "      \"key\": \"" + key + "\",\n";
+            jsonResponse += "      \"path\": \"" + info.endpointName + "\",\n";
+            jsonResponse += "      \"description\": \"" + info.endpointDescription + "\"\n";
+            jsonResponse += "    }" + comma + "\n";
+        }
+        
+        jsonResponse += "  ]\n}";
+        
+        res.set_content(jsonResponse, "application/json");
+        res.status = 200;
     });
     
     // Get Standard C++ Version
-    svr.Get("/getSTDVersion", [](const httplib::Request&, httplib::Response& res) {
+    svr.Get(endpointDictionary["STD_VERSION_ENDPOINT"].endpointName.c_str(), [](const httplib::Request&, httplib::Response& res) {
     		std::string jsonResponse  = GetCPPSTDVersion(__cplusplus); 
             res.set_content(jsonResponse, "application/json");
             res.status = 200;
     });
     
     // Get Http Server Version
-    svr.Get("/getServerVersion", [](const httplib::Request&, httplib::Response& res) {
+    svr.Get(endpointDictionary["SERVER_VERSION_ENDPOINT"].endpointName.c_str(), [](const httplib::Request&, httplib::Response& res) {
     		std::string jsonResponse  = GetCPPHttpVersion();
             res.set_content(jsonResponse, "application/json");
             res.status = 200;
     });
 
     // Fractal Generation Endpoint
-    svr.Get("/api/fractals/generate", [&](const httplib::Request& req, httplib::Response& res) {
+    svr.Get(endpointDictionary["FRACTAL_ENDPOINT"].endpointName.c_str(), [&](const httplib::Request& req, httplib::Response& res) {
     	//
     	FractalEngine engine;
    
@@ -165,7 +199,7 @@ int main(int argc, char* argv[]) {
         }
     });
 
-    svr.Get("/GenerateRandomVertex_CPP", [](const httplib::Request& req, httplib::Response& res) {
+    svr.Get(endpointDictionary["DIJKSTRA_ENDPOINT"].endpointName.c_str(), [](const httplib::Request& req, httplib::Response& res) {
     	
   	    // Default values if query parameters are omitted
 	    int p_vertexSize = 9;
@@ -205,6 +239,10 @@ int main(int argc, char* argv[]) {
 	    res.status = 200;
 	});
 
+	///////////////////////////////////////////////
+	//PROGRAM MAIN ENTRANCE
+	///////////////////////////////////////////////
+	
     int port = 8080;
     if (getenv("PORT")) {
         port = std::stoi(getenv("PORT"));
