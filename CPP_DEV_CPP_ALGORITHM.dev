@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
 CompilerSettings=0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;1;0;0;0;4;0;0;0
-UnitCount=51
+UnitCount=50
 
 [VersionInfo]
 Major=1
@@ -454,7 +454,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit48]
-FileName=src\CppWebServer\FractalEngine.cpp
+FileName=src\CppWebServer\httplib.h
 CompileCpp=1
 Folder=src/CppWebServer
 Compile=1
@@ -464,11 +464,11 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit49]
-FileName=src\CppWebServer\httplib.h
+FileName=src\CppWebServer\scm.txt
 CompileCpp=1
 Folder=src/CppWebServer
-Compile=1
-Link=1
+Compile=0
+Link=0
 Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
@@ -492,15 +492,6 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit42]
-FileName=src\fractalEngine\strategy.txt
-Folder=src/fractalEngineRPC
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit43]
 FileName=src\CppWebServer\Algorithm.ini
 Folder=src/CppWebServer
 Compile=0
@@ -509,17 +500,17 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit44]
+[Unit43]
 FileName=src\CppWebServer\CppWebServer.cpp
-CompileCpp=1
 Folder=src/CppWebServer
 Compile=1
 Link=1
 Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
+CompileCpp=1
 
-[Unit45]
+[Unit44]
 FileName=src\CppWebServer\Dijkstra.cpp
 CompileCpp=1
 Folder=src/CppWebServer
@@ -529,7 +520,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit46]
+[Unit45]
 FileName=src\CppWebServer\Dijkstra.h
 CompileCpp=1
 Folder=src/CppWebServer
@@ -539,8 +530,9 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit47]
+[Unit46]
 FileName=src\CppWebServer\Dockerfile
+CompileCpp=1
 Folder=src/CppWebServer
 Compile=0
 Link=0
@@ -548,8 +540,18 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
+[Unit47]
+FileName=src\CppWebServer\FractalEngine.cpp
+Folder=src/CppWebServer
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+CompileCpp=1
+
 [Unit50]
-FileName=src\CppWebServer\scm.txt
+FileName=src\CppWebServer\strategy.txt
 Folder=src/CppWebServer
 Compile=0
 Link=0

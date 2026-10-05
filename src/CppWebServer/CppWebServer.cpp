@@ -1,6 +1,6 @@
 /*
     // WINDOWS
-    g++ -std=c++17 -O3 CppWebServer.cpp -o cpp_web_server.exe -mconsole -lws2_32
+    g++ -std=c++17 -O3 CppWebServer.cpp -I. Dijkstra.cpp -o cpp_web_server.exe -mconsole -lws2_32
     
     // LINUX
     g++ -std=c++17 -O3 CppWebServer.cpp -I. Dijkstra.cpp -o cpp_web_server -lpthread
@@ -13,6 +13,9 @@
 #include <vector>
 #include <string>
 #include <unordered_map>
+#include <map>
+
+std::map<string, string> configMap;
 
 struct EndpointInfo {
     std::string endpointName;
@@ -21,12 +24,13 @@ struct EndpointInfo {
 
 // Key is a string identifier (e.g., "HEALTH_ENDPOINT")
 std::unordered_map<std::string, EndpointInfo> endpointDictionary = {
-    {"HEALTH_ENDPOINT", {"/health", "Print all endpoints"}},
-    {"PING_ENDPOINT", {"/zero", "Render workaround"}},
-    {"STD_VERSION_ENDPOINT", {"/getSTDVersion", "Get Standard C++ Version"}},
-    {"SERVER_VERSION_ENDPOINT", {"/getServerVersion", "Get Http Server Version"}},
-    {"FRACTAL_ENDPOINT", {"/api/fractals/generate", "Fractal Generation Endpoint"}},
-    {"DIJKSTRA_ENDPOINT", {"/GenerateRandomVertex_CPP", "Generate Random Vertex via Dijkstra"}}
+    {"HEALTH_ENDPOINT"         , {"/health"                     , "Print all endpoints"}},
+    {"PING_ENDPOINT"           , {"/zero"                       , "Render workaround"}},
+    {"APP_VERSION_ENDPOINT"    , {"/getAppVersion"                 , "Get Application Version"}},
+    {"STD_VERSION_ENDPOINT"    , {"/getSTDVersion"              , "Get Standard C++ Version"}},
+    {"SERVER_VERSION_ENDPOINT ", {"/getServerVersion"           , "Get Http Server Version"}},
+    {"FRACTAL_ENDPOINT"        , {"/api/fractals/generate"      , "Fractal Generation Endpoint"}},
+    {"DIJKSTRA_ENDPOINT"       , {"/GenerateRandomVertex_CPP"   , "Generate Random Vertex via Dijkstra"}}
 };
 
 //
@@ -52,7 +56,51 @@ const char* GetCPPHttpVersion()
         return "Unknown cpp-httplib Version";
     #endif
 }
-	
+
+//
+int ReadConfigFile(const char* fileName)
+{
+	 // Open the configuration file
+	std::ifstream configFile(fileName);
+
+	// Check if the file is opened successfully
+	if (!configFile.is_open()) {
+		std::cerr << "Error opening the configuration file." << std::endl;
+		return 1;
+	}
+
+	// Read the file line by line
+	std::string line;
+	while (std::getline(configFile, line)) {
+		// Skip empty lines or lines starting with '#' (comments)
+		if (line.empty() || line[0] == '#') {
+			continue;
+		}
+
+		// Split the line into key and value
+		std::istringstream iss(line);
+		std::string key, value;
+		if (std::getline(iss, key, '=') && std::getline(iss, value))
+		{
+			// Trim leading and trailing whitespaces from key and value
+			key.erase(0, key.find_first_not_of(" \t"));
+			key.erase(key.find_last_not_of(" \t") + 1);
+			value.erase(0, value.find_first_not_of(" \t"));
+			value.erase(value.find_last_not_of(" \t") + 1);
+
+			// Insert key-value pair into the map
+			configMap[key] = value;
+		}
+	}
+
+	// Close the configuration file
+	configFile.close();
+
+	//
+	return 0;
+}	
+
+//
 void ReplaceAll(std::string &str, const std::string &from, const std::string &to) 
 {
     //
@@ -97,7 +145,6 @@ int main(int argc, char* argv[]) {
     });
 
     // Server Diagnostics (Health Endpoint listing all routes)
-    // Server Diagnostics (Health Endpoint listing all routes)
     svr.Get(endpointDictionary["HEALTH_ENDPOINT"].endpointName.c_str(), [&](const httplib::Request&, httplib::Response& res) {
         std::string jsonResponse = "{\n  \"server\": \"Server Working!\",\n  \"endpoints\": [\n";
         
@@ -128,7 +175,22 @@ int main(int argc, char* argv[]) {
             res.status = 200;
     });
     
-    // Get Http Server Version
+        
+    // Get Application Version
+    svr.Get(endpointDictionary["APP_VERSION_ENDPOINT"].endpointName.c_str(), [](const httplib::Request&, httplib::Response& res) {
+    	
+    		//
+			ReadConfigFile("Algorithm.ini");
+
+			//
+    		std::string jsonResponse  = configMap["DLL_VERSION"]; 
+    		
+    		//
+            res.set_content(jsonResponse, "application/json");
+            res.status = 200;
+    });
+    
+	// Get Http Server Version
     svr.Get(endpointDictionary["SERVER_VERSION_ENDPOINT"].endpointName.c_str(), [](const httplib::Request&, httplib::Response& res) {
     		std::string jsonResponse  = GetCPPHttpVersion();
             res.set_content(jsonResponse, "application/json");

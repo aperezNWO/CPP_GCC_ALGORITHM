@@ -43,6 +43,8 @@
 	
 	curl -i "http://localhost:8080/getServerVersion"
 	
+	curl -i "http://localhost:8080/getAppVersion"
+	
 	curl -i "http://localhost:8080/health"
 
 // DOCKER

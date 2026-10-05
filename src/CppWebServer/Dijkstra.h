@@ -35,10 +35,10 @@ public:
     std::string              GetRandomPoints(int p_vertexSize, int p_sourcePoint);
 
 public:
-    std::vector<int>        dist;
-    std::vector<std::string> path;
+    std::vector<int>              dist;
+    std::vector<std::string>      path;
     std::vector<std::vector<int>> graph;
-    map<string, string> configMap;
+    std::map<string, string> configMap;
 };
 
 #endif // DIJKSTRA_H
