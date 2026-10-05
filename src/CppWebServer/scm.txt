@@ -10,7 +10,6 @@
 	// LINUX
 	g++ -std=c++17 -O3 FractalDemo.cpp -I. Dijkstra.cpp -o fractal_server -lpthread
 
-
 // LOCAL TEST
 
 	// WINDOWS
@@ -46,6 +45,13 @@
 	curl -i "http://localhost:8080/getAppVersion"
 	
 	curl -i "http://localhost:8080/health"
+
+// GIT
+
+git add * 
+git commit -m"[Application CPP_GCC_ALGORITHM] - V[1.0.3]" -m"1) getAppVersion() endpoint"
+git push 
+git pull
 
 // DOCKER
 
