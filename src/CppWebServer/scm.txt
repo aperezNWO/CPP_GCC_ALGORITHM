@@ -13,10 +13,10 @@
 // LOCAL TEST
 
 	// WINDOWS
-	fractal_server.exe
+	cpp_web_server.exe
 	
 	// LINUX
-	.\fractal_server
+	.\cpp_web_server
 	
 	cd fractalEngine (other window)
 	

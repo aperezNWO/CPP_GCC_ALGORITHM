@@ -26,9 +26,9 @@ struct EndpointInfo {
 std::unordered_map<std::string, EndpointInfo> endpointDictionary = {
     {"HEALTH_ENDPOINT"         , {"/health"                     , "Print all endpoints"}},
     {"PING_ENDPOINT"           , {"/zero"                       , "Render workaround"}},
-    {"APP_VERSION_ENDPOINT"    , {"/getAppVersion"                 , "Get Application Version"}},
+    {"APP_VERSION_ENDPOINT"    , {"/getAppVersion"              , "Get Application Version"}},
     {"STD_VERSION_ENDPOINT"    , {"/getSTDVersion"              , "Get Standard C++ Version"}},
-    {"SERVER_VERSION_ENDPOINT ", {"/getServerVersion"           , "Get Http Server Version"}},
+    {"SERVER_VERSION_ENDPOINT" , {"/getServerVersion"           , "Get Http Server Version"}},
     {"FRACTAL_ENDPOINT"        , {"/api/fractals/generate"      , "Fractal Generation Endpoint"}},
     {"DIJKSTRA_ENDPOINT"       , {"/GenerateRandomVertex_CPP"   , "Generate Random Vertex via Dijkstra"}}
 };
