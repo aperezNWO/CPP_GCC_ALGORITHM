@@ -36,8 +36,6 @@
 	
 	curl -i "http://localhost:8080/api/fractals/generate?kind=3"
 	
-	curl -i "http://localhost:8080/api/fractals/generate?kind=1&maxIterations=500"
-	
 	curl -i "http://localhost:8080/getSTDVersion"
 	
 	curl -i "http://localhost:8080/getServerVersion"
@@ -45,6 +43,8 @@
 	curl -i "http://localhost:8080/getAppVersion"
 	
 	curl -i "http://localhost:8080/health"
+	
+	curl -i "http://localhost:8080/GenerateRandomVertex_CPP"
 
 // GIT
 

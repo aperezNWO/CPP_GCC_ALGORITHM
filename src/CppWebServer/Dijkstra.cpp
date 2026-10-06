@@ -29,7 +29,7 @@ using namespace std;
 	Dijkstra::Dijkstra() :  graph(), dist(), path()
 	{
 		//
-		this->ReadConfigFile("Algorihtm.ini");
+		this->ReadConfigFile("Algorithm.ini");
 	}
 	//
 	Dijkstra::~Dijkstra()
