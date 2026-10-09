@@ -146,8 +146,11 @@ int main(int argc, char* argv[]) {
 
     // Server Diagnostics (Health Endpoint listing all routes)
     svr.Get(endpointDictionary["HEALTH_ENDPOINT"].endpointName.c_str(), [&](const httplib::Request&, httplib::Response& res) {
-        std::string jsonResponse = "{\n  \"server\": \"Server Working!\",\n  \"endpoints\": [\n";
-        
+    	//
+		std::string webServerVersion = GetCPPHttpVersion();
+        //
+		std::string jsonResponse     = "{\n  \"server\": \"Server 'cpp-httplib' - v[" + webServerVersion  + "] Working!\",\n  \"endpoints\": [\n";
+        //
         size_t count = 0;
         for (const auto& pair : endpointDictionary) {
             const std::string& key = pair.first;
