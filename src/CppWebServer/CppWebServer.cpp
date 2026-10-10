@@ -149,7 +149,7 @@ int main(int argc, char* argv[]) {
     	//
 		std::string webServerVersion = GetCPPHttpVersion();
         //
-		std::string jsonResponse     = "{\n  \"server\": \"Server 'cpp-httplib' - v[" + webServerVersion  + "] Working!\",\n  \"endpoints\": [\n";
+		std::string jsonResponse     = "{\n  \"server\": \"C++ Http Server 'cpp-httplib' - v[" + webServerVersion  + "] Working!\",\n  \"endpoints\": [\n";
         //
         size_t count = 0;
         for (const auto& pair : endpointDictionary) {
