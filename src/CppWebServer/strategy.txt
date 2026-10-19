@@ -4,4 +4,29 @@
 
 -- [_] health endpoint - endpoints lookup dictionary .
 
+/*
+
+         //   
+         cout<<"";
+         cout<<"-----------------------------------------"        << endl;
+         cout<<"-- ALGORITHM SRC TESTING                 "        << endl;
+         cout<<"-- C++ Standard Version: [" << stdVersion << "]"  << endl;
+         cout<<"-----------------------------------------"        << endl;
+         cout<<"-- MAIN MENU                             "        << endl;
+         cout<<"-----------------------------------------"        << endl;
+         
+         cout<<"-----------------------------------------"<< endl;
+         cout<<"1. Iterative.                            "<< endl;         
+         cout<<"2. Recursive.                            "<< endl;
+         cout<<"3. GET DLL Version.                      "<< endl;
+         cout<<"4. Sort Benchmark.                       "<< endl;
+         cout<<"5. Dijkstra.                             "<< endl;
+         cout<<"6. Regular Expression.                   "<< endl;
+         cout<<"7. Sudoku.                               "<< endl;
+         cout<<"-----------------------------------------"<< endl;
+         cout<<"0. Exit.                                 "<< endl;
+         cout<<"-----------------------------------------"<< endl;
+         cout<<"Enter Option : ";
+*/
+
 //////////////////////////////////////////////////////
