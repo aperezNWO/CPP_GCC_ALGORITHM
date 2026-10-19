@@ -1,6 +1,6 @@
 /*
     // WINDOWS
-    g++ -std=c++17 -O3 CppWebServer.cpp -I. Dijkstra.cpp -o cpp_web_server.exe -mconsole -lws2_32
+    g++ -std=c++17 -O3 CppWebServer.cpp -I. TFileManager.cpp Dijkstra.cpp SortBenchMark.cpp  -o cpp_web_server.exe -mconsole -lws2_32
     
     // LINUX
     g++ -std=c++17 -O3 CppWebServer.cpp -I. Dijkstra.cpp -o cpp_web_server -lpthread
@@ -8,6 +8,7 @@
 */
 #include "httplib.h"
 #include "FractalEngine.cpp"
+#include "SortBenchMark.h"
 #include "Dijkstra.h"
 #include <iostream>
 #include <vector>
@@ -30,7 +31,8 @@ std::unordered_map<std::string, EndpointInfo> endpointDictionary = {
     {"STD_VERSION_ENDPOINT"    , {"/getSTDVersion"              , "Get Standard C++ Version"}},
     {"SERVER_VERSION_ENDPOINT" , {"/getServerVersion"           , "Get Http Server Version"}},
     {"FRACTAL_ENDPOINT"        , {"/api/fractals/generate"      , "Fractal Generation Endpoint"}},
-    {"DIJKSTRA_ENDPOINT"       , {"/GenerateRandomVertex_CPP"   , "Generate Random Vertex via Dijkstra"}}
+    {"DIJKSTRA_ENDPOINT"       , {"/api/algorithm/GenerateRandomVertex_CPP"   , "Generate Random Vertex via Dijkstra"}},
+    {"SORT_ENDPOINT"           , {"/api/algorithm/GetSort_CPP"                , "Benchmark Bubble Sort and Quick Sort Algorithms"}}
 };
 
 //
@@ -267,7 +269,7 @@ int main(int argc, char* argv[]) {
     svr.Get(endpointDictionary["DIJKSTRA_ENDPOINT"].endpointName.c_str(), [](const httplib::Request& req, httplib::Response& res) {
     	
   	    // Default values if query parameters are omitted
-	    int p_vertexSize = 9;
+	    int p_vertexSize  = 9;
 	    int p_sourcePoint = 0;
 	
 	    // Check and parse p_vertexSize from query string
@@ -304,6 +306,50 @@ int main(int argc, char* argv[]) {
 	    res.status = 200;
 	});
 
+    // 1 = BUBBLE SORT , 2 = QUICK SORT
+    // http://localhost:808/api/algorithm/GetSort_CPP?p_sortAlgoritm=1&p_unsortedList=23|7|10|16|1|4|22|2|6|24|8|14|11|15|21|13|19|20|18|0|17|5|3|9|12
+    svr.Get(endpointDictionary["SORT_ENDPOINT"].endpointName.c_str(), [](const httplib::Request& req, httplib::Response& res) {
+    	
+  	    // Default values if query parameters are omitted
+  	    std::string response         = "";
+	    int          p_sortAlgoritm  = 0;
+	    const char*  p_unsortedList  = "";
+	
+	    // Check and parse p_vertexSize from query string
+	    if (req.has_param("p_sortAlgoritm")) {
+	        try {
+	            p_sortAlgoritm = std::stoi(req.get_param_value("p_sortAlgoritm"));
+	        } catch (...) {
+	            // Fallback or handle invalid integer format if desired
+	        }
+	    }
+	
+	    // Check and parse p_sourcePoint from query string
+	    if (req.has_param("p_unsortedList")) {
+	        try {
+	            p_unsortedList = req.get_param_value("p_unsortedList").c_str();
+	        } catch (...) {
+	            // Fallback or handle invalid integer format if desired
+	        }
+	    }
+	
+	    // Create SortBenchMark object on the stack
+	    FormatType format = FormatType::HTML; // HTML
+	    SortBenchMark benchmark(p_unsortedList, format);
+	
+	    // Perform sorting and store the result in a static string
+		response = benchmark.GetSort(p_sortAlgoritm);
+	    
+	    // Define the UTF-8 byte sequence for ■
+	    std::string separator = "\xE2\x96\xA0";
+	    
+	    // Replace all occurrences of "~" with "■"
+	    ReplaceAll(response, "~", separator);
+	    
+	    res.set_content(response, "text/plain; charset=utf-8");
+	    res.status = 200;
+	});
+	
 	///////////////////////////////////////////////
 	//PROGRAM MAIN ENTRANCE
 	///////////////////////////////////////////////

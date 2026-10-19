@@ -16,13 +16,13 @@
          cout<<"-----------------------------------------"        << endl;
          
          cout<<"-----------------------------------------"<< endl;
-         cout<<"1. Iterative.                            "<< endl;         
-         cout<<"2. Recursive.                            "<< endl;
-         cout<<"3. GET DLL Version.                      "<< endl;
-         cout<<"4. Sort Benchmark.                       "<< endl;
-         cout<<"5. Dijkstra.                             "<< endl;
-         cout<<"6. Regular Expression.                   "<< endl;
-         cout<<"7. Sudoku.                               "<< endl;
+         cout<<"1. [_] Iterative.                            "<< endl;         
+         cout<<"2. [_] Recursive.                            "<< endl;
+         cout<<"3. [x] GET DLL Version.                      "<< endl;
+         cout<<"4. [>] Sort Benchmark.                       "<< endl;
+         cout<<"5. [x] Dijkstra.                             "<< endl;
+         cout<<"6. [_] Regular Expression.                   "<< endl;
+         cout<<"7. [_] Sudoku.                               "<< endl;
          cout<<"-----------------------------------------"<< endl;
          cout<<"0. Exit.                                 "<< endl;
          cout<<"-----------------------------------------"<< endl;
