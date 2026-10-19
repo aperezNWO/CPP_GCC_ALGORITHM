@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
 CompilerSettings=0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;1;0;0;0;4;0;0;0
-UnitCount=50
+UnitCount=51
 
 [VersionInfo]
 Major=1
@@ -560,8 +560,8 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit51]
-FileName=src\CppWebServer\strategy.txt
-Folder=src/CppWebServer
+FileName=src\AlgorithmAppTestSrc.ini
+Folder=src
 Compile=0
 Link=0
 Priority=1000
