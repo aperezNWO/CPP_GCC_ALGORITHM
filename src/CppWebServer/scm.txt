@@ -49,7 +49,7 @@
 // GIT
 
 git add * 
-git commit -m"[Application CPP_GCC_ALGORITHM] - v[1.0.3]" -m"1) CppWebServer - health() endpoint"
+git commit -m"[Application CPP_GCC_ALGORITHM] - v[1.0.3]" -m"1) CppWebServer - sortbenchmark() endpoint"
 git push 
 git pull
 
