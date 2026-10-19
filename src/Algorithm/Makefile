@@ -1,4 +1,4 @@
-# Compiler
+ # Compiler
 CXX = "C:/msys64/ucrt64/bin/g++.exe"
 
 # Compiler flags

@@ -2,8 +2,9 @@
     // WINDOWS
     g++ -std=c++17 -O3 CppWebServer.cpp -I. TFileManager.cpp Dijkstra.cpp SortBenchMark.cpp  -o cpp_web_server.exe -mconsole -lws2_32
     
-    // LINUX
+    // LINUX -- DOCKER
     g++ -std=c++17 -O3 CppWebServer.cpp -I. Dijkstra.cpp -o cpp_web_server -lpthread
+    g++ -std=c++17 -O3 CppWebServer.cpp -I. TFileManager.cpp Dijkstra.cpp SortBenchMark.cpp  -o cpp_web_server -lpthread
     
 */
 #include "httplib.h"
@@ -309,42 +310,47 @@ int main(int argc, char* argv[]) {
     // 1 = BUBBLE SORT , 2 = QUICK SORT
     // http://localhost:808/api/algorithm/GetSort_CPP?p_sortAlgoritm=1&p_unsortedList=23|7|10|16|1|4|22|2|6|24|8|14|11|15|21|13|19|20|18|0|17|5|3|9|12
     svr.Get(endpointDictionary["SORT_ENDPOINT"].endpointName.c_str(), [](const httplib::Request& req, httplib::Response& res) {
-    	
-  	    // Default values if query parameters are omitted
-  	    std::string response         = "";
-	    int          p_sortAlgoritm  = 0;
-	    const char*  p_unsortedList  = "";
+	    	
+	  	// Default values if query parameters are omitted
+	    std::string response       = "";
+	    int         p_sortAlgoritm = 0;
+	    std::string p_unsortedList = ""; // Change from const char* to std::string
 	
-	    // Check and parse p_vertexSize from query string
+	    // Check and parse p_sortAlgoritm from query string
 	    if (req.has_param("p_sortAlgoritm")) {
 	        try {
 	            p_sortAlgoritm = std::stoi(req.get_param_value("p_sortAlgoritm"));
-	        } catch (...) {
-	            // Fallback or handle invalid integer format if desired
+	        } catch (const std::exception& e) {
+	            std::cout << "[Error occurred] " << e.what() << std::endl;	
 	        }
 	    }
 	
-	    // Check and parse p_sourcePoint from query string
+	    // Check and parse p_unsortedList from query string
 	    if (req.has_param("p_unsortedList")) {
 	        try {
-	            p_unsortedList = req.get_param_value("p_unsortedList").c_str();
-	        } catch (...) {
-	            // Fallback or handle invalid integer format if desired
+	            // Store it safely in a persistent std::string object
+	            p_unsortedList = req.get_param_value("p_unsortedList");
+	            
+	            std::cout << "unsorted list : " << p_unsortedList << std::endl;
+	        } catch (const std::exception& e) {
+	            std::cout << "[Error occurred] " << e.what() << std::endl;	
 	        }
 	    }
 	
-	    // Create SortBenchMark object on the stack
-	    FormatType format = FormatType::HTML; // HTML
-	    SortBenchMark benchmark(p_unsortedList, format);
+	    try {
+	        FormatType format = FormatType::HTML; 
+	        
+	        // Pass the std::string (or its .c_str() safely while p_unsortedList is alive)
+	        SortBenchMark benchmark(p_unsortedList.c_str(), format);
+	        
+	        response = benchmark.GetSort(p_sortAlgoritm);
+	        
+	        std::string separator = "\xE2\x96\xA0";
+	        ReplaceAll(response, "~", separator);
 	
-	    // Perform sorting and store the result in a static string
-		response = benchmark.GetSort(p_sortAlgoritm);
-	    
-	    // Define the UTF-8 byte sequence for ■
-	    std::string separator = "\xE2\x96\xA0";
-	    
-	    // Replace all occurrences of "~" with "■"
-	    ReplaceAll(response, "~", separator);
+	    } catch (const std::exception& e) {
+	        std::cout << "[Error occurred] " << e.what() << std::endl;	
+	    }
 	    
 	    res.set_content(response, "text/plain; charset=utf-8");
 	    res.status = 200;

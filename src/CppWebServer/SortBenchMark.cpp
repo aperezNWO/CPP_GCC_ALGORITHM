@@ -10,6 +10,8 @@
 		this->randomValues   = p_randomValues;
 		this->arraySize      = std::stoi(this->configMap["ARRAY_SIZE"]);
 
+		std::cout << "array size     : " << this->arraySize << endl;
+		std::cout << "random values  : " << p_randomValues  << endl;
 		//-----------------------------------------------------
 		// INICIAR ARREGLO
 		//-----------------------------------------------------
@@ -20,9 +22,9 @@
 			this->arreglo.push_back( std::stoi(arreglo_str[i] ) );
 		}
 
-		//
-		this->_fileManager.DeleteFile("ArrayUnsorted.txt");
-		this->_fileManager.SaveVectorToFile(this->arreglo,"ArrayUnsorted.txt");
+		// TMP IS A TEMPORARY LINUX FOLDER WITH PERMISSIONS
+		//this->_fileManager.DeleteFile("/tmp/ArrayUnsorted.txt");
+		//this->_fileManager.SaveVectorToFile(this->arreglo,"/tmp/ArrayUnsorted.txt");
 
 	};
 	//
@@ -151,21 +153,22 @@
 		} 
 		sortedList += (this->format==FormatType::HTML)? "" : "}";
 				
-		//
+		// TMP FOLDER IS A DEFAULT LINUX TEMPOORARY FOLDER WITH PERMISSIONS
+		/*
 		switch (this->format) {
 			case FormatType::HTML: // HTML
 			{
-				this->_fileManager.DeleteFile("ArraySorted.txt");
-				this->_fileManager.SaveLineToFile(sortedList,"ArraySorted.txt");	
+				this->_fileManager.DeleteFile("/tmp/ArraySorted.txt");
+				this->_fileManager.SaveLineToFile(sortedList,"/tmp/ArraySorted.txt");	
 			}
 			break;		
 			case FormatType::JSON: // JSON
 			{
-				this->_fileManager.DeleteFile("ArraySorted.json");
-				this->_fileManager.SaveLineToFile(sortedList,"ArraySorted.json");
+				this->_fileManager.DeleteFile("/tmp/ArraySorted.json");
+				this->_fileManager.SaveLineToFile(sortedList,"/tmp/ArraySorted.json");
 			}
 		};
-		
+		*/
 		//
 		return sortedList;
 	};

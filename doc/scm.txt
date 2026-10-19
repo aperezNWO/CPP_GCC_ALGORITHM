@@ -65,5 +65,13 @@
 			
 			-- [_] https://tensorflownetcore64.tryasp.net/api/Algorithm/GetAppVersion
 			
+///////////////////////////////////////////////
+	
+// GIT
+
+git add * 
+git commit -m"[Application CPP_GCC_ALGORITHM] - v[1.0.3]" -m"1) CppWebServer - GetSortCpp() endpoint"
+git push 
+git pull
 				
 ///////////////////////////////////////////////
