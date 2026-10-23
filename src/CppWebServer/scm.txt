@@ -46,14 +46,8 @@
 
 	curl -i "http://localhost:8080/health"
 	
-// GIT
 
-git add * 
-git commit -m"[Application CPP_GCC_ALGORITHM] - v[1.0.3]" -m"1) CppWebServer - sortbenchmark() endpoint"
-git push 
-git pull
-
-// DOCKER
+// DOCKER (INIT DOCKER DESKTOP)
 
 # 0  build
 docker build -t fractal-cpp-server .
@@ -81,5 +75,12 @@ docker push apereznwogmail/fractal-cpp-server:latest
 -- [_] https://fractal-cpp-server-latest-hh6n.onrender.com/zero
 
 //////////////////////////////////////////////////////
+// GIT
+//////////////////////////////////////////////////////
 
+git add * 
+git commit -m"[Application CPP_GCC_ALGORITHM] - v[1.0.3]" -m"1) CppWebServer v[1.0.4] - sudokugenerate/so() endpoints"
+git push 
+git pull
 
+//////////////////////////////////////////////////////

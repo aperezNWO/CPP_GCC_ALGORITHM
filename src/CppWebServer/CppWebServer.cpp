@@ -3,9 +3,10 @@
     g++ -std=c++17 -O3 CppWebServer.cpp -I. TFileManager.cpp Dijkstra.cpp SortBenchMark.cpp  -o cpp_web_server.exe -mconsole -lws2_32
     g++ -std=c++17 -O3 CppWebServer.cpp -I. TFileManager.cpp Dijkstra.cpp SortBenchMark.cpp  Sudoku.cpp -o cpp_web_server.exe -mconsole -lws2_32
     
-    // LINUX -- DOCKER
+    // LINUX -- DOCKER (NO .EXE EXTENSION FOR DOCKER!!!)
     g++ -std=c++17 -O3 CppWebServer.cpp -I. Dijkstra.cpp -o cpp_web_server -lpthread
     g++ -std=c++17 -O3 CppWebServer.cpp -I. TFileManager.cpp Dijkstra.cpp SortBenchMark.cpp  -o cpp_web_server -lpthread
+    g++ -std=c++17 -O3 CppWebServer.cpp -I. TFileManager.cpp Dijkstra.cpp SortBenchMark.cpp  Sudoku.cpp -o cpp_web_server.exe -lpthread -lws2_32
     
 */
 #include "httplib.h"
@@ -118,6 +119,26 @@ void ReplaceAll(std::string &str, const std::string &from, const std::string &to
         startPos += to.length(); // Move to the next position after replacement
     }
 }
+
+//
+vector<string> StringSplit(const char* p_inputString, std::string p_delimiter)
+{
+	//
+	std::string s(p_inputString);
+	//
+	std::vector<std::string> outputArr;
+	size_t pos = 0;
+	std::string token;
+	//
+	while ((pos = s.find(p_delimiter)) != std::string::npos) {
+		token = s.substr(0, pos);
+		s.erase(0, pos + p_delimiter.length());
+		outputArr.push_back(token);
+	}
+	outputArr.push_back(s);
+	//
+	return outputArr;
+};
 
 ////////////////////////////////////////////////////////////
 
@@ -363,23 +384,7 @@ int main(int argc, char* argv[]) {
 	///////////////////////////////////////////////	
 	// SUDOKU ENDPOINTS
 	///////////////////////////////////////////////	
-    /*
-	// SUDOKU
-	DLL_EXPORT const char*  Sudoku_Generate_CPP()
-	{
-		//
-		const static int   N = 9;
-		int                K = 20;
-
-		//
-		std::unique_ptr<SudokuGenerator> uniquePtr = std::make_unique<SudokuGenerator>(N, K);
-		string           str_matrix                = uniquePtr->Run();
-
-		//
-		return str_matrix.c_str();
-	}
-	*/		
- 	// http://localhost:8080/api/algorithm/Sudoku_Generate_CPP
+   	// http://localhost:8080/api/algorithm/Sudoku_Generate_CPP
 	svr.Get(endpointDictionary["SUDOKU_GENERATE_ENDPOINT"].endpointName.c_str(), [](const httplib::Request& req, httplib::Response& res) {
 	    	
 	  	// Default values if query parameters are omitted
@@ -388,8 +393,16 @@ int main(int argc, char* argv[]) {
 	    try {
 	        
 			//
-			
+			const static int   N = 9;
+			int                K = 20;
 	
+			//
+			std::unique_ptr<SudokuGenerator> uniquePtr = std::make_unique<SudokuGenerator>(N, K);
+			string           str_matrix                = uniquePtr->Run();
+			
+			//
+			response                                   = str_matrix;
+		
 	    } catch (const std::exception& e) {
 	        std::cout << "[Error occurred] " << e.what() << std::endl;	
 	    }
@@ -398,7 +411,87 @@ int main(int argc, char* argv[]) {
 	    res.set_content(response, "text/plain; charset=utf-8");
 	    res.status = 200;
 	});
-	   
+	/*
+	DLL_EXPORT const char*  Sudoku_Solve_CPP(char* p_matrix)
+	{
+	    //
+		Algorithm*   algorithm     = new Algorithm(false);
+		string       str_p_matrix  = p_matrix;
+		FileManager* fileManager   = new FileManager();
+
+		//
+		std::map<std::string, std::string> replaceMap;
+
+		// Inserting values into the map
+		replaceMap["["]      = "";
+		replaceMap["]"]      = "";
+		replaceMap["},"]     = "|";
+		replaceMap["{"]      = "";
+		//replaceMap["}"]      = "";  // ERROR EN ESTE REEMPLAZO
+		// SE DEBE REEMPLAZAR ESPECIFICMENTE MAS ABAJO
+
+		// Iterating through the map
+		for (const auto& pair : replaceMap) {
+			//
+			algorithm->ReplaceAll(str_p_matrix, pair.first, pair.second);
+		}
+		//
+		algorithm->ReplaceAll(str_p_matrix, "}", "");
+
+		//
+		const char* str_p_matrix_c_str     = str_p_matrix.c_str();
+		//fileManager->SaveLineToFile("\nSudoku To Solve\n","SudokuGenerated.txt");
+
+		//
+		const static int   N          = 9;
+		int                grid[N][N] =
+			{
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1} 
+			};
+
+		//
+		vector<string>   str_p_matrix_rows = algorithm->StringSplit(str_p_matrix_c_str,"|");
+		//
+		int i = 0;
+		//
+		for (string row : str_p_matrix_rows) {
+			//
+			//fileManager->SaveLineToFile(row,"SudokuGenerated.txt");
+			//
+			int j = 0;
+			//				
+			vector<string>   str_p_matrix_cols = algorithm->StringSplit(row.c_str(),",");
+			//
+			for (string col : str_p_matrix_cols) {
+				//
+				int num = stoi(col);
+				//
+				grid[i][j] = num;
+				//
+				j++;	
+			}
+			//
+			i++;
+		}
+
+		//
+		std::unique_ptr<SudokuSolver> uniquePtrSolve = std::make_unique<SudokuSolver>();
+		string           str_matrix                  = uniquePtrSolve->Solve(grid);
+
+		//
+		//fileManager->SaveLineToFile("\nSudoku Solved \n","SudokuSolved.txt");
+		//
+		return str_matrix.c_str();
+	}
+	*/   
 	// http://localhost:8080/api/algorithm/Sudoku_Solve_CPP?p_matrix=[{0,0,0,0,4,5,6,7,8},{3,4,5,6,7,8,2,9,1},{6,7,8,1,2,9,3,4,5},{2,3,7,8,9,1,5,6,4},{5,6,9,2,3,4,8,1,7},{4,8,1,5,6,7,9,3,2},{1,2,6,4,5,3,7,8,9},{0,0,0,0,0,0,0,0,3},{0,0,0,0,0,0,0,0,6
 	svr.Get(endpointDictionary["SUDOKU_SOLVE_ENDPOINT"].endpointName.c_str(), [](const httplib::Request& req, httplib::Response& res) {
 
@@ -409,7 +502,82 @@ int main(int argc, char* argv[]) {
 	    // Check and parse p_matrix from query string
 	    if (req.has_param("p_matrix")) {
 	        try {
-	            p_matrix = std::stoi(req.get_param_value("p_matrix"));
+	            //
+				p_matrix = req.get_param_value("p_matrix");
+	            
+	            //
+				//FileManager* fileManager   = new FileManager();
+
+				//
+				std::map<std::string, std::string> replaceMap;
+		
+				// Inserting values into the map
+				replaceMap["["]      = "";
+				replaceMap["]"]      = "";
+				replaceMap["},"]     = "|";
+				replaceMap["{"]      = "";
+				//replaceMap["}"]      = "";  // ERROR EN ESTE REEMPLAZO
+				// SE DEBE REEMPLAZAR ESPECIFICMENTE MAS ABAJO
+		
+				// Iterating through the map
+				for (const auto& pair : replaceMap) {
+					//
+					ReplaceAll(p_matrix, pair.first, pair.second);
+				}
+				//
+				ReplaceAll(p_matrix, "}", "");
+		
+				//
+				const char* str_p_matrix_c_str     = p_matrix.c_str();
+				//fileManager->SaveLineToFile("\nSudoku To Solve\n","SudokuGenerated.txt");
+		
+				//
+				const static int   N          = 9;
+				int                grid[N][N] =
+					{
+						{-1, -1, -1, -1, -1, -1, -1, -1, -1},
+						{-1, -1, -1, -1, -1, -1, -1, -1, -1},
+						{-1, -1, -1, -1, -1, -1, -1, -1, -1},
+						{-1, -1, -1, -1, -1, -1, -1, -1, -1},
+						{-1, -1, -1, -1, -1, -1, -1, -1, -1},
+						{-1, -1, -1, -1, -1, -1, -1, -1, -1},
+						{-1, -1, -1, -1, -1, -1, -1, -1, -1},
+						{-1, -1, -1, -1, -1, -1, -1, -1, -1},
+						{-1, -1, -1, -1, -1, -1, -1, -1, -1} 
+					};
+		
+				//
+				vector<string>   str_p_matrix_rows = StringSplit(str_p_matrix_c_str,"|");
+				//
+				int i = 0;
+				//
+				for (string row : str_p_matrix_rows) {
+					//
+					//fileManager->SaveLineToFile(row,"SudokuGenerated.txt");
+					//
+					int j = 0;
+					//				
+					vector<string>   str_p_matrix_cols = StringSplit(row.c_str(),",");
+					//
+					for (string col : str_p_matrix_cols) {
+						//
+						int num = stoi(col);
+						//
+						grid[i][j] = num;
+						//
+						j++;	
+					}
+					//
+					i++;
+				}
+		
+				//
+				std::unique_ptr<SudokuSolver> uniquePtrSolve = std::make_unique<SudokuSolver>();
+				string           str_matrix_output           = uniquePtrSolve->Solve(grid);
+				
+				//
+				response         = str_matrix_output;
+		
 	        } catch (const std::exception& e) {
 	            std::cout << "[Error occurred] " << e.what() << std::endl;	
 	        }
