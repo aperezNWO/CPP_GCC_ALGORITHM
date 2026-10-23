@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
 CompilerSettings=0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;1;0;0;0;4;0;0;0
-UnitCount=83
+UnitCount=84
 
 [VersionInfo]
 Major=1
@@ -833,6 +833,16 @@ BuildCmd=
 
 [Unit83]
 FileName=src\CppWebServer\TFileManager.h
+CompileCpp=1
+Folder=src/CppWebServer
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit84]
+FileName=src\CppWebServer\Sudoku.cpp
 CompileCpp=1
 Folder=src/CppWebServer
 Compile=1

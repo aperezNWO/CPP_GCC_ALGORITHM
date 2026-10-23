@@ -1,6 +1,7 @@
 /*
     // WINDOWS
     g++ -std=c++17 -O3 CppWebServer.cpp -I. TFileManager.cpp Dijkstra.cpp SortBenchMark.cpp  -o cpp_web_server.exe -mconsole -lws2_32
+    g++ -std=c++17 -O3 CppWebServer.cpp -I. TFileManager.cpp Dijkstra.cpp SortBenchMark.cpp  Sudoku.cpp -o cpp_web_server.exe -mconsole -lws2_32
     
     // LINUX -- DOCKER
     g++ -std=c++17 -O3 CppWebServer.cpp -I. Dijkstra.cpp -o cpp_web_server -lpthread
@@ -11,6 +12,7 @@
 #include "FractalEngine.cpp"
 #include "SortBenchMark.h"
 #include "Dijkstra.h"
+#include "Sudoku.cpp"
 #include <iostream>
 #include <vector>
 #include <string>
@@ -26,14 +28,16 @@ struct EndpointInfo {
 
 // Key is a string identifier (e.g., "HEALTH_ENDPOINT")
 std::unordered_map<std::string, EndpointInfo> endpointDictionary = {
-    {"HEALTH_ENDPOINT"         , {"/health"                     , "Print all endpoints"}},
-    {"PING_ENDPOINT"           , {"/zero"                       , "Render workaround"}},
-    {"APP_VERSION_ENDPOINT"    , {"/getAppVersion"              , "Get Application Version"}},
-    {"STD_VERSION_ENDPOINT"    , {"/getSTDVersion"              , "Get Standard C++ Version"}},
-    {"SERVER_VERSION_ENDPOINT" , {"/getServerVersion"           , "Get Http Server Version"}},
-    {"FRACTAL_ENDPOINT"        , {"/api/fractals/generate"      , "Fractal Generation Endpoint"}},
-    {"DIJKSTRA_ENDPOINT"       , {"/api/algorithm/GenerateRandomVertex_CPP"   , "Generate Random Vertex via Dijkstra"}},
-    {"SORT_ENDPOINT"           , {"/api/algorithm/GetSort_CPP"                , "Benchmark Bubble Sort and Quick Sort Algorithms"}}
+    {"HEALTH_ENDPOINT"            , {"/health"                     , "Print all endpoints"}},
+    {"PING_ENDPOINT"              , {"/zero"                       , "Render workaround"}},
+    {"APP_VERSION_ENDPOINT"       , {"/getAppVersion"              , "Get Application Version"}},
+    {"STD_VERSION_ENDPOINT"       , {"/getSTDVersion"              , "Get Standard C++ Version"}},
+    {"SERVER_VERSION_ENDPOINT"    , {"/getServerVersion"           , "Get Http Server Version"}},
+    {"FRACTAL_ENDPOINT"           , {"/api/fractals/generate"      , "Fractal Generation Endpoint"}},
+    {"DIJKSTRA_ENDPOINT"          , {"/api/algorithm/GenerateRandomVertex_CPP"   , "Generate Random Vertex via Dijkstra"}},
+    {"SORT_ENDPOINT"              , {"/api/algorithm/GetSort_CPP"                , "Benchmark Bubble Sort and Quick Sort Algorithms"}},
+    {"SUDOKU_GENERATE_ENDPOINT"   , {"/api/algorithm/Sudoku_Generate_CPP"        , "Generate a random sudoku board ready for fill"}},
+    {"SUDOKU_SOLVE_ENDPOINT"      , {"/api/algorithm/Sudoku_Solve_CPP"           , "Solve a random renerated sudoku board"}}
 };
 
 //
@@ -308,7 +312,7 @@ int main(int argc, char* argv[]) {
 	});
 
     // 1 = BUBBLE SORT , 2 = QUICK SORT
-    // http://localhost:808/api/algorithm/GetSort_CPP?p_sortAlgoritm=1&p_unsortedList=23|7|10|16|1|4|22|2|6|24|8|14|11|15|21|13|19|20|18|0|17|5|3|9|12
+    // http://localhost:8080/api/algorithm/GetSort_CPP?p_sortAlgoritm=1&p_unsortedList=23|7|10|16|1|4|22|2|6|24|8|14|11|15|21|13|19|20|18|0|17|5|3|9|12
     svr.Get(endpointDictionary["SORT_ENDPOINT"].endpointName.c_str(), [](const httplib::Request& req, httplib::Response& res) {
 	    	
 	  	// Default values if query parameters are omitted
@@ -355,7 +359,68 @@ int main(int argc, char* argv[]) {
 	    res.set_content(response, "text/plain; charset=utf-8");
 	    res.status = 200;
 	});
+
+	///////////////////////////////////////////////	
+	// SUDOKU ENDPOINTS
+	///////////////////////////////////////////////	
+    /*
+	// SUDOKU
+	DLL_EXPORT const char*  Sudoku_Generate_CPP()
+	{
+		//
+		const static int   N = 9;
+		int                K = 20;
+
+		//
+		std::unique_ptr<SudokuGenerator> uniquePtr = std::make_unique<SudokuGenerator>(N, K);
+		string           str_matrix                = uniquePtr->Run();
+
+		//
+		return str_matrix.c_str();
+	}
+	*/		
+ 	// http://localhost:8080/api/algorithm/Sudoku_Generate_CPP
+	svr.Get(endpointDictionary["SUDOKU_GENERATE_ENDPOINT"].endpointName.c_str(), [](const httplib::Request& req, httplib::Response& res) {
+	    	
+	  	// Default values if query parameters are omitted
+	    std::string response       = "";
+	  	
+	    try {
+	        
+			//
+			
 	
+	    } catch (const std::exception& e) {
+	        std::cout << "[Error occurred] " << e.what() << std::endl;	
+	    }
+	    
+	    //
+	    res.set_content(response, "text/plain; charset=utf-8");
+	    res.status = 200;
+	});
+	   
+	// http://localhost:8080/api/algorithm/Sudoku_Solve_CPP?p_matrix=[{0,0,0,0,4,5,6,7,8},{3,4,5,6,7,8,2,9,1},{6,7,8,1,2,9,3,4,5},{2,3,7,8,9,1,5,6,4},{5,6,9,2,3,4,8,1,7},{4,8,1,5,6,7,9,3,2},{1,2,6,4,5,3,7,8,9},{0,0,0,0,0,0,0,0,3},{0,0,0,0,0,0,0,0,6
+	svr.Get(endpointDictionary["SUDOKU_SOLVE_ENDPOINT"].endpointName.c_str(), [](const httplib::Request& req, httplib::Response& res) {
+
+		// Default values if query parameters are omitted
+	    std::string response       = "";
+	    std::string p_matrix       = "";
+	    
+	    // Check and parse p_matrix from query string
+	    if (req.has_param("p_matrix")) {
+	        try {
+	            p_matrix = std::stoi(req.get_param_value("p_matrix"));
+	        } catch (const std::exception& e) {
+	            std::cout << "[Error occurred] " << e.what() << std::endl;	
+	        }
+	    }
+	    
+	    //
+	    res.set_content(response, "text/plain; charset=utf-8");
+	    res.status = 200;
+	});    	
+
+	   
 	///////////////////////////////////////////////
 	//PROGRAM MAIN ENTRANCE
 	///////////////////////////////////////////////
