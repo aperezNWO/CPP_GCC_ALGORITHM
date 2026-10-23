@@ -79,7 +79,7 @@ docker push apereznwogmail/fractal-cpp-server:latest
 //////////////////////////////////////////////////////
 
 git add * 
-git commit -m"[Application CPP_GCC_ALGORITHM] - v[1.0.3]" -m"1) CppWebServer v[1.0.4] - sudokugenerate/solve() endpoints"
+git commit -m"[Application CPP_GCC_ALGORITHM] - v[1.0.3]" -m"1) CppWebServer v[1.0.5] - sudokugenerate/solve() endpoints"
 git push 
 git pull
 

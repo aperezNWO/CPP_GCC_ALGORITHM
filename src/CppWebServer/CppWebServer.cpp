@@ -2,11 +2,16 @@
     // WINDOWS
     g++ -std=c++17 -O3 CppWebServer.cpp -I. TFileManager.cpp Dijkstra.cpp SortBenchMark.cpp  -o cpp_web_server.exe -mconsole -lws2_32
     g++ -std=c++17 -O3 CppWebServer.cpp -I. TFileManager.cpp Dijkstra.cpp SortBenchMark.cpp  Sudoku.cpp -o cpp_web_server.exe -mconsole -lws2_32
+    g++ -std=c++17 -O3 CppWebServer.cpp -I. TFileManager.cpp Dijkstra.cpp SortBenchMark.cpp  Sudoku.cpp RegExManager.cpp -o cpp_web_server.exe -mconsole -lws2_32
     
     // LINUX -- DOCKER (NO .EXE EXTENSION FOR DOCKER!!!)
-    g++ -std=c++17 -O3 CppWebServer.cpp -I. Dijkstra.cpp -o cpp_web_server -lpthread
-    g++ -std=c++17 -O3 CppWebServer.cpp -I. TFileManager.cpp Dijkstra.cpp SortBenchMark.cpp  -o cpp_web_server -lpthread
-    g++ -std=c++17 -O3 CppWebServer.cpp -I. TFileManager.cpp Dijkstra.cpp SortBenchMark.cpp  Sudoku.cpp -o cpp_web_server.exe -lpthread -lws2_32
+    	// EDIT DOCKER FILE TO ADD NEEDED FILES
+     		 COPY --from=builder /app/cdcatalog.xml /app/cdcatalog.xml  	
+   			 COPY --from=builder /app/Algorithm.ini /app/Algorithm.ini
+			 COPY --from=builder /app/cpp_web_server /app/cpp_web_server
+        // COPY C++ COMMAND TO DOCKER FILE	
+			 RUN  <COMMAND_LINE>		 
+        g++ -std=c++17 -O3 CppWebServer.cpp -I. TFileManager.cpp Dijkstra.cpp SortBenchMark.cpp  Sudoku.cpp RegExManager.cpp -o cpp_web_server -lpthread 
     
 */
 #include "httplib.h"
@@ -14,6 +19,7 @@
 #include "SortBenchMark.h"
 #include "Dijkstra.h"
 #include "Sudoku.cpp"
+#include "RegExManager.h"
 #include <iostream>
 #include <vector>
 #include <string>
@@ -38,7 +44,8 @@ std::unordered_map<std::string, EndpointInfo> endpointDictionary = {
     {"DIJKSTRA_ENDPOINT"          , {"/api/algorithm/GenerateRandomVertex_CPP"   , "Generate Random Vertex via Dijkstra"}},
     {"SORT_ENDPOINT"              , {"/api/algorithm/GetSort_CPP"                , "Benchmark Bubble Sort and Quick Sort Algorithms"}},
     {"SUDOKU_GENERATE_ENDPOINT"   , {"/api/algorithm/Sudoku_Generate_CPP"        , "Generate a random sudoku board ready for fill"}},
-    {"SUDOKU_SOLVE_ENDPOINT"      , {"/api/algorithm/Sudoku_Solve_CPP"           , "Solve a random renerated sudoku board"}}
+    {"SUDOKU_SOLVE_ENDPOINT"      , {"/api/algorithm/Sudoku_Solve_CPP"           , "Solve a random renerated sudoku board"}},
+    {"REGEX_EVAL_ENDPOINT"        , {"/api/algorithm/Regex_Eval_CPP"             , "Evaluate a regular expression from a existing xml file"}},
 };
 
 //
@@ -588,7 +595,83 @@ int main(int argc, char* argv[]) {
 	    res.status = 200;
 	});    	
 
-	   
+	///////////////////////////////////////////////	
+	// REGULAR EXPRESSIONS
+	///////////////////////////////////////////////
+	/*
+	DLL_EXPORT const char*  RegExManager_RegExEval(char* p_tagSearch, char* p_textSearch)
+	{
+		//
+		std::unique_ptr<RegExManager> uniquePtr = std::make_unique<RegExManager>();
+		//
+		static std::string response; 
+		response  = uniquePtr->RegExEval(p_tagSearch, p_textSearch);
+		
+		//
+		return response.c_str();
+	}  
+	*/
+	// http://localhost:8080/api/algorithm/Regex_Eval_CPP?p_tagSearch=company&p_textSearch=BMG 
+	
+	svr.Get(endpointDictionary["REGEX_EVAL_ENDPOINT"].endpointName.c_str(), [](const httplib::Request& req, httplib::Response& res) {
+	    	
+	  	// Default values if query parameters are omitted
+	    std::string response          = "";
+		std::string p_tagSearch       = "";
+		std::string p_textSearch      = "";
+	  	
+	    try {
+	        
+		    // Check and parse p_sortAlgoritm from query string
+		    if (req.has_param("p_tagSearch")) {
+		        try {
+		            //
+					p_tagSearch = req.get_param_value("p_tagSearch");
+		            //
+		            std::cout << "p_tagSearch: " << p_tagSearch << std::endl;
+		        } catch (const std::exception& e) {
+		            std::cout << "[Error occurred] " << e.what() << std::endl;	
+		        }
+		    }
+		
+		    // Check and parse p_unsortedList from query string
+		    if (req.has_param("p_textSearch")) {
+		        try {
+		            // Store it safely in a persistent std::string object
+		            p_textSearch = req.get_param_value("p_textSearch");
+		            
+		            std::cout << "p_textSearch: " << p_textSearch << std::endl;
+		        } catch (const std::exception& e) {
+		            std::cout << "[Error occurred] " << e.what() << std::endl;	
+		        }
+		    }
+			
+			//
+			try {
+				
+		    	//
+				std::unique_ptr<RegExManager> uniquePtr = std::make_unique<RegExManager>();
+				
+				// If it strictly requires raw char* (non-const), you can use &str[0] 
+				// provided the string is not empty:
+				response = uniquePtr->RegExEval(&p_tagSearch[0], &p_textSearch[0]);
+		        
+		        //
+				std::cout << "Response : " << response << std::endl;
+				
+	        } catch (const std::exception& e) {
+	            std::cout << "[Error occurred] " << e.what() << std::endl;	
+	        }
+		
+	    } catch (const std::exception& e) {
+	        std::cout << "[Error occurred] " << e.what() << std::endl;	
+	    }
+	    
+	    //
+	    res.set_content(response, "text/plain; charset=utf-8");
+	    res.status = 200;
+	});
+	
 	///////////////////////////////////////////////
 	//PROGRAM MAIN ENTRANCE
 	///////////////////////////////////////////////

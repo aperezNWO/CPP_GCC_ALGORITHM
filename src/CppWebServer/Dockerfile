@@ -9,14 +9,15 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 COPY . .
 
-RUN     g++ -std=c++17 -O3 CppWebServer.cpp -I. TFileManager.cpp Dijkstra.cpp SortBenchMark.cpp  Sudoku.cpp -o cpp_web_server -lpthread 
-  
+RUN  g++ -std=c++17 -O3 CppWebServer.cpp -I. TFileManager.cpp Dijkstra.cpp SortBenchMark.cpp  Sudoku.cpp RegExManager.cpp -o cpp_web_server -lpthread 
+
  
 
 # Stage 2: Runtime image
 FROM debian:bookworm-slim
 WORKDIR /app
 
+COPY --from=builder /app/cdcatalog.xml /app/cdcatalog.xml  
 COPY --from=builder /app/Algorithm.ini /app/Algorithm.ini
 COPY --from=builder /app/cpp_web_server /app/cpp_web_server
 
