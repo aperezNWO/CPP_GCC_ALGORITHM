@@ -1,7 +1,5 @@
 /*
     // WINDOWS
-    g++ -std=c++17 -O3 CppWebServer.cpp -I. TFileManager.cpp Dijkstra.cpp SortBenchMark.cpp  -o cpp_web_server.exe -mconsole -lws2_32
-    g++ -std=c++17 -O3 CppWebServer.cpp -I. TFileManager.cpp Dijkstra.cpp SortBenchMark.cpp  Sudoku.cpp -o cpp_web_server.exe -mconsole -lws2_32
     g++ -std=c++17 -O3 CppWebServer.cpp -I. TFileManager.cpp Dijkstra.cpp SortBenchMark.cpp  Sudoku.cpp RegExManager.cpp -o cpp_web_server.exe -mconsole -lws2_32
     
     // LINUX -- DOCKER (NO .EXE EXTENSION FOR DOCKER!!!)
@@ -25,6 +23,7 @@
 #include <string>
 #include <unordered_map>
 #include <map>
+#include <filesystem>
 
 std::map<string, string> configMap;
 
@@ -615,6 +614,8 @@ int main(int argc, char* argv[]) {
 	
 	svr.Get(endpointDictionary["REGEX_EVAL_ENDPOINT"].endpointName.c_str(), [](const httplib::Request& req, httplib::Response& res) {
 	    	
+
+	
 	  	// Default values if query parameters are omitted
 	    std::string response          = "";
 		std::string p_tagSearch       = "";
@@ -622,6 +623,11 @@ int main(int argc, char* argv[]) {
 	  	
 	    try {
 	        
+	        /*
+	        for (const auto& entry : std::filesystem::directory_iterator("/app")) {
+		    	std::cout << "[Container File] " << entry.path().filename().string() << std::endl;
+			}*/
+			
 		    // Check and parse p_sortAlgoritm from query string
 		    if (req.has_param("p_tagSearch")) {
 		        try {
@@ -649,7 +655,6 @@ int main(int argc, char* argv[]) {
 			//
 			try {
 				
-		    	//
 				std::unique_ptr<RegExManager> uniquePtr = std::make_unique<RegExManager>();
 				
 				// If it strictly requires raw char* (non-const), you can use &str[0] 

@@ -113,18 +113,14 @@ string RegExManager::StringTrim(const std::string& str)
 //
 int RegExManager::GetXml()
 {
-	//
-	string filePath        = this->configMap["XMLPATH"];
+	// UNABLE TO READ FILENAME FROM CONFIG FILE
+	//const char* filePath        = this->configMap["XMLPATH"].c_str();
+	const char* filePath        = "CdCatalog.xml";
 
-	// Open the file
 	std::ifstream inputFile(filePath);
-
-	// Check if the file is successfully opened
 	if (!inputFile.is_open()) {
-		std::cerr << "Error opening file: " << filePath << std::endl;
-		return 1; // Return an error code
+	    std::cerr << "Failed to open [" << filePath << "]" << std::endl;
 	}
-
 	// Read and print the contents of the file
 	std::string line;
 	while (std::getline(inputFile, line))
